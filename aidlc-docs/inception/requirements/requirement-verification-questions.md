@@ -17,7 +17,7 @@ F) Mobile application
 G) Data pipeline / ETL tool
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]: 
+[Answer]: F
 
 ---
 
@@ -32,7 +32,7 @@ E) Swift / Kotlin (mobile)
 F) Multiple languages (please describe)
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]: 
+[Answer]: B - Full TypeScript (React Native for Mobile Application)
 
 ---
 
@@ -45,14 +45,14 @@ C) Other systems / services (machine-to-machine)
 D) Both end users and developers
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]: 
+[Answer]: A
 
 ---
 
 ## Question 4: Core Features
 What are the main features or capabilities you want to build? (Please describe freely)
 
-[Answer]: 
+[Answer]: Mobile client application for Firefly-iii API to manage personal finances, including transaction tracking, account management, expense categorization, and financial reporting.
 
 ---
 
@@ -66,7 +66,7 @@ D) No — stateless / in-memory only
 E) Not decided yet
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]: 
+[Answer]: C - File-based storage (AsyncStorage for app settings and login credentials)
 
 ---
 
@@ -80,7 +80,7 @@ D) No — no authentication needed
 E) Not decided yet
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]: 
+[Answer]: C
 
 ---
 
@@ -95,7 +95,7 @@ E) Local machine only
 F) Not decided yet
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]: 
+[Answer]: X - Mobile devices (iOS/Android via app stores)
 
 ---
 
@@ -108,7 +108,7 @@ B) No — skip all SECURITY rules
    (suitable for PoCs, prototypes, and experimental projects)
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]: 
+[Answer]: A
 
 ---
 
@@ -125,4 +125,4 @@ C) No — skip all PBT rules
    or thin integration layers with no significant business logic)
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]: 
+[Answer]: B
