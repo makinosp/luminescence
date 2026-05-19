@@ -15,7 +15,7 @@ B) Encrypt authentication data before local persistence using a key backed by pl
 C) Do not persist authentication data locally; require the user to re-enter it when needed
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]:
+[Answer]: A
 
 ---
 
@@ -29,7 +29,7 @@ B) A Firefly III personal access token and the user-configured Firefly III serve
 C) Username/password first, then exchange for or generate an API token for future requests
 X) Other (please describe after [Answer]: tag below)
 
-[Answer]:
+[Answer]: B
 
 ---
 
