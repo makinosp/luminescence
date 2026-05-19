@@ -16,10 +16,10 @@
 - **Structure patterns**: See code-generation.md Critical Rules
 
 ## Extension Configuration
-| Extension | Status |
-|-----------|--------|
-| Security Baseline | Pending opt-in |
-| Property-Based Testing | Pending opt-in |
+| Extension | Enabled | Mode | Decided At |
+|-----------|---------|------|------------|
+| Security Baseline | Yes | Full | Requirements Analysis |
+| Property-Based Testing | Yes | Partial | Requirements Analysis |
 
 ## Stage Progress
 | Stage | Status |
