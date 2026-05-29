@@ -84,3 +84,19 @@
 **Context**: INCEPTION - Requirements Analysis, explicit approval request
 
 ---
+
+## Requirements Analysis - Scope Expansion Questions Created
+**Timestamp**: 2026-05-30T00:00:00Z
+**User Input**: "Using AI-DLC, モバイルだけでなく、WebとCLIも開発対象にしたい。質問があればファイルに書き出して私に教えてください。"
+**AI Response**: Created a new scope-expansion question file to clarify release sequencing, feature parity, platform targets, and authentication storage expectations for Web and CLI.
+**Context**: INCEPTION - Requirements Analysis, scope clarification
+
+---
+
+## Requirements Analysis - Scope Expansion Answers Received
+**Timestamp**: 2026-05-30T00:00:00Z
+**User Input**: "回答しました。"
+**AI Response**: Recorded the scope-expansion answers, including Q5 as A, and started updating the requirements baseline for mobile, web, and CLI clients.
+**Context**: INCEPTION - Requirements Analysis, scope expansion validation
+
+---
