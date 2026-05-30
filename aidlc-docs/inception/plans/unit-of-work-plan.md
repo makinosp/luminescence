@@ -6,11 +6,11 @@ Decompose the Luminescence multi-client TypeScript suite into manageable units o
 **Architecture Summary**: Monorepo with 4 packages — `packages/core` (shared library), `packages/mobile` (React Native), `packages/web` (React SPA), `packages/cli` (Node.js CLI).
 
 **Mandatory Artifacts**:
-- [ ] Generate `aidlc-docs/inception/application-design/unit-of-work.md` with unit definitions and responsibilities
-- [ ] Generate `aidlc-docs/inception/application-design/unit-of-work-dependency.md` with dependency matrix
-- [ ] Generate `aidlc-docs/inception/application-design/unit-of-work-story-map.md` mapping stories to units
-- [ ] Validate unit boundaries and dependencies
-- [ ] Ensure all stories are assigned to units
+- [x] Generate `aidlc-docs/inception/application-design/unit-of-work.md` with unit definitions and responsibilities
+- [x] Generate `aidlc-docs/inception/application-design/unit-of-work-dependency.md` with dependency matrix
+- [x] Generate `aidlc-docs/inception/application-design/unit-of-work-story-map.md` mapping stories to units
+- [x] Validate unit boundaries and dependencies
+- [x] Ensure all stories are assigned to units
 
 ---
 
