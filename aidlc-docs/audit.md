@@ -228,3 +228,17 @@
 **Context**: INCEPTION - Units Generation, phase started
 
 ---
+
+## CONSTRUCTION PHASE - Started
+**Timestamp**: 2026-05-30T05:00:00Z
+**User Input**: "Using AI-DLC, 承認して続行します。"
+**AI Response**: Approved. INCEPTION phase is complete. Starting CONSTRUCTION phase with Unit 1 (Shared Core) Functional Design.
+**Context**: CONSTRUCTION - Phase transition from INCEPTION
+
+---
+
+## Functional Design - Unit 1 (Shared Core) Plan Created
+**Timestamp**: 2026-05-30T05:00:00Z
+**User Input**: N/A (automated planning)
+**AI Response**: Created functional design plan with 10 clarification questions covering transaction amount precision, date validation, transaction type rules, pagination strategy, error retry behavior, store data freshness, report calculation location, validation error granularity, secure storage failure handling, and API response schema validation.
+**Context**: CONSTRUCTION - Functional Design (Unit 1: Shared Core), Steps 2-4

@@ -3,7 +3,7 @@
 ## Project Information
 - **Project Type**: Greenfield
 - **Start Date**: 2026-05-19T00:00:00Z
-- **Current Stage**: INCEPTION - Application Design
+- **Current Stage**: CONSTRUCTION - Functional Design (Unit 1: Shared Core)
 
 ## Workspace State
 - **Existing Code**: No
@@ -31,5 +31,8 @@
 | Workflow Planning     | ✅ Complete       |
 | Application Design    | ✅ Complete       |
 | Units Generation      | ✅ Complete       |
+| Functional Design     | In Progress (Unit 1) |
+| NFR Requirements      | Not Started      |
+| NFR Design            | Not Started      |
 | Code Generation       | Not Started      |
 | Build and Test        | Not Started      |
