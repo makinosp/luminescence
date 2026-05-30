@@ -22,14 +22,14 @@
 | Property-Based Testing | Yes     | Partial | Requirements Analysis |
 
 ## Stage Progress
-| Stage                 | Status              |
-| --------------------- | ------------------- |
-| Workspace Detection   | ✅ Complete          |
-| Reverse Engineering   | N/A (Greenfield)    |
-| Requirements Analysis | ✅ Complete          |
-| User Stories          | ✅ Complete          |
-| Workflow Planning     | ✅ Complete          |
-| Application Design    | ✅ Complete          |
-| Units Generation      | ⏳ Awaiting Approval |
-| Code Generation       | Not Started         |
-| Build and Test        | Not Started         |
+| Stage                 | Status           |
+| --------------------- | ---------------- |
+| Workspace Detection   | ✅ Complete       |
+| Reverse Engineering   | N/A (Greenfield) |
+| Requirements Analysis | ✅ Complete       |
+| User Stories          | ✅ Complete       |
+| Workflow Planning     | ✅ Complete       |
+| Application Design    | ✅ Complete       |
+| Units Generation      | ✅ Complete       |
+| Code Generation       | Not Started      |
+| Build and Test        | Not Started      |
