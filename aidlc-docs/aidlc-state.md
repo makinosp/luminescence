@@ -29,7 +29,7 @@
 | Requirements Analysis | ✅ Complete          |
 | User Stories          | ✅ Complete          |
 | Workflow Planning     | ✅ Complete          |
-| Application Design    | ⏳ Awaiting Approval |
-| Units Generation      | Not Started         |
+| Application Design    | ✅ Complete          |
+| Units Generation      | ⏳ Awaiting Approval |
 | Code Generation       | Not Started         |
 | Build and Test        | Not Started         |
