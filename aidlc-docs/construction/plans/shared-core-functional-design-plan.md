@@ -91,7 +91,7 @@ B) **Integer cents** — Amounts are stored as integers representing cents (e.g.
 C) **Decimal with flexible precision** — Amounts are positive numbers with up to 2 decimal places (e.g., 50, 50.5, 50.50 all valid). Validation rejects more than 2 decimals.
 D) Other (please describe after [Answer]: tag below)
 
-[Answer]: 
+[Answer]: C
 
 ### Question 2 — Transaction Date Validation
 What date validation rules should apply to transactions?
@@ -101,7 +101,7 @@ B) **Future dates allowed for scheduled transactions** — Transactions can have
 C) **Flexible with warning** — Future dates are allowed but trigger a validation warning (not an error). The user can confirm or adjust.
 D) Other (please describe after [Answer]: tag below)
 
-[Answer]: 
+[Answer]: C
 
 ### Question 3 — Transaction Type Rules
 What are the account requirements for each transaction type?
@@ -111,7 +111,7 @@ B) **Flexible with defaults** — Only one account is required; the other can be
 C) **Minimal validation** — Only validate that at least one account is provided. Let Firefly III API enforce account type rules.
 D) Other (please describe after [Answer]: tag below)
 
-[Answer]: 
+[Answer]: A
 
 ### Question 4 — Pagination Strategy
 How should the API client handle paginated responses from Firefly III?
@@ -121,7 +121,7 @@ B) **Automatic full fetch** — Automatically fetch all pages and return complet
 C) **Streaming/iterator** — Return an async iterator that yields items page by page. Memory-efficient for large datasets.
 D) Other (please describe after [Answer]: tag below)
 
-[Answer]: 
+[Answer]: A
 
 ### Question 5 — Error Retry Behavior
 Which operations should be automatically retried by the retry middleware?
@@ -131,7 +131,7 @@ B) **All operations with user opt-in** — Retry all operations (including mutat
 C) **Configurable per-operation** — Each API method has a `retryable` flag. GET defaults to true, mutations default to false but can be overridden.
 D) Other (please describe after [Answer]: tag below)
 
-[Answer]: 
+[Answer]: A
 
 ### Question 6 — Store Data Freshness
 How should MobX stores handle data freshness and caching?
@@ -141,7 +141,7 @@ B) **Cache with TTL** — Stores cache data with a time-to-live (e.g., 5 minutes
 C) **Manual refresh** — Stores load data once and hold it until explicitly refreshed by the user (pull-to-refresh, refresh button).
 D) Other (please describe after [Answer]: tag below)
 
-[Answer]: 
+[Answer]: C
 
 ### Question 7 — Report Calculation Location
 Where should financial report calculations (totals, averages, trends) be performed?
@@ -151,7 +151,7 @@ B) **Server-side via Firefly III API** — Use Firefly III's built-in report end
 C) **Hybrid approach** — Use Firefly III report API for standard reports, but allow client-side calculation for custom queries or visualizations.
 D) Other (please describe after [Answer]: tag below)
 
-[Answer]: 
+[Answer]: C
 
 ### Question 8 — Validation Error Granularity
 How detailed should validation errors be?
@@ -161,7 +161,7 @@ B) **Single error message** — Return the first validation error encountered. S
 C) **All errors with severity** — Return all validation errors with severity levels (error, warning). UI can display all issues at once.
 D) Other (please describe after [Answer]: tag below)
 
-[Answer]: 
+[Answer]: A
 
 ### Question 9 — Secure Storage Failure Handling
 What should happen when secure storage operations fail?
@@ -171,7 +171,7 @@ B) **Fail closed with fallback prompt** — Throw StorageError but provide a use
 C) **Graceful degradation** — Log the error (without secrets) and allow the user to continue in a limited mode (read-only, no authenticated operations).
 D) Other (please describe after [Answer]: tag below)
 
-[Answer]: 
+[Answer]: B
 
 ### Question 10 — API Response Schema Validation
 How strictly should Firefly III API responses be validated?
@@ -181,7 +181,7 @@ B) **Lenient with type coercion** — Accept responses with extra fields (ignore
 C) **Minimal validation** — Only validate critical fields (id, amount, date). Trust the API for other fields. Fastest but riskier.
 D) Other (please describe after [Answer]: tag below)
 
-[Answer]: 
+[Answer]: B
 
 ---
 
