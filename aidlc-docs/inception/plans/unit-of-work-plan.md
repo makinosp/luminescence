@@ -42,20 +42,7 @@ B) **Feature-by-feature across all packages** — Each unit delivers a vertical 
 C) **Core first, then one client at a time** — Shared core (Unit 1), then Mobile (Unit 2), Web (Unit 3), CLI (Unit 4). Each client unit includes both the shared core dependency and client-specific implementation.
 D) **Other** (please describe after [Answer]: tag below)
 
-[Answer]: 
-
----
-
-## Step 2: Unit Dependencies
-
-Given the architecture, dependency relationships among potential units:
-
-```
-Shared Core (no internal deps)
-  ├── Mobile Client (depends on Core)
-  ├── Web Client (depends on Core)
-  └── CLI Client (depends on Core)
-```
+[Answer]: A
 
 **Question 2 — Inter-unit dependency management**:
 How should units that depend on the shared core interact with it during development?
@@ -64,7 +51,7 @@ A) **Workspace protocol (npm workspaces)** — Shared core is package.json `"@lu
 B) **Bundled copy** — Each client gets a build snapshot of shared core at the start of its unit. Updates to core require re-syncing.
 C) **Separate versioned releases** — Shared core is independently versioned (0.1.0, 0.2.0, etc.) and published; each client declares a semver range.
 
-[Answer]: 
+[Answer]: A
 
 ---
 
@@ -79,7 +66,7 @@ A) **Solo throughout** — Single developer on all packages; no need to split ow
 B) **Maybe add contributors later** — Design units to be assignable to separate developers in the future. Unit boundaries should be clean and independently buildable.
 C) **Multiple maintainers from start** — Each client package has a dedicated owner. Core is shared across all.
 
-[Answer]: 
+[Answer]: B
 
 ---
 
@@ -93,7 +80,7 @@ B) **Web (React SPA) first** — Fastest iteration loop (HMR, browser devtools).
 C) **CLI first** — Simplest UI (terminal output). Fastest way to validate core functionality end-to-end before investing in graphical clients.
 D) **All clients in parallel** — Start core, then branch out to all three clients simultaneously. Requires multi-tasking but validates port interfaces across all platforms at once.
 
-[Answer]: 
+[Answer]: C
 
 ---
 
@@ -107,7 +94,7 @@ B) **npm workspaces** — Built-in, no extra tooling. Simpler but slower and les
 C) **Turborepo** — Build caching, parallel task execution, dependency graph awareness. Adds complexity but useful for large monorepos.
 D) **Yarn workspaces** — Mature ecosystem, `.yarnrc.yml` configuration. Good but slower adoption than pnpm in 2026.
 
-[Answer]: 
+[Answer]: A
 
 ---
 
