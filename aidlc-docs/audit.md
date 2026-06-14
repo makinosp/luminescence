@@ -242,3 +242,39 @@
 **User Input**: N/A (automated planning)
 **AI Response**: Created functional design plan with 10 clarification questions covering transaction amount precision, date validation, transaction type rules, pagination strategy, error retry behavior, store data freshness, report calculation location, validation error granularity, secure storage failure handling, and API response schema validation.
 **Context**: CONSTRUCTION - Functional Design (Unit 1: Shared Core), Steps 2-4
+
+---
+
+## Functional Design - Unit 1 (Shared Core) All Steps Completed
+**Timestamp**: 2026-06-14T00:00:00Z
+**User Input**: "Functional Designを続行します。"
+**AI Response**: Completed all 9 steps of Functional Design for Unit 1 (Shared Core). Generated 6 artifacts: (1) domain-models.md — Transaction/Account/Category/Report models, validators, business logic, PBT-suitable pure functions; (2) business-rules.md — Transaction type rules, amount/date validation, account constraints, category rules, report aggregation, error granularity; (3) api-client-design.md — IFireflyIIIClient interface, request/response types, error hierarchy, retry middleware, endpoint mappings; (4) storage-design.md — ISecureStorage/ILocalSettings ports, key naming, fail-closed behavior, platform adapters; (5) store-design.md — AuthStore/TransactionStore/AccountStore/CategoryStore/ReportStore/UIStore state and methods; (6) service-design.md — AuthenticationService/TransactionService/AccountService/CategoryService/ReportService/ValidationService/ErrorHandlingService orchestration logic and flows.
+**Context**: CONSTRUCTION - Functional Design (Unit 1: Shared Core), ALL STEPS COMPLETE
+
+### Artifacts Generated:
+- `aidlc-docs/construction/shared-core/functional-design/domain-models.md`
+- `aidlc-docs/construction/shared-core/functional-design/business-rules.md`
+- `aidlc-docs/construction/shared-core/functional-design/api-client-design.md`
+- `aidlc-docs/construction/shared-core/functional-design/storage-design.md`
+- `aidlc-docs/construction/shared-core/functional-design/store-design.md`
+- `aidlc-docs/construction/shared-core/functional-design/service-design.md`
+
+### Clarification Answers Applied:
+- Q1: C (Decimal with flexible precision, max 2 decimals)
+- Q2: C (Future dates allowed with warning)
+- Q3: A (Strict account pairing)
+- Q4: A (Cursor-based pagination)
+- Q5: A (Idempotent GET only retry)
+- Q6: C (Manual refresh)
+- Q7: C (Hybrid report calculation)
+- Q8: A (Field-level validation errors)
+- Q9: B (Fail closed with fallback prompt)
+- Q10: B (Lenient with type coercion)
+
+---
+
+## Functional Design - Approval Pending
+**Timestamp**: 2026-06-14T00:00:00Z
+**User Input**: N/A (awaiting user review)
+**AI Response**: Presented completion summary with all 9 steps complete. Awaiting user approval to proceed to NFR Requirements stage.
+**Context**: CONSTRUCTION - Functional Design (Unit 1: Shared Core), approval request

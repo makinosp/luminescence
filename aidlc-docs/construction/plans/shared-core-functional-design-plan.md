@@ -9,73 +9,73 @@
 ## Design Steps
 
 ### Step 1: Domain Model Analysis
-- [ ] Analyze Transaction domain model structure and relationships
-- [ ] Analyze Account domain model structure and relationships
-- [ ] Analyze Category domain model structure and relationships
-- [ ] Analyze Report domain model structure and relationships
-- [ ] Define entity relationships and dependencies
-- [ ] Document immutability constraints
+- [x] Analyze Transaction domain model structure and relationships
+- [x] Analyze Account domain model structure and relationships
+- [x] Analyze Category domain model structure and relationships
+- [x] Analyze Report domain model structure and relationships
+- [x] Define entity relationships and dependencies
+- [x] Document immutability constraints
 
 ### Step 2: Business Logic Modeling
-- [ ] Model transaction validation rules and algorithms
-- [ ] Model account validation rules and algorithms
-- [ ] Model category validation rules and algorithms
-- [ ] Model report calculation logic and aggregations
-- [ ] Define pure transformation functions (PBT-suitable)
-- [ ] Document business invariants and constraints
+- [x] Model transaction validation rules and algorithms
+- [x] Model account validation rules and algorithms
+- [x] Model category validation rules and algorithms
+- [x] Model report calculation logic and aggregations
+- [x] Define pure transformation functions (PBT-suitable)
+- [x] Document business invariants and constraints
 
 ### Step 3: Business Rules Definition
-- [ ] Define transaction type rules (deposit, withdrawal, transfer)
-- [ ] Define amount validation rules (precision, sign, currency)
-- [ ] Define date validation rules (future dates, transaction type constraints)
-- [ ] Define account type constraints and relationships
-- [ ] Define category assignment rules
-- [ ] Define report period and aggregation rules
+- [x] Define transaction type rules (deposit, withdrawal, transfer)
+- [x] Define amount validation rules (precision, sign, currency)
+- [x] Define date validation rules (future dates, transaction type constraints)
+- [x] Define account type constraints and relationships
+- [x] Define category assignment rules
+- [x] Define report period and aggregation rules
 
 ### Step 4: API Client Interface Design
-- [ ] Define IFireflyIIIClient interface methods
-- [ ] Define request/response data structures
-- [ ] Define error handling and categorization logic
-- [ ] Define retry middleware behavior (optional)
-- [ ] Document API endpoint mappings
+- [x] Define IFireflyIIIClient interface methods
+- [x] Define request/response data structures
+- [x] Define error handling and categorization logic
+- [x] Define retry middleware behavior (optional)
+- [x] Document API endpoint mappings
 
 ### Step 5: Storage Interface Design
-- [ ] Define ISecureStorage interface (port)
-- [ ] Define ILocalSettings interface (port)
-- [ ] Define storage key naming conventions
-- [ ] Define fail-closed behavior for storage errors
-- [ ] Document security constraints (SB-02, NFR-02)
+- [x] Define ISecureStorage interface (port)
+- [x] Define ILocalSettings interface (port)
+- [x] Define storage key naming conventions
+- [x] Define fail-closed behavior for storage errors
+- [x] Document security constraints (SB-02, NFR-02)
 
 ### Step 6: MobX Store Design
-- [ ] Design AuthStore state and methods
-- [ ] Design TransactionStore state and methods
-- [ ] Design AccountStore state and methods
-- [ ] Design CategoryStore state and methods
-- [ ] Design ReportStore state and methods
-- [ ] Design UIStore state and methods
-- [ ] Define store interactions and dependencies
+- [x] Design AuthStore state and methods
+- [x] Design TransactionStore state and methods
+- [x] Design AccountStore state and methods
+- [x] Design CategoryStore state and methods
+- [x] Design ReportStore state and methods
+- [x] Design UIStore state and methods
+- [x] Define store interactions and dependencies
 
 ### Step 7: Service Layer Design
-- [ ] Design AuthenticationService orchestration logic
-- [ ] Design TransactionService orchestration logic
-- [ ] Design AccountService orchestration logic
-- [ ] Design CategoryService orchestration logic
-- [ ] Design ReportService orchestration logic
-- [ ] Design ValidationService orchestration logic
-- [ ] Design ErrorHandlingService orchestration logic
+- [x] Design AuthenticationService orchestration logic
+- [x] Design TransactionService orchestration logic
+- [x] Design AccountService orchestration logic
+- [x] Design CategoryService orchestration logic
+- [x] Design ReportService orchestration logic
+- [x] Design ValidationService orchestration logic
+- [x] Design ErrorHandlingService orchestration logic
 
 ### Step 8: Error Handling Design
-- [ ] Define error type hierarchy (APIError, NetworkError, ValidationError, StorageError, AuthError)
-- [ ] Define error categorization rules
-- [ ] Define user-friendly message generation
-- [ ] Define retry-ability determination logic
-- [ ] Document secret redaction rules (SB-04, NFR-03)
+- [x] Define error type hierarchy (APIError, NetworkError, ValidationError, StorageError, AuthError)
+- [x] Define error categorization rules
+- [x] Define user-friendly message generation
+- [x] Define retry-ability determination logic
+- [x] Document secret redaction rules (SB-04, NFR-03)
 
 ### Step 9: Validation and Testing Strategy
-- [ ] Identify pure functions suitable for property-based testing
-- [ ] Define serialization round-trip test scenarios
-- [ ] Define validation edge cases
-- [ ] Document test coverage requirements
+- [x] Identify pure functions suitable for property-based testing
+- [x] Define serialization round-trip test scenarios
+- [x] Define validation edge cases
+- [x] Document test coverage requirements
 
 ---
 
