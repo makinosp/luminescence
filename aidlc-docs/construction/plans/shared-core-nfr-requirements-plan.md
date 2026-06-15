@@ -34,8 +34,8 @@
 - [x] No ambiguities detected — all answers are specific and actionable
 
 ### Step 6: Generate NFR Requirements Artifacts
-- [ ] nfr-requirements.md
-- [ ] tech-stack-decisions.md
+- [x] nfr-requirements.md — 7 NFR categories with extension compliance
+- [x] tech-stack-decisions.md — TypeScript, MobX, Vitest, fast-check, native fetch, ESLint, Prettier
 
 ### Step 7: Present Completion Message
 - [ ] Present to user for review

@@ -312,3 +312,13 @@
 - Q6: A — Fail-closed with prompt
 - Q7: A — Maximum strictness (strict: true + noUncheckedIndexedAccess + exactOptionalPropertyTypes + noImplicitReturns)
 - Q8: A — native fetch
+
+---
+
+## NFR Requirements - Artifacts Generated
+**Timestamp**: 2026-06-15T00:00:00Z
+**User Input**: "続行します。"
+**AI Response**: Generated 2 NFR artifacts: (1) nfr-requirements.md — 7 categories (security, reliability, performance, maintainability, availability, usability, extension compliance); (2) tech-stack-decisions.md — TypeScript 5.4+ with maximum strictness, MobX 6.x, Vitest + fast-check, native fetch, ESLint 9 + Prettier 3, minimal runtime dependencies.
+**Context**: CONSTRUCTION - NFR Requirements (Unit 1: Shared Core), Step 6 complete
+
+---
