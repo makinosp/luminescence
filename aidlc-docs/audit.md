@@ -278,3 +278,37 @@
 **User Input**: N/A (awaiting user review)
 **AI Response**: Presented completion summary with all 9 steps complete. Awaiting user approval to proceed to NFR Requirements stage.
 **Context**: CONSTRUCTION - Functional Design (Unit 1: Shared Core), approval request
+
+---
+
+## NFR Requirements - Unit 1 (Shared Core) Plan Created
+**Timestamp**: 2026-06-15T00:00:00Z
+**User Input**: "Go"
+**AI Response**: Starting NFR Requirements for Unit 1 (Shared Core). Created NFR requirements plan with 8 clarification questions covering API response time, concurrent request handling, token expiration, PBT scope, store performance, storage failure recovery, TypeScript strictness, and HTTP client library selection.
+**Context**: CONSTRUCTION - NFR Requirements (Unit 1: Shared Core), Steps 1-4
+
+---
+
+## NFR Requirements - Approval Pending
+**Timestamp**: 2026-06-15T00:00:00Z
+**User Input**: N/A (awaiting user answers to 8 questions)
+**AI Response**: Presented 8 NFR clarification questions to user. Awaiting answers before generating NFR requirements artifacts.
+**Context**: CONSTRUCTION - NFR Requirements (Unit 1: Shared Core), Step 5
+
+---
+
+## NFR Requirements - Answers Received
+**Timestamp**: 2026-06-15T00:00:00Z
+**User Input**: "Q7はAにします。それ以外は推奨された回答で記入してください。まだ次のステップには進まないでください。"
+**AI Response**: Recorded all 8 answers. Q7 changed to A (Maximum strictness). All others per recommendation. No ambiguities detected. Awaiting user signal to proceed to Step 6 (generate artifacts).
+**Context**: CONSTRUCTION - NFR Requirements (Unit 1: Shared Core), answer collection complete
+
+### Answers Summary:
+- Q1: B — Moderate (Under 2 seconds)
+- Q2: C — Simple (Last-write-wins)
+- Q3: C — Error-only (Client decides)
+- Q4: A — Full (All pure functions)
+- Q5: B — Medium (Up to 1,000 items)
+- Q6: A — Fail-closed with prompt
+- Q7: A — Maximum strictness (strict: true + noUncheckedIndexedAccess + exactOptionalPropertyTypes + noImplicitReturns)
+- Q8: A — native fetch
