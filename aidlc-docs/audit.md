@@ -371,3 +371,67 @@
 **User Input**: N/A (awaiting user answers to 8 questions)
 **AI Response**: Presented 8 NFR design clarification questions to user. Awaiting answers before generating NFR design artifacts.
 **Context**: CONSTRUCTION - NFR Design (Unit 1: Shared Core), Step 5
+
+---
+
+## NFR Design - Artifacts Generated
+**Timestamp**: 2026-06-15T00:00:00Z
+**User Input**: "承認して続行します。"
+**AI Response**: Generated 2 NFR design artifacts: (1) nfr-design-patterns.md — resilience patterns (retry middleware, fail-closed storage, concurrent request handling), security patterns (token lifecycle, error redaction pipeline, validation pipeline, module isolation, TLS enforcement), performance patterns (MobX computed, cursor-based pagination, manual refresh, API timeout), maintainability patterns (PBT organization, strict TypeScript, zero platform deps, oxlint); (2) logical-components.md — API Client Layer (HTTPS Enforcer, Retry Middleware, Timeout Controller, Auth Gate), Service Layer (Authentication, Validation, Error Handling, Transaction, Account, Category, Report), Store Layer (Auth, Transaction, Account, Category, Report, UI), Storage Ports (ISecureStorage, ILocalSettings), cross-cutting interaction flows.
+**Context**: CONSTRUCTION - NFR Design (Unit 1: Shared Core), Step 6 complete
+
+### Artifacts Generated:
+- `aidlc-docs/construction/shared-core/nfr-design/nfr-design-patterns.md`
+- `aidlc-docs/construction/shared-core/nfr-design/logical-components.md`
+
+---
+
+## NFR Design - Approval Granted
+**Timestamp**: 2026-06-21T00:00:00Z
+**User Input**: "Using AI-DLC, 承認し、Code Generation (Unit 1: Shared Core)に進みます。"
+**AI Response**: Approved. NFR Design phase is complete. Proceeding to Code Generation (Unit 1: Shared Core) — Part 1: Planning.
+**Context**: CONSTRUCTION - NFR Design (Unit 1: Shared Core), user approval received
+
+---
+
+## Code Generation - Unit 1 (Shared Core) Part 1 Started
+**Timestamp**: 2026-06-21T00:00:00Z
+**User Input**: "Using AI-DLC, 承認し、Code Generation (Unit 1: Shared Core)に進みます。"
+**AI Response**: Starting Code Generation Part 1 (Planning) for Unit 1 (Shared Core). Loading all functional design, NFR requirements, and NFR design artifacts to create a comprehensive code generation plan.
+**Context**: CONSTRUCTION - Code Generation (Unit 1: Shared Core), Part 1 Planning started
+
+---
+
+## Code Generation - Part 1 Plan Created
+**Timestamp**: 2026-06-21T00:00:00Z
+**User Input**: N/A (automated planning)
+**AI Response**: Created comprehensive code generation plan at aidlc-docs/construction/plans/shared-core-code-generation-plan.md with 18 steps covering: project structure setup, error types, storage interfaces, domain models (Transaction, Account, Category, Report), API client layer (HTTP adapter, HTTPS enforcer, timeout controller, auth gate, retry middleware, Firefly III client), MobX stores (Auth, Transaction, Account, Category, Report, UI), services (Validation, Error Handling, Authentication, Transaction, Account, Category, Report), storage platform adapters, barrel exports, documentation, and dependency installation/verification. Estimated ~75 files total.
+**Context**: CONSTRUCTION - Code Generation (Unit 1: Shared Core), Part 1 Planning complete
+
+---
+
+## Code Generation - Part 1 Approved, Part 2 Started
+**Timestamp**: 2026-06-21T00:00:00Z
+**User Input**: "承認してCode Generation Part 2を開始します。"
+**AI Response**: Approved. Starting Code Generation Part 2 (Generation) for Unit 1 (Shared Core). Executing Step 1: Project Structure Setup.
+**Context**: CONSTRUCTION - Code Generation (Unit 1: Shared Core), Part 2 Generation started
+
+---
+
+## Code Generation - Unit 1 (Shared Core) Complete
+**Timestamp**: 2026-06-21T00:00:00Z
+**User Input**: N/A (automated generation)
+**AI Response**: Completed all 18 steps of Code Generation for Unit 1 (Shared Core). Generated ~65 files across the monorepo structure. TypeScript build passes with maximum strictness. All 88 tests pass (9 test files, 73 example-based + 15 property-based). Dependencies installed via pnpm.
+**Context**: CONSTRUCTION - Code Generation (Unit 1: Shared Core), ALL STEPS COMPLETE
+
+### Build Verification:
+- ✅ `pnpm install` — 81 packages installed
+- ✅ `pnpm --filter @luminescence/core build` — TypeScript compilation passes (max strict)
+- ✅ `pnpm --filter @luminescence/core test` — 88 tests pass (9 test files)
+
+### Files Generated:
+- **Config**: package.json, pnpm-workspace.yaml, tsconfig.base.json, oxlintrc.json, .prettierrc, .gitignore
+- **Package**: packages/core/package.json, tsconfig.json, vitest.config.ts
+- **Source**: ~45 source files across errors/, domain-models/, api-client/, stores/, services/, storage/
+- **Tests**: 9 test files (example-based) + 6 property-based test files
+- **Docs**: code-generation-summary.md
