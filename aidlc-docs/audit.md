@@ -344,6 +344,10 @@
 **AI Response**: Generated 2 NFR artifacts: (1) nfr-requirements.md — 7 categories (security, reliability, performance, maintainability, availability, usability, extension compliance); (2) tech-stack-decisions.md — TypeScript 5.4+ with maximum strictness, MobX 6.x, Vitest + fast-check, native fetch, oxlint 9 + Prettier 3, minimal runtime dependencies.
 **Context**: CONSTRUCTION - NFR Requirements (Unit 1: Shared Core), Step 6 complete
 
+### Artifacts Generated:
+- `aidlc-docs/construction/shared-core/nfr-requirements.md`
+- `aidlc-docs/construction/shared-core/tech-stack-decisions.md`
+
 ---
 
 ## NFR Requirements - Approval Granted

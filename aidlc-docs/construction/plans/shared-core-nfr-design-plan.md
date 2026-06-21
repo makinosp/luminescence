@@ -33,11 +33,11 @@
 - [x] Tech stack note: ESLint replaced with oxlint (Rust-based, fast, React Native + Expo compatible)
 
 ### Step 6: Generate NFR Design Artifacts
-- [ ] nfr-design-patterns.md
-- [ ] logical-components.md
+- [x] nfr-design-patterns.md
+- [x] logical-components.md
 
 ### Step 7: Present Completion Message
-- [ ] Present to user for review
+- [x] Present to user for review
 
 ### Step 8: Wait for Explicit Approval
 - [ ] Awaiting user approval

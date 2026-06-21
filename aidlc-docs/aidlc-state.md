@@ -31,8 +31,8 @@
 | Workflow Planning     | ✅ Complete       |
 | Application Design    | ✅ Complete       |
 | Units Generation      | ✅ Complete       |
-| Functional Design     | In Progress (Unit 1) |
-| NFR Requirements      | Not Started      |
-| NFR Design            | Not Started      |
+| Functional Design     | ✅ Complete (Unit 1) |
+| NFR Requirements      | ✅ Complete (Unit 1) |
+| NFR Design            | In Progress (Unit 1) |
 | Code Generation       | Not Started      |
 | Build and Test        | Not Started      |
