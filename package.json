@@ -1,0 +1,19 @@
+{
+  "name": "luminescence",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Multi-platform Firefly III client — Mobile, Web, CLI",
+  "scripts": {
+    "build": "pnpm --recursive build",
+    "test": "pnpm --recursive test",
+    "lint": "oxlint",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "clean": "pnpm --recursive clean"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "packageManager": "pnpm@9.0.0"
+}

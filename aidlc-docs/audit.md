@@ -228,3 +228,237 @@
 **Context**: INCEPTION - Units Generation, phase started
 
 ---
+
+## CONSTRUCTION PHASE - Started
+**Timestamp**: 2026-05-30T05:00:00Z
+**User Input**: "Using AI-DLC, 承認して続行します。"
+**AI Response**: Approved. INCEPTION phase is complete. Starting CONSTRUCTION phase with Unit 1 (Shared Core) Functional Design.
+**Context**: CONSTRUCTION - Phase transition from INCEPTION
+
+---
+
+## Functional Design - Unit 1 (Shared Core) Plan Created
+**Timestamp**: 2026-05-30T05:00:00Z
+**User Input**: N/A (automated planning)
+**AI Response**: Created functional design plan with 10 clarification questions covering transaction amount precision, date validation, transaction type rules, pagination strategy, error retry behavior, store data freshness, report calculation location, validation error granularity, secure storage failure handling, and API response schema validation.
+**Context**: CONSTRUCTION - Functional Design (Unit 1: Shared Core), Steps 2-4
+
+---
+
+## Functional Design - Unit 1 (Shared Core) All Steps Completed
+**Timestamp**: 2026-06-14T00:00:00Z
+**User Input**: "Functional Designを続行します。"
+**AI Response**: Completed all 9 steps of Functional Design for Unit 1 (Shared Core). Generated 6 artifacts: (1) domain-models.md — Transaction/Account/Category/Report models, validators, business logic, PBT-suitable pure functions; (2) business-rules.md — Transaction type rules, amount/date validation, account constraints, category rules, report aggregation, error granularity; (3) api-client-design.md — IFireflyIIIClient interface, request/response types, error hierarchy, retry middleware, endpoint mappings; (4) storage-design.md — ISecureStorage/ILocalSettings ports, key naming, fail-closed behavior, platform adapters; (5) store-design.md — AuthStore/TransactionStore/AccountStore/CategoryStore/ReportStore/UIStore state and methods; (6) service-design.md — AuthenticationService/TransactionService/AccountService/CategoryService/ReportService/ValidationService/ErrorHandlingService orchestration logic and flows.
+**Context**: CONSTRUCTION - Functional Design (Unit 1: Shared Core), ALL STEPS COMPLETE
+
+### Artifacts Generated:
+- `aidlc-docs/construction/shared-core/functional-design/domain-models.md`
+- `aidlc-docs/construction/shared-core/functional-design/business-rules.md`
+- `aidlc-docs/construction/shared-core/functional-design/api-client-design.md`
+- `aidlc-docs/construction/shared-core/functional-design/storage-design.md`
+- `aidlc-docs/construction/shared-core/functional-design/store-design.md`
+- `aidlc-docs/construction/shared-core/functional-design/service-design.md`
+
+### Clarification Answers Applied:
+- Q1: C (Decimal with flexible precision, max 2 decimals)
+- Q2: C (Future dates allowed with warning)
+- Q3: A (Strict account pairing)
+- Q4: A (Cursor-based pagination)
+- Q5: A (Idempotent GET only retry)
+- Q6: C (Manual refresh)
+- Q7: C (Hybrid report calculation)
+- Q8: A (Field-level validation errors)
+- Q9: B (Fail closed with fallback prompt)
+- Q10: B (Lenient with type coercion)
+
+---
+
+## Functional Design - Approval Pending
+**Timestamp**: 2026-06-14T00:00:00Z
+**User Input**: N/A (awaiting user review)
+**AI Response**: Presented completion summary with all 9 steps complete. Awaiting user approval to proceed to NFR Requirements stage.
+**Context**: CONSTRUCTION - Functional Design (Unit 1: Shared Core), approval request
+
+---
+
+## NFR Requirements - Unit 1 (Shared Core) Plan Created
+**Timestamp**: 2026-06-15T00:00:00Z
+**User Input**: "Go"
+**AI Response**: Starting NFR Requirements for Unit 1 (Shared Core). Created NFR requirements plan with 8 clarification questions covering API response time, concurrent request handling, token expiration, PBT scope, store performance, storage failure recovery, TypeScript strictness, and HTTP client library selection.
+**Context**: CONSTRUCTION - NFR Requirements (Unit 1: Shared Core), Steps 1-4
+
+---
+
+## NFR Requirements - Approval Pending
+**Timestamp**: 2026-06-15T00:00:00Z
+**User Input**: N/A (awaiting user answers to 8 questions)
+**AI Response**: Presented 8 NFR clarification questions to user. Awaiting answers before generating NFR requirements artifacts.
+**Context**: CONSTRUCTION - NFR Requirements (Unit 1: Shared Core), Step 5
+
+---
+
+## NFR Requirements - Q8 Answer Received (All 8 Complete)
+**Timestamp**: 2026-06-15T00:00:00Z
+**User Input**: "Q7までは回答してあります。Q8をその方針で回答記述してください。まだ次のステップには進まないでください。"
+**AI Response**: Recorded Q8 answer: A (oxlint import restrictions). User requested ESLint be replaced with oxlint for speed. oxlint is compatible with React Native + Expo (runs on Node.js, independent of Hermes runtime). All 8 questions now complete. Awaiting user signal to proceed to Step 6.
+**Context**: CONSTRUCTION - NFR Design (Unit 1: Shared Core), all answers complete
+
+### Answers Summary:
+- Q1: B — No circuit breaker (client UI handles offline)
+- Q2: B — User-facing only (internal logs retain details for debugging)
+- Q3: B — Session cache (retrieve once, hold until 401/logout)
+- Q4: B — Separate test directory (__properties__/)
+- Q5: A — Single error field per store
+- Q6: B — Chain of validators (composable, PBT-friendly)
+- Q7: D — Configurable (default 10 seconds)
+- Q8: A — oxlint import restrictions (replaces ESLint; Rust-based, fast, RN+Expo compatible)
+
+### Tech Stack Update:
+- ESLint 9 → **oxlint** (Rust-based linter, 10-100x faster than ESLint)
+- Prettier 3 retained as formatter
+- oxlint `no-restricted-imports` for security module boundary enforcement
+
+---
+
+## NFR Requirements - Answers Received
+**Timestamp**: 2026-06-15T00:00:00Z
+**User Input**: "Q7はAにします。それ以外は推奨された回答で記入してください。まだ次のステップには進まないでください。"
+**AI Response**: Recorded all 8 answers. Q7 changed to A (Maximum strictness). All others per recommendation. No ambiguities detected. Awaiting user signal to proceed to Step 6 (generate artifacts).
+**Context**: CONSTRUCTION - NFR Requirements (Unit 1: Shared Core), answer collection complete
+
+### Answers Summary:
+- Q1: B — Moderate (Under 2 seconds)
+- Q2: C — Simple (Last-write-wins)
+- Q3: C — Error-only (Client decides)
+- Q4: A — Full (All pure functions)
+- Q5: B — Medium (Up to 1,000 items)
+- Q6: A — Fail-closed with prompt
+- Q7: A — Maximum strictness (strict: true + noUncheckedIndexedAccess + exactOptionalPropertyTypes + noImplicitReturns)
+- Q8: A — oxlint import restrictions (replaces ESLint; Rust-based, fast, RN+Expo compatible)
+
+---
+
+## NFR Requirements - Artifacts Generated
+**Timestamp**: 2026-06-15T00:00:00Z
+**User Input**: "続行します。"
+**AI Response**: Generated 2 NFR artifacts: (1) nfr-requirements.md — 7 categories (security, reliability, performance, maintainability, availability, usability, extension compliance); (2) tech-stack-decisions.md — TypeScript 5.4+ with maximum strictness, MobX 6.x, Vitest + fast-check, native fetch, oxlint 9 + Prettier 3, minimal runtime dependencies.
+**Context**: CONSTRUCTION - NFR Requirements (Unit 1: Shared Core), Step 6 complete
+
+### Artifacts Generated:
+- `aidlc-docs/construction/shared-core/nfr-requirements.md`
+- `aidlc-docs/construction/shared-core/tech-stack-decisions.md`
+
+---
+
+## NFR Requirements - Approval Granted
+**Timestamp**: 2026-06-15T00:00:00Z
+**User Input**: "承認して続行します。"
+**AI Response**: Approved. NFR Requirements phase is complete. Proceeding to NFR Design stage.
+**Context**: CONSTRUCTION - NFR Requirements (Unit 1: Shared Core), user approval received
+
+---
+
+## NFR Design - Unit 1 (Shared Core) Plan Created
+**Timestamp**: 2026-06-15T00:00:00Z
+**User Input**: "承認して続行します。"
+**AI Response**: Starting NFR Design for Unit 1 (Shared Core). Created NFR design plan with 8 clarification questions covering circuit breaker, error redaction scope, token in-memory lifetime, PBT organization, store error granularity, validation pipeline, API timeout, and security module boundary.
+**Context**: CONSTRUCTION - NFR Design (Unit 1: Shared Core), Steps 1-4
+
+---
+
+## NFR Design - Approval Pending
+**Timestamp**: 2026-06-15T00:00:00Z
+**User Input**: N/A (awaiting user answers to 8 questions)
+**AI Response**: Presented 8 NFR design clarification questions to user. Awaiting answers before generating NFR design artifacts.
+**Context**: CONSTRUCTION - NFR Design (Unit 1: Shared Core), Step 5
+
+---
+
+## NFR Design - Artifacts Generated
+**Timestamp**: 2026-06-15T00:00:00Z
+**User Input**: "承認して続行します。"
+**AI Response**: Generated 2 NFR design artifacts: (1) nfr-design-patterns.md — resilience patterns (retry middleware, fail-closed storage, concurrent request handling), security patterns (token lifecycle, error redaction pipeline, validation pipeline, module isolation, TLS enforcement), performance patterns (MobX computed, cursor-based pagination, manual refresh, API timeout), maintainability patterns (PBT organization, strict TypeScript, zero platform deps, oxlint); (2) logical-components.md — API Client Layer (HTTPS Enforcer, Retry Middleware, Timeout Controller, Auth Gate), Service Layer (Authentication, Validation, Error Handling, Transaction, Account, Category, Report), Store Layer (Auth, Transaction, Account, Category, Report, UI), Storage Ports (ISecureStorage, ILocalSettings), cross-cutting interaction flows.
+**Context**: CONSTRUCTION - NFR Design (Unit 1: Shared Core), Step 6 complete
+
+### Artifacts Generated:
+- `aidlc-docs/construction/shared-core/nfr-design/nfr-design-patterns.md`
+- `aidlc-docs/construction/shared-core/nfr-design/logical-components.md`
+
+---
+
+## NFR Design - Approval Granted
+**Timestamp**: 2026-06-21T00:00:00Z
+**User Input**: "Using AI-DLC, 承認し、Code Generation (Unit 1: Shared Core)に進みます。"
+**AI Response**: Approved. NFR Design phase is complete. Proceeding to Code Generation (Unit 1: Shared Core) — Part 1: Planning.
+**Context**: CONSTRUCTION - NFR Design (Unit 1: Shared Core), user approval received
+
+---
+
+## Code Generation - Unit 1 (Shared Core) Part 1 Started
+**Timestamp**: 2026-06-21T00:00:00Z
+**User Input**: "Using AI-DLC, 承認し、Code Generation (Unit 1: Shared Core)に進みます。"
+**AI Response**: Starting Code Generation Part 1 (Planning) for Unit 1 (Shared Core). Loading all functional design, NFR requirements, and NFR design artifacts to create a comprehensive code generation plan.
+**Context**: CONSTRUCTION - Code Generation (Unit 1: Shared Core), Part 1 Planning started
+
+---
+
+## Code Generation - Part 1 Plan Created
+**Timestamp**: 2026-06-21T00:00:00Z
+**User Input**: N/A (automated planning)
+**AI Response**: Created comprehensive code generation plan at aidlc-docs/construction/plans/shared-core-code-generation-plan.md with 18 steps covering: project structure setup, error types, storage interfaces, domain models (Transaction, Account, Category, Report), API client layer (HTTP adapter, HTTPS enforcer, timeout controller, auth gate, retry middleware, Firefly III client), MobX stores (Auth, Transaction, Account, Category, Report, UI), services (Validation, Error Handling, Authentication, Transaction, Account, Category, Report), storage platform adapters, barrel exports, documentation, and dependency installation/verification. Estimated ~75 files total.
+**Context**: CONSTRUCTION - Code Generation (Unit 1: Shared Core), Part 1 Planning complete
+
+---
+
+## Code Generation - Part 1 Approved, Part 2 Started
+**Timestamp**: 2026-06-21T00:00:00Z
+**User Input**: "承認してCode Generation Part 2を開始します。"
+**AI Response**: Approved. Starting Code Generation Part 2 (Generation) for Unit 1 (Shared Core). Executing Step 1: Project Structure Setup.
+**Context**: CONSTRUCTION - Code Generation (Unit 1: Shared Core), Part 2 Generation started
+
+---
+
+## Code Generation - Unit 1 (Shared Core) Complete
+**Timestamp**: 2026-06-21T00:00:00Z
+**User Input**: N/A (automated generation)
+**AI Response**: Completed all 18 steps of Code Generation for Unit 1 (Shared Core). Generated ~65 files across the monorepo structure. TypeScript build passes with maximum strictness. All 88 tests pass (9 test files, 73 example-based + 15 property-based). Dependencies installed via pnpm.
+**Context**: CONSTRUCTION - Code Generation (Unit 1: Shared Core), ALL STEPS COMPLETE
+
+### Build Verification:
+- ✅ `pnpm install` — 81 packages installed
+- ✅ `pnpm --filter @luminescence/core build` — TypeScript compilation passes (max strict)
+- ✅ `pnpm --filter @luminescence/core test` — 88 tests pass (9 test files)
+
+### Files Generated:
+- **Config**: package.json, pnpm-workspace.yaml, tsconfig.base.json, oxlintrc.json, .prettierrc, .gitignore
+- **Package**: packages/core/package.json, tsconfig.json, vitest.config.ts
+- **Source**: ~45 source files across errors/, domain-models/, api-client/, stores/, services/, storage/
+- **Tests**: 9 test files (example-based) + 6 property-based test files
+- **Docs**: code-generation-summary.md
+
+---
+
+## Build and Test - Unit 2 (CLI Client) Complete
+**Timestamp**: 2026-06-27T00:00:00Z
+**User Input**: "Unit 2のBuild and Testに進んでください。"
+**AI Response**: Ran full build and test verification for Unit 2 (CLI Client). All checks pass.
+**Context**: CONSTRUCTION - Build and Test (Unit 2: CLI Client), COMPLETE
+
+### Build Verification:
+- ✅ `pnpm install` — 123 packages installed (monorepo)
+- ✅ `pnpm --filter @luminescence/core build` — TypeScript compilation passes (max strict)
+- ✅ `pnpm --filter @luminescence/cli build` — TypeScript compilation passes
+
+### Test Results:
+- ✅ `pnpm --filter @luminescence/core test` — 88 tests pass (9 test files)
+- ✅ `pnpm --filter @luminescence/cli test` — 12 tests pass (2 test files: cli-service.test.ts, table-formatter.test.ts)
+
+### Lint Results:
+- ⚠️ oxlint warning: `keyring-adapter.ts:37:14` — unused catch parameter `error` (non-blocking)
+
+### Unit 2 CLI Structure:
+- `packages/cli/src/cli.ts` — Commander.js entry point (configure, logout, transactions, transaction, accounts, categories)
+- `packages/cli/src/services/cli-service.ts` — CLIService orchestration
+- `packages/cli/src/formatters/` — TableFormatter, JSONFormatter, CSVFormatter
+- `packages/cli/src/storage/` — JSONConfigAdapter (ILocalSettings), KeyringAdapter (ISecureStorage)
+- `packages/cli/src/__tests__/` — cli-service.test.ts, table-formatter.test.ts
