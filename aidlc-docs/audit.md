@@ -435,3 +435,30 @@
 - **Source**: ~45 source files across errors/, domain-models/, api-client/, stores/, services/, storage/
 - **Tests**: 9 test files (example-based) + 6 property-based test files
 - **Docs**: code-generation-summary.md
+
+---
+
+## Build and Test - Unit 2 (CLI Client) Complete
+**Timestamp**: 2026-06-27T00:00:00Z
+**User Input**: "Unit 2のBuild and Testに進んでください。"
+**AI Response**: Ran full build and test verification for Unit 2 (CLI Client). All checks pass.
+**Context**: CONSTRUCTION - Build and Test (Unit 2: CLI Client), COMPLETE
+
+### Build Verification:
+- ✅ `pnpm install` — 123 packages installed (monorepo)
+- ✅ `pnpm --filter @luminescence/core build` — TypeScript compilation passes (max strict)
+- ✅ `pnpm --filter @luminescence/cli build` — TypeScript compilation passes
+
+### Test Results:
+- ✅ `pnpm --filter @luminescence/core test` — 88 tests pass (9 test files)
+- ✅ `pnpm --filter @luminescence/cli test` — 12 tests pass (2 test files: cli-service.test.ts, table-formatter.test.ts)
+
+### Lint Results:
+- ⚠️ oxlint warning: `keyring-adapter.ts:37:14` — unused catch parameter `error` (non-blocking)
+
+### Unit 2 CLI Structure:
+- `packages/cli/src/cli.ts` — Commander.js entry point (configure, logout, transactions, transaction, accounts, categories)
+- `packages/cli/src/services/cli-service.ts` — CLIService orchestration
+- `packages/cli/src/formatters/` — TableFormatter, JSONFormatter, CSVFormatter
+- `packages/cli/src/storage/` — JSONConfigAdapter (ILocalSettings), KeyringAdapter (ISecureStorage)
+- `packages/cli/src/__tests__/` — cli-service.test.ts, table-formatter.test.ts
