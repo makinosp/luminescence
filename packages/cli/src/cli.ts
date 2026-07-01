@@ -2,8 +2,8 @@
 
 import { Command } from 'commander';
 import { CLIService } from './services/cli-service.js';
-import { KeyringAdapter } from './storage/keyring-adapter.js';
 import { JSONConfigAdapter } from './storage/json-config-adapter.js';
+import { KeyringAdapter } from './storage/keyring-adapter.js';
 
 async function main(): Promise<void> {
   const program = new Command();
@@ -11,10 +11,7 @@ async function main(): Promise<void> {
   const config = new JSONConfigAdapter();
   const cliService = new CLIService(keyring, config);
 
-  program
-    .name('luminescence')
-    .description('CLI client for Firefly III')
-    .version('0.1.0');
+  program.name('luminescence').description('CLI client for Firefly III').version('0.1.0');
 
   // Authentication commands
   program

@@ -17,14 +17,14 @@ export const ACCOUNT_TYPE_LABELS: Record<AccountType, string> = {
  * Immutable Account domain model.
  */
 export interface Account {
-  readonly id: string;
-  readonly name: string;
-  readonly type: AccountType;
-  readonly currencyCode: string; // ISO 4217
-  readonly currentBalance: number;
-  readonly isActive: boolean;
-  readonly createdAt: Date;
-  readonly updatedAt: Date;
+  readonlyid: string;
+  readonlyname: string;
+  readonlytype: AccountType;
+  readonlycurrencyCode: string; // ISO 4217
+  readonlycurrentBalance: number;
+  readonlyisActive: boolean;
+  readonlycreatedAt: Date;
+  readonlyupdatedAt: Date;
 }
 
 /**

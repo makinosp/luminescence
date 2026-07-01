@@ -1,6 +1,6 @@
-import { describe, it, expect } from 'vitest';
-import type { ISecureStorage } from '../interfaces/secure-storage.js';
 import type { ILocalSettings } from '../interfaces/local-settings.js';
+import type { ISecureStorage } from '../interfaces/secure-storage.js';
+import { describe, it, expect } from 'vitest';
 
 /**
  * Contract tests for ISecureStorage implementations.

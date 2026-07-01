@@ -1,4 +1,4 @@
-import { Transaction } from '@luminescence/core';
+import type { Transaction } from '@luminescence/core';
 
 export class TableFormatter {
   formatTransactions(transactions: Transaction[]): string {
@@ -34,7 +34,14 @@ export class TableFormatter {
     return lines.join('\n');
   }
 
-  formatAccounts(accounts: Array<{ id: string; name: string; type: string; currentBalance?: number }>): string {
+  formatAccounts(
+    accounts: Array<{
+      id: string;
+      name: string;
+      type: string;
+      currentBalance?: number;
+    }>,
+  ): string {
     if (accounts.length === 0) {
       return 'No accounts found.';
     }

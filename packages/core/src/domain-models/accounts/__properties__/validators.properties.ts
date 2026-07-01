@@ -1,18 +1,15 @@
-import { describe, it, expect } from 'vitest';
 import fc from 'fast-check';
+import { describe, it, expect } from 'vitest';
 import { validateAccountType } from '../validators.js';
 
 describe('Account Validators — Property-Based Tests', () => {
   describe('validateAccountType', () => {
     it('should accept valid account types', () => {
       fc.assert(
-        fc.property(
-          fc.constantFrom('asset', 'liability', 'revenue', 'expense'),
-          (type) => {
-            const result = validateAccountType(type);
-            expect(result.isValid).toBe(true);
-          },
-        ),
+        fc.property(fc.constantFrom('asset', 'liability', 'revenue', 'expense'), (type) => {
+          const result = validateAccountType(type);
+          expect(result.isValid).toBe(true);
+        }),
       );
     });
 

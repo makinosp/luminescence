@@ -1,4 +1,4 @@
-import { Transaction } from '@luminescence/core';
+import type { Transaction } from '@luminescence/core';
 
 export class CSVFormatter {
   formatTransactions(transactions: Transaction[]): string {
@@ -36,18 +36,20 @@ export class CSVFormatter {
     return [headers, values].map((row) => row.map(this.escapeCSV).join(',')).join('\n');
   }
 
-  formatAccounts(accounts: Array<{ id: string; name: string; type: string; currentBalance?: number }>): string {
+  formatAccounts(
+    accounts: Array<{
+      id: string;
+      name: string;
+      type: string;
+      currentBalance?: number;
+    }>,
+  ): string {
     if (accounts.length === 0) {
       return '';
     }
 
     const headers = ['id', 'name', 'type', 'currentBalance'];
-    const rows = accounts.map((a) => [
-      a.id ?? '',
-      a.name ?? '',
-      a.type ?? '',
-      a.currentBalance?.toString() ?? '',
-    ]);
+    const rows = accounts.map((a) => [a.id ?? '', a.name ?? '', a.type ?? '', a.currentBalance?.toString() ?? '']);
 
     return [headers, ...rows].map((row) => row.map(this.escapeCSV).join(',')).join('\n');
   }
@@ -58,10 +60,7 @@ export class CSVFormatter {
     }
 
     const headers = ['id', 'name'];
-    const rows = categories.map((c) => [
-      c.id ?? '',
-      c.name ?? '',
-    ]);
+    const rows = categories.map((c) => [c.id ?? '', c.name ?? '']);
 
     return [headers, ...rows].map((row) => row.map(this.escapeCSV).join(',')).join('\n');
   }

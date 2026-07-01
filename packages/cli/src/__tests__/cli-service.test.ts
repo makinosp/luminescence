@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { CLIService } from '../services/cli-service.js';
-import { KeyringAdapter } from '../storage/keyring-adapter.js';
-import { JSONConfigAdapter } from '../storage/json-config-adapter.js';
+import type { JSONConfigAdapter } from '../storage/json-config-adapter.js';
+import type { KeyringAdapter } from '../storage/keyring-adapter.js';
 
 describe('CLIService', () => {
   let cliService: CLIService;

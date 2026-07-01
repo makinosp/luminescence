@@ -10,59 +10,59 @@ export type ReportPeriod = 'current_month' | 'last_month' | 'last_3_months' | 'c
  * Date range for custom report periods.
  */
 export interface DateRange {
-  readonly startDate: Date;
-  readonly endDate: Date;
+  readonlystartDate: Date;
+  readonlyendDate: Date;
 }
 
 /**
  * Spending overview report data.
  */
 export interface SpendingOverview {
-  readonly period: ReportPeriod;
-  readonly dateRange: DateRange;
-  readonly totalIncome: number;
-  readonly totalExpenses: number;
-  readonly netCashflow: number;
-  readonly categoryBreakdown: readonly CategorySpending[];
+  readonlyperiod: ReportPeriod;
+  readonlydateRange: DateRange;
+  readonlytotalIncome: number;
+  readonlytotalExpenses: number;
+  readonlynetCashflow: number;
+  readonlycategoryBreakdown: readonly CategorySpending[];
 }
 
 /**
  * Category spending breakdown.
  */
 export interface CategorySpending {
-  readonly categoryId: string;
-  readonly categoryName: string;
-  readonly totalSpent: number;
-  readonly percentage: number;
-  readonly transactionCount: number;
+  readonlycategoryId: string;
+  readonlycategoryName: string;
+  readonlytotalSpent: number;
+  readonlypercentage: number;
+  readonlytransactionCount: number;
 }
 
 /**
  * Income vs expenses comparison report.
  */
 export interface IncomeVsExpensesReport {
-  readonly period: ReportPeriod;
-  readonly dateRange: DateRange;
-  readonly income: number;
-  readonly expenses: number;
-  readonly netCashflow: number;
+  readonlyperiod: ReportPeriod;
+  readonlydateRange: DateRange;
+  readonlyincome: number;
+  readonlyexpenses: number;
+  readonlynetCashflow: number;
 }
 
 /**
  * Trend analysis over multiple months.
  */
 export interface TrendAnalysis {
-  readonly months: readonly MonthlyTrend[];
+  readonlymonths: readonly MonthlyTrend[];
 }
 
 /**
  * Monthly trend data point.
  */
 export interface MonthlyTrend {
-  readonly month: string; // YYYY-MM format
-  readonly income: number;
-  readonly expenses: number;
-  readonly netCashflow: number;
+  readonlymonth: string; // YYYY-MM format
+  readonlyincome: number;
+  readonlyexpenses: number;
+  readonlynetCashflow: number;
 }
 
 /**
@@ -110,7 +110,14 @@ export function calculateNetCashflow(totalIncome: number, totalExpenses: number)
  * Pure function — suitable for PBT.
  */
 export function calculateCategoryPercentages(
-  categorySpending: Map<string, { name: string; totalSpent: number; transactionCount: number }>,
+  categorySpending: Map<
+    string,
+    {
+      name: string;
+      totalSpent: number;
+      transactionCount: number;
+    }
+  >,
   totalExpenses: number,
 ): CategorySpending[] {
   if (totalExpenses === 0) {
@@ -147,7 +154,14 @@ export function aggregateSpendingOverview(
 ): SpendingOverview {
   let totalIncome = 0;
   let totalExpenses = 0;
-  const categorySpending = new Map<string, { name: string; totalSpent: number; transactionCount: number }>();
+  const categorySpending = new Map<
+    string,
+    {
+      name: string;
+      totalSpent: number;
+      transactionCount: number;
+    }
+  >();
 
   for (const tx of transactions) {
     if (tx.type === 'deposit') {

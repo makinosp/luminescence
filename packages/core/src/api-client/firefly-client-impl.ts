@@ -1,11 +1,11 @@
+import type { Account, AccountType } from '../domain-models/accounts/account.js';
+import type { Category } from '../domain-models/categories/category.js';
+import type { SpendingOverview, IncomeVsExpensesReport, TrendAnalysis } from '../domain-models/reports/report.js';
+import type { Transaction } from '../domain-models/transactions/transaction.js';
 import type { IHTTPAdapter } from './adapters/fetch-adapter.js';
-import { FetchAdapter } from './adapters/fetch-adapter.js';
-import { HTTPSEnforcer } from './https-enforcer.js';
-import { TimeoutController } from './timeout-controller.js';
-import { AuthGate } from './auth-gate.js';
-import { RetryMiddleware } from './retry-middleware.js';
-import { APIError, NetworkError, AuthError } from '../errors/error-types.js';
-import { errorHandlingService } from '../errors/error-categorization.js';
+import type { IFireflyIIIClient, TransactionQueryParams } from './firefly-client.js';
+import { createAccount } from '../domain-models/accounts/account.js';
+import { createCategory } from '../domain-models/categories/category.js';
 import {
   deserializeTransaction,
   deserializeTransactionList,
@@ -14,17 +14,13 @@ import {
   type FireflyIIIPaginatedResponse,
   type FireflyIIITransactionResponse,
 } from '../domain-models/transactions/serializers.js';
-import type { Transaction } from '../domain-models/transactions/transaction.js';
-import type { Account, AccountType } from '../domain-models/accounts/account.js';
-import { createAccount } from '../domain-models/accounts/account.js';
-import type { Category } from '../domain-models/categories/category.js';
-import { createCategory } from '../domain-models/categories/category.js';
-import type {
-  SpendingOverview,
-  IncomeVsExpensesReport,
-  TrendAnalysis,
-} from '../domain-models/reports/report.js';
-import type { IFireflyIIIClient, TransactionQueryParams } from './firefly-client.js';
+import { errorHandlingService } from '../errors/error-categorization.js';
+import { APIError, NetworkError, AuthError } from '../errors/error-types.js';
+import { FetchAdapter } from './adapters/fetch-adapter.js';
+import { AuthGate } from './auth-gate.js';
+import { HTTPSEnforcer } from './https-enforcer.js';
+import { RetryMiddleware } from './retry-middleware.js';
+import { TimeoutController } from './timeout-controller.js';
 
 /**
  * Firefly III API client implementation.
@@ -128,7 +124,9 @@ export class FireflyIIIClient implements IFireflyIIIClient {
     if (params?.type) queryParams.set('type', params.type);
 
     const path = `/accounts?${queryParams.toString()}`;
-    const response = await this.request<{ data: Array<{ id: string; attributes: Record<string, unknown> }> }>('GET', path);
+    const response = await this.request<{
+      data: Array<{ id: string; attributes: Record<string, unknown> }>;
+    }>('GET', path);
 
     return response.data.map((item) =>
       createAccount({
@@ -145,7 +143,9 @@ export class FireflyIIIClient implements IFireflyIIIClient {
   }
 
   async getAccount(id: string): Promise<Account> {
-    const response = await this.request<{ data: { id: string; attributes: Record<string, unknown> } }>('GET', `/accounts/${id}`);
+    const response = await this.request<{
+      data: { id: string; attributes: Record<string, unknown> };
+    }>('GET', `/accounts/${id}`);
     const item = response.data;
 
     return createAccount({
@@ -165,7 +165,9 @@ export class FireflyIIIClient implements IFireflyIIIClient {
   // =========================================================================
 
   async getCategories(): Promise<Category[]> {
-    const response = await this.request<{ data: Array<{ id: string; attributes: Record<string, unknown> }> }>('GET', '/categories');
+    const response = await this.request<{
+      data: Array<{ id: string; attributes: Record<string, unknown> }>;
+    }>('GET', '/categories');
 
     return response.data.map((item) => {
       const categoryData: {
@@ -188,7 +190,9 @@ export class FireflyIIIClient implements IFireflyIIIClient {
   }
 
   async getCategory(id: string): Promise<Category> {
-    const response = await this.request<{ data: { id: string; attributes: Record<string, unknown> } }>('GET', `/categories/${id}`);
+    const response = await this.request<{
+      data: { id: string; attributes: Record<string, unknown> };
+    }>('GET', `/categories/${id}`);
     const item = response.data;
 
     const categoryData: {
@@ -243,10 +247,7 @@ export class FireflyIIIClient implements IFireflyIIIClient {
     };
   }
 
-  async getIncomeVsExpenses(params: {
-    startDate: Date;
-    endDate: Date;
-  }): Promise<IncomeVsExpensesReport> {
+  async getIncomeVsExpenses(params: { startDate: Date; endDate: Date }): Promise<IncomeVsExpensesReport> {
     const body: Record<string, unknown> = {
       start: this.formatDate(params.startDate),
       end: this.formatDate(params.endDate),
@@ -277,11 +278,9 @@ export class FireflyIIIClient implements IFireflyIIIClient {
       end: this.formatDate(endDate),
     };
 
-    const response = await this.request<{ data: Array<{ month: string; income: string; expenses: string }> }>(
-      'GET',
-      '/insight/income/period',
-      body,
-    );
+    const response = await this.request<{
+      data: Array<{ month: string; income: string; expenses: string }>;
+    }>('GET', '/insight/income/period', body);
 
     return {
       months: (response.data ?? []).map((item) => ({
@@ -349,11 +348,7 @@ export class FireflyIIIClient implements IFireflyIIIClient {
             serverResponse = response.body;
           }
 
-          throw new APIError(
-            `API request failed with status ${response.status}`,
-            response.status,
-            serverResponse,
-          );
+          throw new APIError(`API request failed with status ${response.status}`, response.status, serverResponse);
         }
 
         if (response.status === 204 || !response.body) {
@@ -365,11 +360,7 @@ export class FireflyIIIClient implements IFireflyIIIClient {
         clear();
 
         // Re-throw known error types
-        if (
-          error instanceof APIError ||
-          error instanceof AuthError ||
-          error instanceof NetworkError
-        ) {
+        if (error instanceof APIError || error instanceof AuthError || error instanceof NetworkError) {
           throw error;
         }
 

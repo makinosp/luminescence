@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest';
 import fc from 'fast-check';
+import { describe, it, expect } from 'vitest';
 import { calculateNetCashflow, calculateCategoryPercentages } from '../report.js';
 
 describe('Report Calculations — Property-Based Tests', () => {
@@ -61,7 +61,14 @@ describe('Report Calculations — Property-Based Tests', () => {
           ),
           (categories) => {
             const spending = new Map(
-              categories.map((c) => [c.id, { name: c.name, totalSpent: c.spent, transactionCount: c.count }]),
+              categories.map((c) => [
+                c.id,
+                {
+                  name: c.name,
+                  totalSpent: c.spent,
+                  transactionCount: c.count,
+                },
+              ]),
             );
             const totalExpenses = categories.reduce((sum, c) => sum + c.spent, 0);
             const result = calculateCategoryPercentages(spending, totalExpenses);
@@ -89,7 +96,14 @@ describe('Report Calculations — Property-Based Tests', () => {
           ),
           (categories) => {
             const spending = new Map(
-              categories.map((c) => [c.id, { name: c.name, totalSpent: c.spent, transactionCount: c.count }]),
+              categories.map((c) => [
+                c.id,
+                {
+                  name: c.name,
+                  totalSpent: c.spent,
+                  transactionCount: c.count,
+                },
+              ]),
             );
             const totalExpenses = categories.reduce((sum, c) => sum + c.spent, 0);
             const result = calculateCategoryPercentages(spending, totalExpenses);

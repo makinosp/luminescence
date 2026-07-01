@@ -1,4 +1,3 @@
-import { makeAutoObservable, runInAction } from 'mobx';
 import type {
   SpendingOverview,
   IncomeVsExpensesReport,
@@ -7,6 +6,7 @@ import type {
   DateRange,
 } from '../domain-models/reports/report.js';
 import type { APIError, NetworkError, AuthError } from '../errors/error-types.js';
+import { makeAutoObservable, runInAction } from 'mobx';
 
 /**
  * Report data state.

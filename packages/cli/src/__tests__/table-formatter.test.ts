@@ -1,8 +1,8 @@
-import { describe, it, expect } from 'vitest';
-import { TableFormatter } from '../formatters/table-formatter.js';
-import { JSONFormatter } from '../formatters/json-formatter.js';
-import { CSVFormatter } from '../formatters/csv-formatter.js';
 import type { Transaction } from '@luminescence/core';
+import { describe, it, expect } from 'vitest';
+import { CSVFormatter } from '../formatters/csv-formatter.js';
+import { JSONFormatter } from '../formatters/json-formatter.js';
+import { TableFormatter } from '../formatters/table-formatter.js';
 
 describe('TableFormatter', () => {
   const formatter = new TableFormatter();
@@ -43,9 +43,7 @@ describe('TableFormatter', () => {
     });
 
     it('should format accounts as table', () => {
-      const accounts = [
-        { id: '1', name: 'Checking', type: 'asset', currentBalance: 1000 },
-      ];
+      const accounts = [{ id: '1', name: 'Checking', type: 'asset', currentBalance: 1000 }];
 
       const result = formatter.formatAccounts(accounts);
       expect(result).toContain('Checking');
@@ -60,9 +58,7 @@ describe('TableFormatter', () => {
     });
 
     it('should format categories as table', () => {
-      const categories = [
-        { id: '1', name: 'Groceries' },
-      ];
+      const categories = [{ id: '1', name: 'Groceries' }];
 
       const result = formatter.formatCategories(categories);
       expect(result).toContain('Groceries');
@@ -77,7 +73,7 @@ describe('JSONFormatter', () => {
     const tx: Transaction = {
       id: '12345',
       type: 'withdrawal',
-      amount: 50.00,
+      amount: 50.0,
       description: 'Test',
       date: new Date('2024-01-15'),
       fromAccountId: 'acc-1',
@@ -100,7 +96,7 @@ describe('CSVFormatter', () => {
     const tx: Transaction = {
       id: '12345',
       type: 'deposit',
-      amount: 100.50,
+      amount: 100.5,
       description: 'Test transaction',
       date: new Date('2024-01-15'),
       fromAccountId: 'acc-1',

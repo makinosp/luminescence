@@ -31,7 +31,12 @@ export const TRANSACTION_TYPE_SIGN: Record<TransactionType, 1 | -1 | 0> = {
  */
 export const TRANSACTION_ACCOUNT_REQUIREMENTS: Record<
   TransactionType,
-  { fromRequired: boolean; toRequired: boolean; fromAccountTypes: string[]; toAccountTypes: string[] }
+  {
+    fromRequired: boolean;
+    toRequired: boolean;
+    fromAccountTypes: string[];
+    toAccountTypes: string[];
+  }
 > = {
   deposit: {
     fromRequired: true,
@@ -59,18 +64,18 @@ export const TRANSACTION_ACCOUNT_REQUIREMENTS: Record<
  * Created via factory functions, never mutated directly.
  */
 export interface Transaction {
-  readonly id: string;
-  readonly type: TransactionType;
-  readonly amount: number; // Positive decimal, max 2 decimal places (Clarification Q1: C)
-  readonly description: string; // 1-1000 chars
-  readonly date: Date; // Transaction date (Clarification Q2: C, future dates allowed with warning)
-  readonly fromAccountId: string; // Source account ID (always required)
-  readonly toAccountId?: string; // Destination account ID (required for transfers)
-  readonly categoryId?: string; // Optional category assignment
-  readonly budgetId?: string; // Optional budget assignment
-  readonly tags: readonly string[]; // Immutable tag list
-  readonly createdAt: Date; // Firefly III creation timestamp
-  readonly updatedAt: Date; // Firefly III update timestamp
+  readonlyid: string;
+  readonlytype: TransactionType;
+  readonlyamount: number; // Positive decimal, max 2 decimal places (Clarification Q1: C)
+  readonlydescription: string; // 1-1000 chars
+  readonlydate: Date; // Transaction date (Clarification Q2: C, future dates allowed with warning)
+  readonlyfromAccountId: string; // Source account ID (always required)
+  readonlytoAccountId?: string; // Destination account ID (required for transfers)
+  readonlycategoryId?: string; // Optional category assignment
+  readonlybudgetId?: string; // Optional budget assignment
+  readonlytags: readonly string[]; // Immutable tag list
+  readonlycreatedAt: Date; // Firefly III creation timestamp
+  readonlyupdatedAt: Date; // Firefly III update timestamp
 }
 
 /**

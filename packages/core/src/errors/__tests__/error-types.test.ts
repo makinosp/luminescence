@@ -1,12 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import {
-  LuminescenceError,
-  APIError,
-  NetworkError,
-  ValidationError,
-  StorageError,
-  AuthError,
-} from '../error-types.js';
+import { LuminescenceError, APIError, NetworkError, ValidationError, StorageError, AuthError } from '../error-types.js';
 
 describe('LuminescenceError', () => {
   it('should set name to constructor name', () => {

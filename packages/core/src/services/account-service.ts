@@ -1,7 +1,7 @@
 import type { IFireflyIIIClient } from '../api-client/firefly-client.js';
 import type { Account, AccountType } from '../domain-models/accounts/account.js';
 import type { APIError, NetworkError, AuthError } from '../errors/error-types.js';
-import { AccountStore } from '../stores/account-store.js';
+import type { AccountStore } from '../stores/account-store.js';
 
 /**
  * Account service.
@@ -11,7 +11,7 @@ export class AccountService {
   constructor(
     private readonly apiClient: IFireflyIIIClient,
     private readonly accountStore: AccountStore,
-  ) { }
+  ) {}
 
   /**
    * Get accounts with optional type filter.

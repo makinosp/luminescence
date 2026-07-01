@@ -1,6 +1,6 @@
-import { makeAutoObservable, runInAction } from 'mobx';
 import type { Category } from '../domain-models/categories/category.js';
 import type { APIError, NetworkError, AuthError } from '../errors/error-types.js';
+import { makeAutoObservable, runInAction } from 'mobx';
 
 /**
  * Category list state.

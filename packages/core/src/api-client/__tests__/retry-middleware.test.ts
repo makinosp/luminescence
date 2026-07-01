@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
-import { RetryMiddleware } from '../retry-middleware.js';
 import { NetworkError } from '../../errors/error-types.js';
+import { RetryMiddleware } from '../retry-middleware.js';
 
 describe('RetryMiddleware', () => {
   it('should not retry non-idempotent methods', async () => {
@@ -27,11 +27,11 @@ describe('RetryMiddleware', () => {
   });
 
   it('should retry GET on network error', async () => {
-    const middleware = new RetryMiddleware({ maxRetries: 1, initialBackoffMs: 10 });
-    const fn = vi
-      .fn()
-      .mockRejectedValueOnce(new NetworkError('First attempt failed'))
-      .mockResolvedValueOnce('success');
+    const middleware = new RetryMiddleware({
+      maxRetries: 1,
+      initialBackoffMs: 10,
+    });
+    const fn = vi.fn().mockRejectedValueOnce(new NetworkError('First attempt failed')).mockResolvedValueOnce('success');
 
     const result = await middleware.execute('GET', fn);
     expect(result).toBe('success');
@@ -39,7 +39,10 @@ describe('RetryMiddleware', () => {
   });
 
   it('should throw after exhausting retries', async () => {
-    const middleware = new RetryMiddleware({ maxRetries: 1, initialBackoffMs: 10 });
+    const middleware = new RetryMiddleware({
+      maxRetries: 1,
+      initialBackoffMs: 10,
+    });
     const fn = vi.fn().mockRejectedValue(new NetworkError('Always fails'));
 
     await expect(middleware.execute('GET', fn)).rejects.toThrow(NetworkError);

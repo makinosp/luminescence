@@ -10,11 +10,11 @@ import {
   AccountStore,
   CategoryStore,
 } from '@luminescence/core';
-import { KeyringAdapter } from '../storage/keyring-adapter.js';
-import { JSONConfigAdapter } from '../storage/json-config-adapter.js';
-import { TableFormatter } from '../formatters/table-formatter.js';
-import { JSONFormatter } from '../formatters/json-formatter.js';
 import { CSVFormatter } from '../formatters/csv-formatter.js';
+import { JSONFormatter } from '../formatters/json-formatter.js';
+import { TableFormatter } from '../formatters/table-formatter.js';
+import type { JSONConfigAdapter } from '../storage/json-config-adapter.js';
+import type { KeyringAdapter } from '../storage/keyring-adapter.js';
 
 export interface CLIOptions {
   format?: string;
@@ -29,10 +29,7 @@ export class CLIService {
   private categoryService: CategoryService;
   private client: FireflyIIIClient;
 
-  constructor(
-    keyring: KeyringAdapter,
-    config: JSONConfigAdapter
-  ) {
+  constructor(keyring: KeyringAdapter, config: JSONConfigAdapter) {
     const validationService = new ValidationService();
     const authStore = new AuthStore();
     const transactionStore = new TransactionStore();
@@ -40,27 +37,10 @@ export class CLIService {
     const categoryStore = new CategoryStore();
 
     this.client = new FireflyIIIClient();
-    this.authService = new AuthenticationService(
-      keyring,
-      config,
-      this.client,
-      validationService,
-      authStore
-    );
-    this.transactionService = new TransactionService(
-      this.client,
-      validationService,
-      transactionStore
-    );
-    this.accountService = new AccountService(
-      this.client,
-      accountStore
-    );
-    this.categoryService = new CategoryService(
-      this.client,
-      categoryStore,
-      this.transactionService
-    );
+    this.authService = new AuthenticationService(keyring, config, this.client, validationService, authStore);
+    this.transactionService = new TransactionService(this.client, validationService, transactionStore);
+    this.accountService = new AccountService(this.client, accountStore);
+    this.categoryService = new CategoryService(this.client, categoryStore, this.transactionService);
   }
 
   async configure(options: { url?: string; token?: string }): Promise<number> {
@@ -145,7 +125,7 @@ export class CLIService {
     }
   }
 
-  private getFormatter(format: string) {
+  private getFormatter(format: string): BaseFormatter {
     switch (format.toLowerCase()) {
       case 'json':
         return new JSONFormatter();

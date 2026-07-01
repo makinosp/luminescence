@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { HTTPSEnforcer } from '../https-enforcer.js';
 import { ValidationError } from '../../errors/error-types.js';
+import { HTTPSEnforcer } from '../https-enforcer.js';
 
 describe('HTTPSEnforcer', () => {
   let enforcer: HTTPSEnforcer;

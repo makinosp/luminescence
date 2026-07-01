@@ -1,13 +1,7 @@
-import { describe, it, expect } from 'vitest';
 import fc from 'fast-check';
+import { describe, it, expect } from 'vitest';
 import { ErrorHandlingService } from '../error-categorization.js';
-import {
-  APIError,
-  NetworkError,
-  ValidationError,
-  StorageError,
-  AuthError,
-} from '../error-types.js';
+import { APIError, NetworkError, ValidationError, StorageError, AuthError } from '../error-types.js';
 
 const service = new ErrorHandlingService();
 

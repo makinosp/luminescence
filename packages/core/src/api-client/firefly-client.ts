@@ -1,8 +1,8 @@
-import type { Transaction } from '../domain-models/transactions/transaction.js';
-import type { CreateTransactionInput } from '../domain-models/transactions/serializers.js';
 import type { Account, AccountType } from '../domain-models/accounts/account.js';
 import type { Category } from '../domain-models/categories/category.js';
 import type { SpendingOverview, IncomeVsExpensesReport, TrendAnalysis } from '../domain-models/reports/report.js';
+import type { CreateTransactionInput } from '../domain-models/transactions/serializers.js';
+import type { Transaction } from '../domain-models/transactions/transaction.js';
 
 /**
  * Firefly III API client interface.

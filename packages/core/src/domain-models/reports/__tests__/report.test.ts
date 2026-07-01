@@ -1,11 +1,11 @@
 import { describe, it, expect } from 'vitest';
+import { createTransaction } from '../../transactions/transaction.js';
 import {
   calculateDateRange,
   calculateNetCashflow,
   calculateCategoryPercentages,
   aggregateSpendingOverview,
 } from '../report.js';
-import { createTransaction } from '../../transactions/transaction.js';
 
 describe('Report', () => {
   describe('calculateDateRange', () => {

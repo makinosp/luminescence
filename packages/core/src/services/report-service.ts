@@ -7,12 +7,12 @@ import type {
   ReportPeriod,
   DateRange,
 } from '../domain-models/reports/report.js';
-import { calculateDateRange, aggregateSpendingOverview } from '../domain-models/reports/report.js';
 import type { APIError, NetworkError, AuthError } from '../errors/error-types.js';
-import { ValidationService } from './validation-service.js';
-import { ReportStore } from '../stores/report-store.js';
-import type { TransactionService } from './transaction-service.js';
 import type { CategoryService } from './category-service.js';
+import type { TransactionService } from './transaction-service.js';
+import { calculateDateRange, aggregateSpendingOverview } from '../domain-models/reports/report.js';
+import type { ReportStore } from '../stores/report-store.js';
+import type { ValidationService } from './validation-service.js';
 
 /**
  * Report service.
@@ -29,7 +29,7 @@ export class ReportService {
     private readonly reportStore: ReportStore,
     private readonly transactionService: TransactionService,
     private readonly categoryService: CategoryService,
-  ) { }
+  ) {}
 
   /**
    * Get spending overview for a period.
@@ -48,10 +48,7 @@ export class ReportService {
 
       if (period === 'custom') {
         // Client-side calculation for custom queries
-        const transactions = this.transactionService.getTransactionsByDateRange(
-          dateRange.startDate,
-          dateRange.endDate,
-        );
+        const transactions = this.transactionService.getTransactionsByDateRange(dateRange.startDate, dateRange.endDate);
         const categories = await this.categoryService.getCategories();
         const categoryNames = new Map(categories.map((c) => [c.id, c.name]));
         overview = aggregateSpendingOverview(transactions, period, dateRange, categoryNames);
