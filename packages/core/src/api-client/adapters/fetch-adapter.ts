@@ -42,13 +42,13 @@ export class FetchAdapter implements IHTTPAdapter {
     const fetchOptions: RequestInit = {
       method: options.method,
     };
-    if (options.headers != null) {
+    if (options.headers !== null) {
       fetchOptions.headers = options.headers;
     }
-    if (options.body != null) {
+    if (options.body !== null) {
       fetchOptions.body = options.body;
     }
-    if (options.signal != null) {
+    if (options.signal !== null) {
       fetchOptions.signal = options.signal;
     }
 
