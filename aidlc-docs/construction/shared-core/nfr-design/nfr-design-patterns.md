@@ -28,6 +28,7 @@
 ```
 
 **Pattern Details**:
+
 - **Scope**: GET requests only (list transactions, get accounts, get categories, get reports).
 - **Non-idempotent operations** (POST, PUT, DELETE) are **never** retried automatically.
 - **Retry configuration**: Maximum 1 retry with exponential backoff starting at 500ms.
@@ -45,6 +46,7 @@
 **Requirement**: NFR Security §1.3, NFR Reliability §2.3
 
 When `ISecureStorage` is unavailable:
+
 1. All authenticated operations are **blocked**.
 2. `AuthStore` transitions to an `error` state.
 3. User-facing message prompts the user to unlock storage.
@@ -150,16 +152,18 @@ Composable validator functions that can be chained together:
 
 ```typescript
 // Validation chain pattern
-const validateTransaction = (input: CreateTransactionInput): ValidationResult[] => [
-  validateAmount(input.amount),
-  validateDescription(input.description),
-  validateDate(input.date),
-  validateAccounts(input.fromAccountId, input.toAccountId, input.type),
-  validateCategory(input.categoryId, input.type),
-].filter((r): r is ValidationResult => r !== null);
+const validateTransaction = (input: CreateTransactionInput): ValidationResult[] =>
+    [
+        validateAmount(input.amount),
+        validateDescription(input.description),
+        validateDate(input.date),
+        validateAccounts(input.fromAccountId, input.toAccountId, input.type),
+        validateCategory(input.categoryId, input.type),
+    ].filter((r): r is ValidationResult => r !== null);
 ```
 
 **Chain behavior**:
+
 - Each validator is a **pure function** (PBT-suitable).
 - All validators run; errors are **collected**, not short-circuited.
 - Returns `ValidationError` with field-level error details.
@@ -173,23 +177,24 @@ Use `oxlint` (Rust-based, fast, React Native + Expo compatible) `no-restricted-i
 ```jsonc
 // oxlint configuration
 {
-  "rules": {
-    "no-restricted-imports": [
-      "error",
-      {
-        "patterns": [
-          {
-            "group": ["packages/core/src/api-client/internal/*"],
-            "message": "Auth internals are not accessible outside the api-client module."
-          }
-        ]
-      }
-    ]
-  }
+    "rules": {
+        "no-restricted-imports": [
+            "error",
+            {
+                "patterns": [
+                    {
+                        "group": ["packages/core/src/api-client/internal/*"],
+                        "message": "Auth internals are not accessible outside the api-client module.",
+                    },
+                ],
+            },
+        ],
+    },
 }
 ```
 
 **Isolated modules**:
+
 - `packages/core/src/api-client/` — HTTP client and auth headers
 - `packages/core/src/storage/interfaces/` — Storage port definitions
 - `packages/core/src/services/authentication-service.ts` — Auth orchestration
@@ -214,19 +219,20 @@ Use `oxlint` (Rust-based, fast, React Native + Expo compatible) `no-restricted-i
 ```typescript
 // Derived data via computed properties — no redundant calculations
 class TransactionStore {
-  @computed
-  get transactionsByCategory(): Map<string, Transaction[]> {
-    return groupBy(this.transactions, t => t.categoryId ?? 'uncategorized');
-  }
+    @computed
+    get transactionsByCategory(): Map<string, Transaction[]> {
+        return groupBy(this.transactions, (t) => t.categoryId ?? "uncategorized");
+    }
 
-  @computed
-  get monthlySummary(): MonthlySummary {
-    return calculateMonthlySummary(this.transactions);
-  }
+    @computed
+    get monthlySummary(): MonthlySummary {
+        return calculateMonthlySummary(this.transactions);
+    }
 }
 ```
 
 **Rules**:
+
 - Computed properties cache results until dependencies change.
 - No manual cache invalidation needed — MobX handles reactivity.
 - Up to 1,000 items per view is the target performance boundary.
@@ -256,10 +262,10 @@ class TransactionStore {
 const DEFAULT_TIMEOUT_MS = 10_000;
 
 interface RequestConfig {
-  url: string;
-  method: string;
-  timeout?: number; // Override default timeout
-  signal?: AbortController; // For cancellation
+    url: string;
+    method: string;
+    timeout?: number; // Override default timeout
+    signal?: AbortController; // For cancellation
 }
 ```
 
@@ -292,6 +298,7 @@ packages/core/src/
 ```
 
 **PBT scope** (Answer: A — Full scope, all pure functions):
+
 - **Validators**: amount, description, date, URL, token, transaction input
 - **Serializers**: Firefly III API response parsing, request format conversion
 - **Domain logic**: `netAmount()` calculation, transaction type sign, account pairing rules
@@ -305,6 +312,7 @@ packages/core/src/
 **Requirement**: Tech Stack §1.2 — Maximum strictness
 
 All strict flags enabled:
+
 - `strict: true`
 - `noUncheckedIndexedAccess: true`
 - `exactOptionalPropertyTypes: true`
@@ -324,9 +332,9 @@ All strict flags enabled:
 
 - ESLint replaced with **oxlint** (Rust-based, fast, React Native + Expo compatible).
 - Key rules:
-  - `no-restricted-imports` for security module isolation.
-  - `@typescript-eslint/no-explicit-any`: error.
-  - `@typescript-eslint/strict-boolean-expressions`: error.
+    - `no-restricted-imports` for security module isolation.
+    - `@typescript-eslint/no-explicit-any`: error.
+    - `@typescript-eslint/strict-boolean-expressions`: error.
 
 ---
 
@@ -334,18 +342,18 @@ All strict flags enabled:
 
 ### 5.1 Security Baseline (Enabled, Full Mode)
 
-| Rule | Status | Design Pattern |
-|------|--------|----------------|
-| SB-01 | Compliant | `ILocalSettings` for non-sensitive settings only |
-| SB-02 | Compliant | `ISecureStorage` exclusive token storage; session cache in memory |
-| SB-03 | Compliant | Chain of validators before any API request |
-| SB-04 | Compliant | Error redaction pipeline — user-facing messages redacted; internal logs full detail |
+| Rule  | Status    | Design Pattern                                                                       |
+| ----- | --------- | ------------------------------------------------------------------------------------ |
+| SB-01 | Compliant | `ILocalSettings` for non-sensitive settings only                                     |
+| SB-02 | Compliant | `ISecureStorage` exclusive token storage; session cache in memory                    |
+| SB-03 | Compliant | Chain of validators before any API request                                           |
+| SB-04 | Compliant | Error redaction pipeline — user-facing messages redacted; internal logs full detail  |
 | SB-05 | Compliant | Defense in depth: validation + secure storage + fail-closed + TLS + module isolation |
 
 ### 5.2 Property-Based Testing (Enabled, Partial Mode)
 
-| Rule | Status | Design Pattern |
-|------|--------|----------------|
-| PBT-REQ-01 | Compliant | PBT for all pure functions (validators, serializers, domain logic) |
-| PBT-REQ-02 | Compliant | Realistic domain constraint generators (ISO 4217, 2-decimal amounts, valid dates) |
+| Rule       | Status    | Design Pattern                                                                               |
+| ---------- | --------- | -------------------------------------------------------------------------------------------- |
+| PBT-REQ-01 | Compliant | PBT for all pure functions (validators, serializers, domain logic)                           |
+| PBT-REQ-02 | Compliant | Realistic domain constraint generators (ISO 4217, 2-decimal amounts, valid dates)            |
 | PBT-REQ-03 | Compliant | PBT in `__properties__/` directories; example-based tests in `__tests__/` for critical flows |

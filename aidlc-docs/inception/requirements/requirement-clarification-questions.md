@@ -5,6 +5,7 @@ I detected a contradiction and an ambiguity in the previous answers that must be
 ---
 
 ## Contradiction 1: Sensitive credential storage vs Security Baseline
+
 You indicated file-based storage using AsyncStorage for app settings and login credentials in Question 5, but you also enabled the Security Baseline extension in Question 8.
 These responses conflict because sensitive credentials require protected storage with encryption at rest, while AsyncStorage should be treated as non-sensitive application storage.
 
@@ -20,6 +21,7 @@ X) Other (please describe after [Answer]: tag below)
 ---
 
 ## Ambiguity 1: Exact authentication artifact
+
 Question 6 selected API key based authentication, but Question 5 refers to login credentials. The exact secret type affects storage, UX, and security requirements.
 
 ## Question 2: What exact authentication data will the mobile app handle?

@@ -172,15 +172,15 @@ validateConnectivity(): Promise<boolean>;
  * Matches Firefly III API request format.
  */
 export interface CreateTransactionInput {
-  type: TransactionType;
-  amount: number;
-  description: string;
-  date: Date;
-  fromAccountId: string;
-  toAccountId?: string;
-  categoryId?: string;
-  budgetId?: string;
-  tags?: string[];
+    type: TransactionType;
+    amount: number;
+    description: string;
+    date: Date;
+    fromAccountId: string;
+    toAccountId?: string;
+    categoryId?: string;
+    budgetId?: string;
+    tags?: string[];
 }
 ```
 
@@ -192,74 +192,74 @@ export interface CreateTransactionInput {
  * Used for deserialization with lenient validation (Clarification Q10: B).
  */
 export interface FireflyIIITransactionResponse {
-  data: {
-    id: string;
-    type: string;
-    attributes: {
-      type: string;
-      amount: string;        // Firefly III returns amount as string
-      description: string;
-      date: string;          // ISO 8601 date string
-      source_id: string;
-      destination_id?: string;
-      category_id?: string;
-      budget_id?: string;
-      tags?: string[];
-      created_at: string;
-      updated_at: string;
+    data: {
+        id: string;
+        type: string;
+        attributes: {
+            type: string;
+            amount: string; // Firefly III returns amount as string
+            description: string;
+            date: string; // ISO 8601 date string
+            source_id: string;
+            destination_id?: string;
+            category_id?: string;
+            budget_id?: string;
+            tags?: string[];
+            created_at: string;
+            updated_at: string;
+        };
     };
-  };
 }
 
 /**
  * Firefly III account API response structure.
  */
 export interface FireflyIIIAccountResponse {
-  data: {
-    id: string;
-    type: string;
-    attributes: {
-      name: string;
-      type: string;
-      currency_code: string;
-      current_balance: string;
-      active: boolean;
-      created_at: string;
-      updated_at: string;
+    data: {
+        id: string;
+        type: string;
+        attributes: {
+            name: string;
+            type: string;
+            currency_code: string;
+            current_balance: string;
+            active: boolean;
+            created_at: string;
+            updated_at: string;
+        };
     };
-  };
 }
 
 /**
  * Firefly III category API response structure.
  */
 export interface FireflyIIICategoryResponse {
-  data: {
-    id: string;
-    type: string;
-    attributes: {
-      name: string;
-      description?: string;
-      created_at: string;
-      updated_at: string;
+    data: {
+        id: string;
+        type: string;
+        attributes: {
+            name: string;
+            description?: string;
+            created_at: string;
+            updated_at: string;
+        };
     };
-  };
 }
 
 /**
  * Firefly III paginated response wrapper.
  */
 export interface FireflyIIIPaginatedResponse<T> {
-  data: T[];
-  meta: {
-    pagination: {
-      total: number;
-      count: number;
-      per_page: number;
-      current_page: number;
-      total_pages: number;
+    data: T[];
+    meta: {
+        pagination: {
+            total: number;
+            count: number;
+            per_page: number;
+            current_page: number;
+            total_pages: number;
+        };
     };
-  };
 }
 ```
 
@@ -274,16 +274,16 @@ export interface FireflyIIIPaginatedResponse<T> {
  * Base error class for all Luminescence errors.
  */
 export abstract class LuminescenceError extends Error {
-  abstract readonly isRetryable: boolean;
-  abstract readonly userMessage: string; // Safe for display (SB-04)
+    abstract readonly isRetryable: boolean;
+    abstract readonly userMessage: string; // Safe for display (SB-04)
 
-  constructor(
-    message: string,
-    public readonly context?: Record<string, unknown>,
-  ) {
-    super(message);
-    this.name = this.constructor.name;
-  }
+    constructor(
+        message: string,
+        public readonly context?: Record<string, unknown>,
+    ) {
+        super(message);
+        this.name = this.constructor.name;
+    }
 }
 
 /**
@@ -291,22 +291,22 @@ export abstract class LuminescenceError extends Error {
  * Contains HTTP status code and server response.
  */
 export class APIError extends LuminescenceError {
-  readonly isRetryable: boolean;
+    readonly isRetryable: boolean;
 
-  constructor(
-    message: string,
-    public readonly statusCode: number,
-    public readonly serverResponse?: unknown,
-  ) {
-    super(message);
-    // 5xx errors are retryable; 4xx are not
-    this.isRetryable = statusCode >= 500 && statusCode < 600;
-  }
+    constructor(
+        message: string,
+        public readonly statusCode: number,
+        public readonly serverResponse?: unknown,
+    ) {
+        super(message);
+        // 5xx errors are retryable; 4xx are not
+        this.isRetryable = statusCode >= 500 && statusCode < 600;
+    }
 
-  readonly userMessage: string =
-    this.statusCode >= 500
-      ? 'The server encountered an error. Please try again later.'
-      : 'The request could not be completed. Please check your input.';
+    readonly userMessage: string =
+        this.statusCode >= 500
+            ? "The server encountered an error. Please try again later."
+            : "The request could not be completed. Please check your input.";
 }
 
 /**
@@ -314,12 +314,15 @@ export class APIError extends LuminescenceError {
  * Always retryable.
  */
 export class NetworkError extends LuminescenceError {
-  readonly isRetryable = true;
-  readonly userMessage = 'Unable to connect. Please check your internet connection.';
+    readonly isRetryable = true;
+    readonly userMessage = "Unable to connect. Please check your internet connection.";
 
-  constructor(message: string, public readonly cause?: Error) {
-    super(message);
-  }
+    constructor(
+        message: string,
+        public readonly cause?: Error,
+    ) {
+        super(message);
+    }
 }
 
 /**
@@ -327,15 +330,15 @@ export class NetworkError extends LuminescenceError {
  * Never retryable — user must correct input.
  */
 export class ValidationError extends LuminescenceError {
-  readonly isRetryable = false;
-  readonly userMessage = 'Please check your input and try again.';
+    readonly isRetryable = false;
+    readonly userMessage = "Please check your input and try again.";
 
-  constructor(
-    message: string,
-    public readonly fieldErrors: Map<string, string>,
-  ) {
-    super(message);
-  }
+    constructor(
+        message: string,
+        public readonly fieldErrors: Map<string, string>,
+    ) {
+        super(message);
+    }
 }
 
 /**
@@ -343,18 +346,18 @@ export class ValidationError extends LuminescenceError {
  * Never retryable — indicates platform issue.
  */
 export class StorageError extends LuminescenceError {
-  readonly isRetryable = false;
+    readonly isRetryable = false;
 
-  readonly userMessage: string; // Clarification Q9: B — User-friendly prompt
+    readonly userMessage: string; // Clarification Q9: B — User-friendly prompt
 
-  constructor(
-    message: string,
-    public readonly operation: 'read' | 'write' | 'delete',
-  ) {
-    super(message);
-    this.userMessage =
-      'Unable to access secure storage. Please check your device security settings and try again.';
-  }
+    constructor(
+        message: string,
+        public readonly operation: "read" | "write" | "delete",
+    ) {
+        super(message);
+        this.userMessage =
+            "Unable to access secure storage. Please check your device security settings and try again.";
+    }
 }
 
 /**
@@ -362,12 +365,15 @@ export class StorageError extends LuminescenceError {
  * Never retryable — user must reconfigure.
  */
 export class AuthError extends LuminescenceError {
-  readonly isRetryable = false;
-  readonly userMessage = 'Your session has expired. Please reconfigure your server settings.';
+    readonly isRetryable = false;
+    readonly userMessage = "Your session has expired. Please reconfigure your server settings.";
 
-  constructor(message: string, public readonly cause?: Error) {
-    super(message);
-  }
+    constructor(
+        message: string,
+        public readonly cause?: Error,
+    ) {
+        super(message);
+    }
 }
 ```
 
@@ -379,23 +385,23 @@ export class AuthError extends LuminescenceError {
  * Used by the API client to wrap fetch/axios errors.
  */
 export function categorizeError(error: unknown): LuminescenceError {
-  if (error instanceof LuminescenceError) {
-    return error;
-  }
+    if (error instanceof LuminescenceError) {
+        return error;
+    }
 
-  // Network errors (fetch throws TypeError for network failures)
-  if (error instanceof TypeError && error.message.includes('fetch')) {
-    return new NetworkError('Network request failed', error);
-  }
+    // Network errors (fetch throws TypeError for network failures)
+    if (error instanceof TypeError && error.message.includes("fetch")) {
+        return new NetworkError("Network request failed", error);
+    }
 
-  // HTTP errors (from response status)
-  if (error instanceof APIError) {
-    return error;
-  }
+    // HTTP errors (from response status)
+    if (error instanceof APIError) {
+        return error;
+    }
 
-  // Unknown error — wrap as generic API error
-  const message = error instanceof Error ? error.message : 'An unexpected error occurred';
-  return new APIError(message, 500);
+    // Unknown error — wrap as generic API error
+    const message = error instanceof Error ? error.message : "An unexpected error occurred";
+    return new APIError(message, 500);
 }
 ```
 
@@ -410,17 +416,17 @@ export function categorizeError(error: unknown): LuminescenceError {
  * Retry configuration for the API client.
  */
 export interface RetryConfig {
-  readonly maxAttempts: number;       // Default: 3
-  readonly baseDelayMs: number;       // Default: 1000
-  readonly maxDelayMs: number;        // Default: 8000
-  readonly retryableStatusCodes: readonly number[]; // Default: [500, 502, 503, 504]
+    readonly maxAttempts: number; // Default: 3
+    readonly baseDelayMs: number; // Default: 1000
+    readonly maxDelayMs: number; // Default: 8000
+    readonly retryableStatusCodes: readonly number[]; // Default: [500, 502, 503, 504]
 }
 
 export const DEFAULT_RETRY_CONFIG: RetryConfig = {
-  maxAttempts: 3,
-  baseDelayMs: 1000,
-  maxDelayMs: 8000,
-  retryableStatusCodes: [500, 502, 503, 504],
+    maxAttempts: 3,
+    baseDelayMs: 1000,
+    maxDelayMs: 8000,
+    retryableStatusCodes: [500, 502, 503, 504],
 };
 ```
 
@@ -440,29 +446,32 @@ export const DEFAULT_RETRY_CONFIG: RetryConfig = {
  * Only GET requests with retryable errors are retried.
  */
 export function shouldRetry(
-  method: string,
-  error: LuminescenceError,
-  attemptCount: number,
-  config: RetryConfig = DEFAULT_RETRY_CONFIG,
+    method: string,
+    error: LuminescenceError,
+    attemptCount: number,
+    config: RetryConfig = DEFAULT_RETRY_CONFIG,
 ): boolean {
-  // Only retry GET requests
-  if (method !== 'GET') return false;
+    // Only retry GET requests
+    if (method !== "GET") return false;
 
-  // Check attempt limit
-  if (attemptCount >= config.maxAttempts) return false;
+    // Check attempt limit
+    if (attemptCount >= config.maxAttempts) return false;
 
-  // Check if error is retryable
-  if (!error.isRetryable) return false;
+    // Check if error is retryable
+    if (!error.isRetryable) return false;
 
-  return true;
+    return true;
 }
 
 /**
  * Calculate exponential backoff delay.
  */
-export function getRetryDelay(attemptCount: number, config: RetryConfig = DEFAULT_RETRY_CONFIG): number {
-  const delay = config.baseDelayMs * Math.pow(2, attemptCount);
-  return Math.min(delay, config.maxDelayMs);
+export function getRetryDelay(
+    attemptCount: number,
+    config: RetryConfig = DEFAULT_RETRY_CONFIG,
+): number {
+    const delay = config.baseDelayMs * Math.pow(2, attemptCount);
+    return Math.min(delay, config.maxDelayMs);
 }
 ```
 
@@ -472,23 +481,24 @@ export function getRetryDelay(attemptCount: number, config: RetryConfig = DEFAUL
 
 ### 5.1 Firefly III REST API v1
 
-| Method | Endpoint | Client Method | Description |
-|--------|----------|--------------|-------------|
-| GET | `/api/v1/transactions` | `getTransactions()` | List transactions (paginated) |
-| GET | `/api/v1/transactions/{id}` | `getTransaction()` | Get single transaction |
-| POST | `/api/v1/transactions` | `createTransaction()` | Create transaction |
-| PUT | `/api/v1/transactions/{id}` | `updateTransaction()` | Update transaction |
-| DELETE | `/api/v1/transactions/{id}` | `deleteTransaction()` | Delete transaction |
-| GET | `/api/v1/accounts` | `getAccounts()` | List accounts |
-| GET | `/api/v1/accounts/{id}` | `getAccount()` | Get single account |
-| GET | `/api/v1/categories` | `getCategories()` | List categories |
-| GET | `/api/v1/categories/{id}` | `getCategory()` | Get single category |
-| GET | `/api/v1/reports` | `getReport()` | Generate report |
-| GET | `/api/v1/about` | `validateConnectivity()` | Check API health |
+| Method | Endpoint                    | Client Method            | Description                   |
+| ------ | --------------------------- | ------------------------ | ----------------------------- |
+| GET    | `/api/v1/transactions`      | `getTransactions()`      | List transactions (paginated) |
+| GET    | `/api/v1/transactions/{id}` | `getTransaction()`       | Get single transaction        |
+| POST   | `/api/v1/transactions`      | `createTransaction()`    | Create transaction            |
+| PUT    | `/api/v1/transactions/{id}` | `updateTransaction()`    | Update transaction            |
+| DELETE | `/api/v1/transactions/{id}` | `deleteTransaction()`    | Delete transaction            |
+| GET    | `/api/v1/accounts`          | `getAccounts()`          | List accounts                 |
+| GET    | `/api/v1/accounts/{id}`     | `getAccount()`           | Get single account            |
+| GET    | `/api/v1/categories`        | `getCategories()`        | List categories               |
+| GET    | `/api/v1/categories/{id}`   | `getCategory()`          | Get single category           |
+| GET    | `/api/v1/reports`           | `getReport()`            | Generate report               |
+| GET    | `/api/v1/about`             | `validateConnectivity()` | Check API health              |
 
 ### 5.2 Request Headers
 
 All authenticated requests include:
+
 ```
 Authorization: Bearer <token>
 Accept: application/json
@@ -508,6 +518,7 @@ Content-Type: application/json
 ### 6.1 Secret Redaction
 
 All error messages and logs must redact:
+
 - Token values
 - Server base URLs (in error logs)
 - Internal file paths
@@ -520,15 +531,15 @@ All error messages and logs must redact:
  * Log an API request with secrets redacted.
  */
 export function logRequest(method: string, endpoint: string): void {
-  console.log(`[API] ${method} ${endpoint}`);
-  // Never log headers (contain token) or request body (may contain sensitive data)
+    console.log(`[API] ${method} ${endpoint}`);
+    // Never log headers (contain token) or request body (may contain sensitive data)
 }
 
 /**
  * Log an API response with secrets redacted.
  */
 export function logResponse(status: number, endpoint: string): void {
-  console.log(`[API] ${endpoint} → ${status}`);
-  // Never log response body (may contain financial data in error messages)
+    console.log(`[API] ${endpoint} → ${status}`);
+    // Never log response body (may contain financial data in error messages)
 }
 ```

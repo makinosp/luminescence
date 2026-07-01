@@ -1,6 +1,7 @@
 # Shared Core - Functional Design Plan
 
 ## Unit Context
+
 - **Unit**: Unit 1 - Shared Core (`packages/core`)
 - **Responsibilities**: Domain models, validators, serializers, API client, storage interfaces, MobX stores, error handling, services
 - **Stories Covered**: US-01 through US-09, US-11 (shared logic portions)
@@ -9,6 +10,7 @@
 ## Design Steps
 
 ### Step 1: Domain Model Analysis
+
 - [x] Analyze Transaction domain model structure and relationships
 - [x] Analyze Account domain model structure and relationships
 - [x] Analyze Category domain model structure and relationships
@@ -17,6 +19,7 @@
 - [x] Document immutability constraints
 
 ### Step 2: Business Logic Modeling
+
 - [x] Model transaction validation rules and algorithms
 - [x] Model account validation rules and algorithms
 - [x] Model category validation rules and algorithms
@@ -25,6 +28,7 @@
 - [x] Document business invariants and constraints
 
 ### Step 3: Business Rules Definition
+
 - [x] Define transaction type rules (deposit, withdrawal, transfer)
 - [x] Define amount validation rules (precision, sign, currency)
 - [x] Define date validation rules (future dates, transaction type constraints)
@@ -33,6 +37,7 @@
 - [x] Define report period and aggregation rules
 
 ### Step 4: API Client Interface Design
+
 - [x] Define IFireflyIIIClient interface methods
 - [x] Define request/response data structures
 - [x] Define error handling and categorization logic
@@ -40,6 +45,7 @@
 - [x] Document API endpoint mappings
 
 ### Step 5: Storage Interface Design
+
 - [x] Define ISecureStorage interface (port)
 - [x] Define ILocalSettings interface (port)
 - [x] Define storage key naming conventions
@@ -47,6 +53,7 @@
 - [x] Document security constraints (SB-02, NFR-02)
 
 ### Step 6: MobX Store Design
+
 - [x] Design AuthStore state and methods
 - [x] Design TransactionStore state and methods
 - [x] Design AccountStore state and methods
@@ -56,6 +63,7 @@
 - [x] Define store interactions and dependencies
 
 ### Step 7: Service Layer Design
+
 - [x] Design AuthenticationService orchestration logic
 - [x] Design TransactionService orchestration logic
 - [x] Design AccountService orchestration logic
@@ -65,6 +73,7 @@
 - [x] Design ErrorHandlingService orchestration logic
 
 ### Step 8: Error Handling Design
+
 - [x] Define error type hierarchy (APIError, NetworkError, ValidationError, StorageError, AuthError)
 - [x] Define error categorization rules
 - [x] Define user-friendly message generation
@@ -72,6 +81,7 @@
 - [x] Document secret redaction rules (SB-04, NFR-03)
 
 ### Step 9: Validation and Testing Strategy
+
 - [x] Identify pure functions suitable for property-based testing
 - [x] Define serialization round-trip test scenarios
 - [x] Define validation edge cases
@@ -84,6 +94,7 @@
 Please answer the following questions to clarify the functional design for the Shared Core unit.
 
 ### Question 1 — Transaction Amount Precision
+
 How should transaction amounts be represented and validated?
 
 A) **Decimal with 2-digit precision** — Amounts are positive numbers with exactly 2 decimal places (e.g., 50.00, 123.45). Validation rejects amounts with more than 2 decimals or negative values.
@@ -94,6 +105,7 @@ D) Other (please describe after [Answer]: tag below)
 [Answer]: C
 
 ### Question 2 — Transaction Date Validation
+
 What date validation rules should apply to transactions?
 
 A) **No future dates** — All transaction dates must be today or in the past. Future-dated transactions are rejected.
@@ -104,6 +116,7 @@ D) Other (please describe after [Answer]: tag below)
 [Answer]: C
 
 ### Question 3 — Transaction Type Rules
+
 What are the account requirements for each transaction type?
 
 A) **Strict account pairing** — Withdrawals require fromAccount (asset) + toAccount (expense). Deposits require fromAccount (revenue) + toAccount (asset). Transfers require fromAccount (asset) + toAccount (asset).
@@ -114,6 +127,7 @@ D) Other (please describe after [Answer]: tag below)
 [Answer]: A
 
 ### Question 4 — Pagination Strategy
+
 How should the API client handle paginated responses from Firefly III?
 
 A) **Cursor-based pagination** — Use page/offset parameters. Return `{ data: T[], hasMore: boolean, nextPage?: number }`. Client decides when to fetch more.
@@ -124,6 +138,7 @@ D) Other (please describe after [Answer]: tag below)
 [Answer]: A
 
 ### Question 5 — Error Retry Behavior
+
 Which operations should be automatically retried by the retry middleware?
 
 A) **Idempotent GET operations only** — Only retry GET requests (read operations) on 5xx or network errors. Never retry POST/PUT/DELETE (mutations) automatically.
@@ -134,6 +149,7 @@ D) Other (please describe after [Answer]: tag below)
 [Answer]: A
 
 ### Question 6 — Store Data Freshness
+
 How should MobX stores handle data freshness and caching?
 
 A) **Always fetch from API** — Stores always call the API on load. No local caching. Ensures data is current but may be slow.
@@ -144,6 +160,7 @@ D) Other (please describe after [Answer]: tag below)
 [Answer]: C
 
 ### Question 7 — Report Calculation Location
+
 Where should financial report calculations (totals, averages, trends) be performed?
 
 A) **Client-side from raw transactions** — Fetch all transactions for the period and calculate aggregates (sum, average, trend) in the ReportService. Flexible but may be slow for large datasets.
@@ -154,6 +171,7 @@ D) Other (please describe after [Answer]: tag below)
 [Answer]: C
 
 ### Question 8 — Validation Error Granularity
+
 How detailed should validation errors be?
 
 A) **Field-level errors** — Return a map of field names to error messages (e.g., `{ amount: "Must be positive", description: "Required" }`). Allows UI to highlight specific fields.
@@ -164,6 +182,7 @@ D) Other (please describe after [Answer]: tag below)
 [Answer]: A
 
 ### Question 9 — Secure Storage Failure Handling
+
 What should happen when secure storage operations fail?
 
 A) **Fail closed with error** — Throw StorageError and block the operation. User must retry or reconfigure. Ensures security but may frustrate users.
@@ -174,6 +193,7 @@ D) Other (please describe after [Answer]: tag below)
 [Answer]: B
 
 ### Question 10 — API Response Schema Validation
+
 How strictly should Firefly III API responses be validated?
 
 A) **Strict schema validation** — Validate every field in the API response against expected schema. Reject responses with unexpected fields or types. Catches API changes early.
@@ -186,6 +206,7 @@ D) Other (please describe after [Answer]: tag below)
 ---
 
 ## Instructions
+
 1. Fill in [Answer]: tags above with your chosen option (e.g., `[Answer]: A`)
 2. For "Other" options, describe your preferred approach after the tag
 3. After completing all answers, I'll review for ambiguities and ask follow-ups if needed

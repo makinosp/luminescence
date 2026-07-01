@@ -2,19 +2,19 @@
 
 ## Story-to-Unit Matrix
 
-| Story     | Description                       | Core Logic                                                                  | CLI UI                                        | Web UI                     | Mobile UI                             |
-| --------- | --------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------- | -------------------------- | ------------------------------------- |
+| Story     | Description                       | Core Logic                                                                   | CLI UI                                         | Web UI                      | Mobile UI                              |
+| --------- | --------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------- | --------------------------- | -------------------------------------- |
 | **US-01** | View transaction list             | ✅ Transaction model, API client, TransactionStore, TransactionService       | ✅ `transactions list` command                 | ✅ Transaction list page    | ✅ Transaction list screen             |
 | **US-02** | Search & filter transactions      | ✅ Filter params, TransactionStore pagination, ValidationService             | ✅ `--from-date`, `--category` flags           | ✅ Filter panel UI          | ✅ Filter modal UI                     |
 | **US-03** | Create, edit, delete transactions | ✅ Transaction validators, serializers, Mutation API calls, TransactionStore | ✅ `transactions create` interactive           | ✅ Create/edit form         | ✅ Create/edit form                    |
 | **US-04** | View accounts & balances          | ✅ Account model, AccountStore, AccountService, API client                   | ✅ `accounts list` command                     | ✅ Account list page        | ✅ Account list screen                 |
 | **US-05** | Manage categories                 | ✅ Category model, CategoryStore, CategoryService, API client                | ✅ `categories list` command                   | ✅ Category management page | ✅ Category management screen          |
 | **US-06** | Financial reports                 | ✅ Report model, ReportStore, ReportService, Trend calculation               | ✅ `report spending-overview` command          | ✅ Report page with charts  | ✅ Report screen                       |
-| **US-07** | CLI interactive & scriptable      | ✅ CLIService, Exit codes, Output formatting                                 | ✅ Commander.js, --format, interactive prompts | —                          | —                                     |
+| **US-07** | CLI interactive & scriptable      | ✅ CLIService, Exit codes, Output formatting                                 | ✅ Commander.js, --format, interactive prompts | —                           | —                                      |
 | **US-08** | Error handling & user feedback    | ✅ Error types, ErrorHandlingService, getUserMessage(), retry middleware     | ✅ Error exit codes, user messages             | ✅ Toast / inline error UI  | ✅ Toast / inline error UI             |
 | **US-09** | Configure server connection       | ✅ AuthStore, AuthenticationService, ValidationService, Storage interfaces   | ✅ `configure` command                         | ✅ Settings page            | ✅ Settings screen                     |
-| **US-10** | Responsive mobile interface       | —                                                                           | —                                             | —                          | ✅ Mobile-first layout, gestures       |
-| **US-11** | Offline capability awareness      | ✅ Offline detection state (UIStore), connectivity check                     | —                                             | —                          | ✅ Offline banner, cached data display |
+| **US-10** | Responsive mobile interface       | —                                                                            | —                                              | —                           | ✅ Mobile-first layout, gestures       |
+| **US-11** | Offline capability awareness      | ✅ Offline detection state (UIStore), connectivity check                     | —                                              | —                           | ✅ Offline banner, cached data display |
 
 ## Story Distribution Summary
 

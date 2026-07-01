@@ -73,16 +73,19 @@ MobX provides SwiftUI-like reactivity with automatic change tracking:
 ### Platform Adapters
 
 **Mobile (iOS/Android)**:
+
 - Secure storage: Keychain (iOS) / Keystore (Android)
 - Non-sensitive settings: AsyncStorage
 - HTTP: React Native fetch or axios
 
 **Web**:
+
 - Secure storage: sessionStorage (browser session only, cleared on tab close)
 - Non-sensitive settings: localStorage
 - HTTP: native fetch
 
 **CLI**:
+
 - Secure storage: OS keyring (via keytar or equivalent)
 - Non-sensitive settings: JSON config file at `~/.config/luminescence/config.json`
 - HTTP: native Node.js fetch + Commander.js CLI framework
@@ -90,11 +93,13 @@ MobX provides SwiftUI-like reactivity with automatic change tracking:
 ### Error Handling & Retry Strategy
 
 **Shared Core Defines**:
+
 - Error types: APIError, NetworkError, ValidationError, StorageError, AuthError
 - Error categorization and user-friendly messages
 - Optional retry middleware (clients choose to apply)
 
 **Per-Client Application**:
+
 - Mobile/Web: Apply retry middleware for transient errors
 - CLI: Optional `--retry` flag; script can implement own retry logic
 - Security: All error messages redact tokens, paths, and internal details (SB-04, US-08)
@@ -102,6 +107,7 @@ MobX provides SwiftUI-like reactivity with automatic change tracking:
 ### Component Grouping: Hybrid Layer Strategy
 
 **Architectural Layers** (top-level):
+
 ```
 ├── api-client/            # Firefly III HTTP communication
 │   ├── types.ts
@@ -130,6 +136,7 @@ MobX provides SwiftUI-like reactivity with automatic change tracking:
 ```
 
 **Within Each Layer**: Domain features are grouped for better visibility:
+
 - `domain-models/transaction/` → Transaction model, validators, serializers
 - `domain-models/account/` → Account model, account-specific logic
 - `stores/` → One store per business domain
@@ -137,6 +144,7 @@ MobX provides SwiftUI-like reactivity with automatic change tracking:
 ### Extension Compliance
 
 **Security Baseline (Full Enforcement)**:
+
 - SB-01: Non-sensitive settings in AsyncStorage (Mobile) / localStorage (Web) / JSON config (CLI)
 - SB-02: Tokens in secure storage only (Keychain/Keystore/Keyring/sessionStorage)
 - SB-03: Client-side URL & input validation before API submission
@@ -144,6 +152,7 @@ MobX provides SwiftUI-like reactivity with automatic change tracking:
 - SB-05: Defense-in-depth: validation + secure storage + fail-closed error handling
 
 **Property-Based Testing (Partial Enforcement)**:
+
 - PBT-REQ-01: Apply to pure domain logic and serialization round-trips
 - PBT-REQ-02: Use fast-check with realistic domain constraints
 - PBT-REQ-03: Complement (not replace) example-based tests for critical flows

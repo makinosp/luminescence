@@ -5,6 +5,7 @@ The current requirements baseline focuses on a mobile client. The following ques
 ---
 
 ## Question 1: Delivery Scope
+
 Should Web and CLI be included in the initial delivery, or scheduled after the mobile client?
 
 A) Include Mobile, Web, and CLI in the initial delivery
@@ -18,6 +19,7 @@ X) Other (please describe after [Answer]: tag below)
 ---
 
 ## Question 2: Feature Parity
+
 Should all clients share the same functional scope?
 
 A) Yes, all clients should aim for feature parity
@@ -30,6 +32,7 @@ X) Other (please describe after [Answer]: tag below)
 ---
 
 ## Question 3: Web Target
+
 What should the Web client target?
 
 A) Browser-based responsive web application
@@ -42,6 +45,7 @@ X) Other (please describe after [Answer]: tag below)
 ---
 
 ## Question 4: CLI Target
+
 What should the CLI target?
 
 A) Interactive terminal application for human users
@@ -54,6 +58,7 @@ X) Other (please describe after [Answer]: tag below)
 ---
 
 ## Question 5: Authentication Storage
+
 How should authentication data be stored on Web and CLI?
 
 A) Web uses session-only storage; CLI uses OS keyring or equivalent secure storage

@@ -6,6 +6,7 @@ Fill in the letter choice (and any additional description) after each `[Answer]:
 ---
 
 ## Question 1: Project Overview
+
 What is the primary purpose of this project?
 
 A) Web API / Backend service
@@ -22,6 +23,7 @@ X) Other (please describe after [Answer]: tag below)
 ---
 
 ## Question 2: Programming Language
+
 What programming language(s) should be used?
 
 A) Go
@@ -37,6 +39,7 @@ X) Other (please describe after [Answer]: tag below)
 ---
 
 ## Question 3: Target Users
+
 Who are the primary users or consumers of this system?
 
 A) End users (general public)
@@ -50,6 +53,7 @@ X) Other (please describe after [Answer]: tag below)
 ---
 
 ## Question 4: Core Features
+
 What are the main features or capabilities you want to build? (Please describe freely)
 
 [Answer]: Mobile client application for Firefly-iii API to manage personal finances, including transaction tracking, account management, expense categorization, and financial reporting.
@@ -57,6 +61,7 @@ What are the main features or capabilities you want to build? (Please describe f
 ---
 
 ## Question 5: Data Storage
+
 Does the project require persistent data storage?
 
 A) Yes — relational database (e.g., PostgreSQL, MySQL)
@@ -71,6 +76,7 @@ X) Other (please describe after [Answer]: tag below)
 ---
 
 ## Question 6: Authentication / Authorization
+
 Does the project require user authentication or access control?
 
 A) Yes — standard username/password authentication
@@ -85,6 +91,7 @@ X) Other (please describe after [Answer]: tag below)
 ---
 
 ## Question 7: Deployment Environment
+
 Where will this project be deployed or run?
 
 A) Cloud (AWS, GCP, Azure)
@@ -100,12 +107,13 @@ X) Other (please describe after [Answer]: tag below)
 ---
 
 ## Question 8: Security Extension
+
 Should security extension rules be enforced for this project?
 
 A) Yes — enforce all SECURITY rules as blocking constraints
-   (recommended for production-grade applications)
+(recommended for production-grade applications)
 B) No — skip all SECURITY rules
-   (suitable for PoCs, prototypes, and experimental projects)
+(suitable for PoCs, prototypes, and experimental projects)
 X) Other (please describe after [Answer]: tag below)
 
 [Answer]: A
@@ -113,16 +121,17 @@ X) Other (please describe after [Answer]: tag below)
 ---
 
 ## Question 9: Property-Based Testing Extension
+
 Should property-based testing (PBT) rules be enforced for this project?
 
 A) Yes — enforce all PBT rules as blocking constraints
-   (recommended for projects with business logic, data transformations,
-   serialization, or stateful components)
+(recommended for projects with business logic, data transformations,
+serialization, or stateful components)
 B) Partial — enforce PBT rules only for pure functions and serialization
-   round-trips (suitable for limited algorithmic complexity)
+round-trips (suitable for limited algorithmic complexity)
 C) No — skip all PBT rules
-   (suitable for simple CRUD applications, UI-only projects,
-   or thin integration layers with no significant business logic)
+(suitable for simple CRUD applications, UI-only projects,
+or thin integration layers with no significant business logic)
 X) Other (please describe after [Answer]: tag below)
 
 [Answer]: B
