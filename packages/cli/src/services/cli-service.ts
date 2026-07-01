@@ -1,3 +1,5 @@
+import type { JSONConfigAdapter } from '../storage/json-config-adapter.js';
+import type { KeyringAdapter } from '../storage/keyring-adapter.js';
 import {
   AuthenticationService,
   TransactionService,
@@ -13,8 +15,6 @@ import {
 import { CSVFormatter } from '../formatters/csv-formatter.js';
 import { JSONFormatter } from '../formatters/json-formatter.js';
 import { TableFormatter } from '../formatters/table-formatter.js';
-import type { JSONConfigAdapter } from '../storage/json-config-adapter.js';
-import type { KeyringAdapter } from '../storage/keyring-adapter.js';
 
 export interface CLIOptions {
   format?: string;

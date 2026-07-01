@@ -1,9 +1,9 @@
 import type { IFireflyIIIClient } from '../api-client/firefly-client.js';
 import type { ILocalSettings } from '../storage/interfaces/local-settings.js';
 import type { ISecureStorage } from '../storage/interfaces/secure-storage.js';
-import { AuthError, StorageError } from '../errors/error-types.js';
 import type { AuthStore } from '../stores/auth-store.js';
 import type { ValidationService } from './validation-service.js';
+import { AuthError, StorageError } from '../errors/error-types.js';
 
 /**
  * Authentication service.

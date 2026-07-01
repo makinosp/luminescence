@@ -1,7 +1,7 @@
+import type { ILocalSettings } from '@luminescence/core';
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { join } from 'node:path';
-import type { ILocalSettings } from '@luminescence/core';
 
 export class JSONConfigAdapter implements ILocalSettings {
   private readonly configDir: string;

@@ -2,8 +2,8 @@ import type { IFireflyIIIClient } from '../api-client/firefly-client.js';
 import type { Category } from '../domain-models/categories/category.js';
 import type { Transaction } from '../domain-models/transactions/transaction.js';
 import type { APIError, NetworkError, AuthError } from '../errors/error-types.js';
-import type { TransactionService } from './transaction-service.js';
 import type { CategoryStore } from '../stores/category-store.js';
+import type { TransactionService } from './transaction-service.js';
 
 /**
  * Category service.

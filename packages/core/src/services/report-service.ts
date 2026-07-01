@@ -8,11 +8,11 @@ import type {
   DateRange,
 } from '../domain-models/reports/report.js';
 import type { APIError, NetworkError, AuthError } from '../errors/error-types.js';
+import type { ReportStore } from '../stores/report-store.js';
 import type { CategoryService } from './category-service.js';
 import type { TransactionService } from './transaction-service.js';
-import { calculateDateRange, aggregateSpendingOverview } from '../domain-models/reports/report.js';
-import type { ReportStore } from '../stores/report-store.js';
 import type { ValidationService } from './validation-service.js';
+import { calculateDateRange, aggregateSpendingOverview } from '../domain-models/reports/report.js';
 
 /**
  * Report service.
