@@ -3,16 +3,16 @@
  * Clarification Q8 Answer A: Field-level errors.
  */
 export interface ValidationResult {
-  readonlyisValid: boolean;
-  readonlyerrors: ReadonlyMap<string, string>; // field → error message
+  readonly isValid: boolean;
+  readonly errors: ReadonlyMap<string, string>; // field → error message
 }
 
 /**
  * Warning result for non-blocking validation issues.
  */
 export interface ValidationWarning {
-  readonlyfield: string;
-  readonlymessage: string;
+  readonly field: string;
+  readonly message: string;
 }
 
 /**

@@ -125,7 +125,7 @@ export class CLIService {
     }
   }
 
-  private getFormatter(format: string): BaseFormatter {
+  private getFormatter(format: string): JSONFormatter | CSVFormatter | TableFormatter {
     switch (format.toLowerCase()) {
       case 'json':
         return new JSONFormatter();

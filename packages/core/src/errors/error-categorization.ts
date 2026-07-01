@@ -10,9 +10,9 @@ export type ErrorCategory = 'api' | 'network' | 'validation' | 'storage' | 'auth
  * Never contains tokens, URLs, paths, or framework details (SB-04).
  */
 export interface RedactedError {
-  readonlycategory: ErrorCategory;
-  readonlymessage: string;
-  readonlyisRetryable: boolean;
+  readonly category: ErrorCategory;
+  readonly message: string;
+  readonly isRetryable: boolean;
 }
 
 /**

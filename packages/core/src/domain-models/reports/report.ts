@@ -10,59 +10,59 @@ export type ReportPeriod = 'current_month' | 'last_month' | 'last_3_months' | 'c
  * Date range for custom report periods.
  */
 export interface DateRange {
-  readonlystartDate: Date;
-  readonlyendDate: Date;
+  readonly startDate: Date;
+  readonly endDate: Date;
 }
 
 /**
  * Spending overview report data.
  */
 export interface SpendingOverview {
-  readonlyperiod: ReportPeriod;
-  readonlydateRange: DateRange;
-  readonlytotalIncome: number;
-  readonlytotalExpenses: number;
-  readonlynetCashflow: number;
-  readonlycategoryBreakdown: readonly CategorySpending[];
+  readonly period: ReportPeriod;
+  readonly dateRange: DateRange;
+  readonly totalIncome: number;
+  readonly totalExpenses: number;
+  readonly netCashflow: number;
+  readonly categoryBreakdown: readonly CategorySpending[];
 }
 
 /**
  * Category spending breakdown.
  */
 export interface CategorySpending {
-  readonlycategoryId: string;
-  readonlycategoryName: string;
-  readonlytotalSpent: number;
-  readonlypercentage: number;
-  readonlytransactionCount: number;
+  readonly categoryId: string;
+  readonly categoryName: string;
+  readonly totalSpent: number;
+  readonly percentage: number;
+  readonly transactionCount: number;
 }
 
 /**
  * Income vs expenses comparison report.
  */
 export interface IncomeVsExpensesReport {
-  readonlyperiod: ReportPeriod;
-  readonlydateRange: DateRange;
-  readonlyincome: number;
-  readonlyexpenses: number;
-  readonlynetCashflow: number;
+  readonly period: ReportPeriod;
+  readonly dateRange: DateRange;
+  readonly income: number;
+  readonly expenses: number;
+  readonly netCashflow: number;
 }
 
 /**
  * Trend analysis over multiple months.
  */
 export interface TrendAnalysis {
-  readonlymonths: readonly MonthlyTrend[];
+  readonly months: readonly MonthlyTrend[];
 }
 
 /**
  * Monthly trend data point.
  */
 export interface MonthlyTrend {
-  readonlymonth: string; // YYYY-MM format
-  readonlyincome: number;
-  readonlyexpenses: number;
-  readonlynetCashflow: number;
+  readonly month: string; // YYYY-MM format
+  readonly income: number;
+  readonly expenses: number;
+  readonly netCashflow: number;
 }
 
 /**

@@ -2,11 +2,11 @@
  * Immutable Category domain model.
  */
 export interface Category {
-  readonlyid: string;
-  readonlyname: string;
-  readonlydescription?: string;
-  readonlycreatedAt: Date;
-  readonlyupdatedAt: Date;
+  readonly id: string;
+  readonly name: string;
+  readonly description?: string;
+  readonly createdAt: Date;
+  readonly updatedAt: Date;
 }
 
 /**
