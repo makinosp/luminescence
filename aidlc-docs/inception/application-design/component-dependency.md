@@ -133,7 +133,7 @@
 ```
 export const TransactionList = observer(() => {
   const store = useContext(TransactionStoreContext);
-  
+
   // Component subscribes to changes
   return (
     <div>
@@ -159,7 +159,7 @@ Service Layer:
     ├─→ ISecureStorage.setToken("ff3-token", token)
     │
     └─→ Implementation (Platform-specific):
-    
+
     ┌──────────────────────────────────────────────┐
     │ Mobile:                                      │
     │ KeychainSecureStorage.setToken()             │
@@ -262,17 +262,20 @@ UI displays user-friendly message
 ## Coupling Analysis
 
 ### Low Coupling Areas ✅
+
 - Domain models (Transaction, Account) have no external dependencies
 - ValidationService uses only domain model validators
 - ErrorHandlingService is purely functional (no state)
 - Storage adapters are isolated behind interfaces
 
 ### Moderate Coupling Areas ⚠️
+
 - Services depend on multiple components (necessary for orchestration)
 - MobX Stores depend on IFireflyIIIClient (needed for data loading)
 - AuthenticationService coordinates multiple layers (by design)
 
 ### Tight Coupling Avoided ✅
+
 - Domain models don't know about services
 - Services don't directly depend on UI components
 - Storage adapters don't leak platform concerns to shared core
@@ -283,39 +286,46 @@ UI displays user-friendly message
 ## Dependency Injection Strategy
 
 ### Constructor Injection (Services)
+
 ```typescript
 class TransactionService {
-  constructor(
-    private client: IFireflyIIIClient,
-    private store: TransactionStore,
-    private validation: IValidationService,
-    private errorHandling: IErrorHandlingService
-  ) {}
+    constructor(
+        private client: IFireflyIIIClient,
+        private store: TransactionStore,
+        private validation: IValidationService,
+        private errorHandling: IErrorHandlingService,
+    ) {}
 }
 ```
 
 ### Context/Provider Injection (React Components)
+
 ```typescript
 export const TransactionStoreContext = React.createContext<TransactionStore | null>(null);
 
 const useTransactionStore = () => {
-  const store = useContext(TransactionStoreContext);
-  if (!store) throw new Error('TransactionStore not provided');
-  return store;
+    const store = useContext(TransactionStoreContext);
+    if (!store) throw new Error("TransactionStore not provided");
+    return store;
 };
 ```
 
 ### Factory Pattern (Adapters)
+
 ```typescript
 interface StorageFactory {
-  createSecureStorage(): ISecureStorage;
-  createLocalSettings(): ILocalSettings;
+    createSecureStorage(): ISecureStorage;
+    createLocalSettings(): ILocalSettings;
 }
 
 // Platform implementations:
 class IOSStorageFactory implements StorageFactory {
-  createSecureStorage() { return new KeychainSecureStorage(); }
-  createLocalSettings() { return new AsyncStorageAdapter(); }
+    createSecureStorage() {
+        return new KeychainSecureStorage();
+    }
+    createLocalSettings() {
+        return new AsyncStorageAdapter();
+    }
 }
 ```
 
@@ -324,26 +334,31 @@ class IOSStorageFactory implements StorageFactory {
 ## Testing Strategy by Dependency Level
 
 ### Level 1: Domain Models (No Dependencies)
+
 - **Test**: Pure property-based tests
 - Example: `Transaction.validateTransactionInput()` with fast-check
 - No mocking needed
 
 ### Level 2: Pure Functions (ValidationService, ErrorHandlingService)
+
 - **Test**: Property-based tests + example-based
 - Example: `ErrorHandlingService.categorizeError()` for all error types
 - No mocking needed
 
 ### Level 3: Services (Multiple Dependencies)
+
 - **Test**: Example-based integration tests
 - Mock: IFireflyIIIClient, Stores, ValidationService
 - Example: TransactionService.createTransaction() with mock client
 
 ### Level 4: Stores (External Dependencies)
+
 - **Test**: Example-based with mock IFireflyIIIClient
 - Mock: IFireflyIIIClient
 - Example: TransactionStore.loadTransactions() → updates state
 
 ### Level 5: UI Components (Store Dependencies)
+
 - **Test**: React Testing Library with mock stores
 - Mock: All services and stores
 - Example: TransactionList renders transactions from store

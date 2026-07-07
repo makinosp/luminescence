@@ -1,11 +1,13 @@
 # Unit of Work Plan
 
 ## Overview
+
 Decompose the Luminescence multi-client TypeScript suite into manageable units of work for the CONSTRUCTION PHASE.
 
 **Architecture Summary**: Monorepo with 4 packages — `packages/core` (shared library), `packages/mobile` (React Native), `packages/web` (React SPA), `packages/cli` (Node.js CLI).
 
 **Mandatory Artifacts**:
+
 - [x] Generate `aidlc-docs/inception/application-design/unit-of-work.md` with unit definitions and responsibilities
 - [x] Generate `aidlc-docs/inception/application-design/unit-of-work-dependency.md` with dependency matrix
 - [x] Generate `aidlc-docs/inception/application-design/unit-of-work-story-map.md` mapping stories to units
@@ -99,6 +101,7 @@ D) **Yarn workspaces** — Mature ecosystem, `.yarnrc.yml` configuration. Good b
 ---
 
 ## Instructions
+
 1. Fill in [Answer]: tags above with your chosen option (e.g., `[Answer]: A`)
 2. For "Other" options, describe your preferred approach after the tag
 3. After completing all answers, I'll review for ambiguities and ask follow-ups if needed

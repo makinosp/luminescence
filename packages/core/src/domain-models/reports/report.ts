@@ -110,7 +110,14 @@ export function calculateNetCashflow(totalIncome: number, totalExpenses: number)
  * Pure function — suitable for PBT.
  */
 export function calculateCategoryPercentages(
-  categorySpending: Map<string, { name: string; totalSpent: number; transactionCount: number }>,
+  categorySpending: Map<
+    string,
+    {
+      name: string;
+      totalSpent: number;
+      transactionCount: number;
+    }
+  >,
   totalExpenses: number,
 ): CategorySpending[] {
   if (totalExpenses === 0) {
@@ -147,7 +154,14 @@ export function aggregateSpendingOverview(
 ): SpendingOverview {
   let totalIncome = 0;
   let totalExpenses = 0;
-  const categorySpending = new Map<string, { name: string; totalSpent: number; transactionCount: number }>();
+  const categorySpending = new Map<
+    string,
+    {
+      name: string;
+      totalSpent: number;
+      transactionCount: number;
+    }
+  >();
 
   for (const tx of transactions) {
     if (tx.type === 'deposit') {

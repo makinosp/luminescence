@@ -1,6 +1,6 @@
-import { makeAutoObservable, runInAction } from 'mobx';
 import type { Account } from '../domain-models/accounts/account.js';
 import type { APIError, NetworkError, AuthError } from '../errors/error-types.js';
+import { makeAutoObservable, runInAction } from 'mobx';
 
 /**
  * Account list state.

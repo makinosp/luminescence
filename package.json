@@ -3,13 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "description": "Multi-platform Firefly III client — Mobile, Web, CLI",
+  "type": "module",
   "scripts": {
     "build": "pnpm --recursive build",
     "test": "pnpm --recursive test",
     "lint": "oxlint",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
+    "format": "oxfmt --write .",
+    "format:check": "oxfmt --check .",
     "clean": "pnpm --recursive clean"
+  },
+  "devDependencies": {
+    "oxfmt": "^0.57.0",
+    "oxlint": "^1.59.0"
   },
   "engines": {
     "node": ">=20.0.0",

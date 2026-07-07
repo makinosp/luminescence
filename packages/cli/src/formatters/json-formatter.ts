@@ -1,4 +1,4 @@
-import { Transaction } from '@luminescence/core';
+import type { Transaction } from '@luminescence/core';
 
 export class JSONFormatter {
   formatTransactions(transactions: Transaction[]): string {
@@ -9,7 +9,14 @@ export class JSONFormatter {
     return JSON.stringify(transaction, null, 2);
   }
 
-  formatAccounts(accounts: Array<{ id: string; name: string; type: string; currentBalance?: number }>): string {
+  formatAccounts(
+    accounts: Array<{
+      id: string;
+      name: string;
+      type: string;
+      currentBalance?: number;
+    }>,
+  ): string {
     return JSON.stringify(accounts, null, 2);
   }
 

@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "description": "CLI client for Luminescence — Firefly III terminal interface",
-  "type": "module",
   "bin": {
     "luminescence": "./dist/cli.js"
   },
+  "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
@@ -22,8 +22,8 @@
     "keytar": "^7.9.0"
   },
   "devDependencies": {
-    "@types/node": "^20.14.0",
     "@types/keytar": "^4.4.0",
+    "@types/node": "^20.14.0",
     "tsx": "^4.0.0",
     "typescript": "^5.4.0",
     "vitest": "^1.6.0"

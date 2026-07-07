@@ -1,11 +1,8 @@
-import { ValidationError } from '../errors/error-types.js';
-import {
-  validateTransactionInput,
-  type ValidationResult,
-} from '../domain-models/transactions/validators.js';
+import type { CreateTransactionInput } from '../domain-models/transactions/serializers.js';
 import { validateAccountType } from '../domain-models/accounts/validators.js';
 import { validateCategoryId } from '../domain-models/categories/validators.js';
-import type { CreateTransactionInput } from '../domain-models/transactions/serializers.js';
+import { validateTransactionInput, type ValidationResult } from '../domain-models/transactions/validators.js';
+import { ValidationError } from '../errors/error-types.js';
 
 /**
  * Validation service.
@@ -92,7 +89,12 @@ export class ValidationService {
       errors.set('endDate', 'A valid end date is required');
     }
 
-    if (startDate instanceof Date && endDate instanceof Date && !isNaN(startDate.getTime()) && !isNaN(endDate.getTime())) {
+    if (
+      startDate instanceof Date &&
+      endDate instanceof Date &&
+      !isNaN(startDate.getTime()) &&
+      !isNaN(endDate.getTime())
+    ) {
       if (startDate > endDate) {
         errors.set('dateRange', 'Start date must be before end date');
       }

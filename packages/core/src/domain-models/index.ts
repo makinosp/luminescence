@@ -22,7 +22,11 @@ export {
   validateTransactionInput,
 } from './transactions/validators.js';
 
-export type { CreateTransactionInput, FireflyIIITransactionResponse, FireflyIIIPaginatedResponse } from './transactions/serializers.js';
+export type {
+  CreateTransactionInput,
+  FireflyIIITransactionResponse,
+  FireflyIIIPaginatedResponse,
+} from './transactions/serializers.js';
 export {
   deserializeTransaction,
   deserializeTransactionList,

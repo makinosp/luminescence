@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest';
 import fc from 'fast-check';
+import { describe, it, expect } from 'vitest';
 import {
   validateAmount,
   validateDescription,
@@ -26,13 +26,10 @@ describe('Transaction Validators — Property-Based Tests', () => {
 
     it('should reject zero or negative amounts', () => {
       fc.assert(
-        fc.property(
-          fc.float({ min: -1_000_000, max: 0, noNaN: true }),
-          (amount) => {
-            const result = validateAmount(amount);
-            expect(result.isValid).toBe(false);
-          },
-        ),
+        fc.property(fc.float({ min: -1_000_000, max: 0, noNaN: true }), (amount) => {
+          const result = validateAmount(amount);
+          expect(result.isValid).toBe(false);
+        }),
       );
     });
 
@@ -54,13 +51,10 @@ describe('Transaction Validators — Property-Based Tests', () => {
 
     it('should reject non-number inputs', () => {
       fc.assert(
-        fc.property(
-          fc.oneof(fc.string(), fc.boolean(), fc.constant(null), fc.constant(undefined)),
-          (input) => {
-            const result = validateAmount(input);
-            expect(result.isValid).toBe(false);
-          },
-        ),
+        fc.property(fc.oneof(fc.string(), fc.boolean(), fc.constant(null), fc.constant(undefined)), (input) => {
+          const result = validateAmount(input);
+          expect(result.isValid).toBe(false);
+        }),
       );
     });
   });
@@ -94,13 +88,10 @@ describe('Transaction Validators — Property-Based Tests', () => {
 
     it('should reject descriptions longer than 1000 chars', () => {
       fc.assert(
-        fc.property(
-          fc.string({ minLength: 1001, maxLength: 2000 }),
-          (desc) => {
-            const result = validateDescription(desc);
-            expect(result.isValid).toBe(false);
-          },
-        ),
+        fc.property(fc.string({ minLength: 1001, maxLength: 2000 }), (desc) => {
+          const result = validateDescription(desc);
+          expect(result.isValid).toBe(false);
+        }),
       );
     });
   });
@@ -108,25 +99,19 @@ describe('Transaction Validators — Property-Based Tests', () => {
   describe('validateDate', () => {
     it('should accept valid dates after 1970-01-01', () => {
       fc.assert(
-        fc.property(
-          fc.date({ min: new Date('1970-01-02'), max: new Date('2100-01-01') }),
-          (date) => {
-            const result = validateDate(date);
-            expect(result.isValid).toBe(true);
-          },
-        ),
+        fc.property(fc.date({ min: new Date('1970-01-02'), max: new Date('2100-01-01') }), (date) => {
+          const result = validateDate(date);
+          expect(result.isValid).toBe(true);
+        }),
       );
     });
 
     it('should reject dates before 1970-01-01', () => {
       fc.assert(
-        fc.property(
-          fc.date({ min: new Date('1900-01-01'), max: new Date('1969-12-31') }),
-          (date) => {
-            const result = validateDate(date);
-            expect(result.isValid).toBe(false);
-          },
-        ),
+        fc.property(fc.date({ min: new Date('1900-01-01'), max: new Date('1969-12-31') }), (date) => {
+          const result = validateDate(date);
+          expect(result.isValid).toBe(false);
+        }),
       );
     });
   });
@@ -134,13 +119,10 @@ describe('Transaction Validators — Property-Based Tests', () => {
   describe('validateTransactionType', () => {
     it('should accept valid transaction types', () => {
       fc.assert(
-        fc.property(
-          fc.constantFrom('deposit', 'withdrawal', 'transfer'),
-          (type) => {
-            const result = validateTransactionType(type);
-            expect(result.isValid).toBe(true);
-          },
-        ),
+        fc.property(fc.constantFrom('deposit', 'withdrawal', 'transfer'), (type) => {
+          const result = validateTransactionType(type);
+          expect(result.isValid).toBe(true);
+        }),
       );
     });
 

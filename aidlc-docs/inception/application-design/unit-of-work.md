@@ -5,6 +5,7 @@
 ### Unit 1: Shared Core (`packages/core`)
 
 **Responsibilities**:
+
 - Domain models: Transaction, Account, Category, Report (immutable, pure logic)
 - Validators: Amount, description, date, URL, token, transaction input
 - Serializers: Firefly III API response parsing, request format conversion
@@ -17,6 +18,7 @@
 **Contains all shared business logic. Zero platform dependencies.**
 
 **Code Organization** (Hybrid Layering per Application Design Q6):
+
 ```
 packages/core/src/
 ├── api-client/
@@ -77,6 +79,7 @@ packages/core/src/
 ### Unit 2: CLI Client (`packages/cli`)
 
 **Responsibilities**:
+
 - CLI framework using Commander.js (interactive + scriptable modes)
 - KeyringSecureStorage adapter (OS keyring via keytar)
 - JSONConfigAdapter for local settings
@@ -93,6 +96,7 @@ packages/core/src/
 ### Unit 3: Web Client (`packages/web`)
 
 **Responsibilities**:
+
 - React SPA with MobX observer components
 - SessionStorageAdapter for secure token storage (session scope)
 - LocalStorageAdapter for non-sensitive settings (persistent)
@@ -109,6 +113,7 @@ packages/core/src/
 ### Unit 4: Mobile Client (`packages/mobile`)
 
 **Responsibilities**:
+
 - React Native app for iOS and Android
 - KeychainSecureStorage adapter (iOS Keychain)
 - KeystoreSecureStorage adapter (Android Keystore)

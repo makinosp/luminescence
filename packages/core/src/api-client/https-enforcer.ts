@@ -27,10 +27,7 @@ export class HTTPSEnforcer {
     try {
       new URL(trimmed);
     } catch {
-      throw new ValidationError(
-        'Invalid server URL',
-        new Map([['baseURL', 'The server URL is not a valid URL']]),
-      );
+      throw new ValidationError('Invalid server URL', new Map([['baseURL', 'The server URL is not a valid URL']]));
     }
 
     // Remove trailing slash for consistency
@@ -49,10 +46,7 @@ export class HTTPSEnforcer {
    */
   buildURL(path: string): string {
     if (!this.baseURL) {
-      throw new ValidationError(
-        'Server not configured',
-        new Map([['baseURL', 'Server URL has not been configured']]),
-      );
+      throw new ValidationError('Server not configured', new Map([['baseURL', 'Server URL has not been configured']]));
     }
     const normalizedPath = path.startsWith('/') ? path : `/${path}`;
     return `${this.baseURL}/api/v1${normalizedPath}`;

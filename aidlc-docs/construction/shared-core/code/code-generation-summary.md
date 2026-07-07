@@ -1,6 +1,7 @@
 # Shared Core — Code Generation Summary
 
 ## Overview
+
 Generated the complete shared core package (`@luminescence/core`) for the Luminescence multi-platform Firefly III client.
 
 ## Module Structure
@@ -98,28 +99,28 @@ packages/core/src/
 
 ## Key Design Decisions Applied
 
-| Decision | Implementation |
-|----------|---------------|
-| Q1: Decimal precision (max 2 decimals) | `validateAmount()` checks `Math.round(amount * 100)` |
-| Q2: Future dates allowed with warning | `getDateWarning()` returns non-blocking warning |
-| Q3: Strict account pairing | `TRANSACTION_ACCOUNT_REQUIREMENTS` enforces type constraints |
-| Q4: Cursor-based pagination | `deserializeTransactionList()` returns `hasMore` + `nextPage` |
-| Q5: Idempotent GET only retry | `RetryMiddleware` only retries GET, max 1 retry, 500ms backoff |
-| Q6: Manual refresh | Stores hold data until explicit `loadTransactions()` call |
-| Q7: Hybrid report calculation | Standard reports via API, custom queries client-side |
-| Q8: Field-level validation errors | `ValidationResult.errors` is `Map<field, message>` |
-| Q9: Fail closed with prompt | `StorageError` with user-friendly message, blocks auth ops |
-| Q10: Lenient with type coercion | `deserializeTransaction()` uses `as TransactionType` cast |
+| Decision                               | Implementation                                                 |
+| -------------------------------------- | -------------------------------------------------------------- |
+| Q1: Decimal precision (max 2 decimals) | `validateAmount()` checks `Math.round(amount * 100)`           |
+| Q2: Future dates allowed with warning  | `getDateWarning()` returns non-blocking warning                |
+| Q3: Strict account pairing             | `TRANSACTION_ACCOUNT_REQUIREMENTS` enforces type constraints   |
+| Q4: Cursor-based pagination            | `deserializeTransactionList()` returns `hasMore` + `nextPage`  |
+| Q5: Idempotent GET only retry          | `RetryMiddleware` only retries GET, max 1 retry, 500ms backoff |
+| Q6: Manual refresh                     | Stores hold data until explicit `loadTransactions()` call      |
+| Q7: Hybrid report calculation          | Standard reports via API, custom queries client-side           |
+| Q8: Field-level validation errors      | `ValidationResult.errors` is `Map<field, message>`             |
+| Q9: Fail closed with prompt            | `StorageError` with user-friendly message, blocks auth ops     |
+| Q10: Lenient with type coercion        | `deserializeTransaction()` uses `as TransactionType` cast      |
 
 ## NFR Compliance
 
-| NFR Category | Status |
-|-------------|--------|
-| Security (SB-01~05) | ✅ Token isolation, redaction, fail-closed, TLS, module isolation |
-| Reliability | ✅ Retry middleware, error categorization, storage failure recovery |
-| Performance | ✅ MobX computed, cursor pagination, manual refresh, 10s timeout |
-| Maintainability | ✅ PBT for all pure functions, max strict TypeScript, zero platform deps |
-| Extension: PBT | ✅ `__properties__/` directories, fast-check generators |
+| NFR Category        | Status                                                                   |
+| ------------------- | ------------------------------------------------------------------------ |
+| Security (SB-01~05) | ✅ Token isolation, redaction, fail-closed, TLS, module isolation        |
+| Reliability         | ✅ Retry middleware, error categorization, storage failure recovery      |
+| Performance         | ✅ MobX computed, cursor pagination, manual refresh, 10s timeout         |
+| Maintainability     | ✅ PBT for all pure functions, max strict TypeScript, zero platform deps |
+| Extension: PBT      | ✅ `__properties__/` directories, fast-check generators                  |
 
 ## Test Coverage
 

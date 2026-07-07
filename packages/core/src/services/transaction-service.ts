@@ -1,9 +1,9 @@
 import type { IFireflyIIIClient } from '../api-client/firefly-client.js';
-import type { Transaction } from '../domain-models/transactions/transaction.js';
 import type { CreateTransactionInput } from '../domain-models/transactions/serializers.js';
+import type { Transaction } from '../domain-models/transactions/transaction.js';
 import type { APIError, NetworkError, AuthError } from '../errors/error-types.js';
-import { ValidationService } from './validation-service.js';
-import { TransactionStore } from '../stores/transaction-store.js';
+import type { TransactionStore } from '../stores/transaction-store.js';
+import type { ValidationService } from './validation-service.js';
 
 /**
  * Transaction service.
@@ -18,7 +18,7 @@ export class TransactionService {
     private readonly apiClient: IFireflyIIIClient,
     private readonly validationService: ValidationService,
     private readonly transactionStore: TransactionStore,
-  ) { }
+  ) {}
 
   /**
    * Get transactions with optional filters.
@@ -61,9 +61,7 @@ export class TransactionService {
    */
   async createTransaction(input: CreateTransactionInput): Promise<Transaction> {
     // Validate input before API submission (SB-03)
-    this.validationService.throwIfInvalid(
-      this.validationService.validateTransactionInput(input),
-    );
+    this.validationService.throwIfInvalid(this.validationService.validateTransactionInput(input));
 
     const transaction = await this.apiClient.createTransaction(input);
     this.transactionStore.addTransaction(transaction);

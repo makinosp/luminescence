@@ -2,7 +2,7 @@ import type { IFireflyIIIClient } from '../api-client/firefly-client.js';
 import type { Category } from '../domain-models/categories/category.js';
 import type { Transaction } from '../domain-models/transactions/transaction.js';
 import type { APIError, NetworkError, AuthError } from '../errors/error-types.js';
-import { CategoryStore } from '../stores/category-store.js';
+import type { CategoryStore } from '../stores/category-store.js';
 import type { TransactionService } from './transaction-service.js';
 
 /**
@@ -14,7 +14,7 @@ export class CategoryService {
     private readonly apiClient: IFireflyIIIClient,
     private readonly categoryStore: CategoryStore,
     private readonly transactionService: TransactionService,
-  ) { }
+  ) {}
 
   /**
    * Get all categories.
@@ -51,9 +51,7 @@ export class CategoryService {
     const spending = new Map<string, number>();
 
     for (const [categoryId, transactions] of grouped) {
-      const total = transactions
-        .filter((t) => t.type === 'withdrawal')
-        .reduce((sum, t) => sum + t.amount, 0);
+      const total = transactions.filter((t) => t.type === 'withdrawal').reduce((sum, t) => sum + t.amount, 0);
       spending.set(categoryId, total);
     }
 

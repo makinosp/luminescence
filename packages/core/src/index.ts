@@ -53,7 +53,13 @@ export {
 } from './domain-models/index.js';
 
 // API Client
-export type { IFireflyIIIClient, TransactionQueryParams, IHTTPAdapter, RequestOptions, HTTPResponse } from './api-client/index.js';
+export type {
+  IFireflyIIIClient,
+  TransactionQueryParams,
+  IHTTPAdapter,
+  RequestOptions,
+  HTTPResponse,
+} from './api-client/index.js';
 export {
   FireflyIIIClient,
   HTTPSEnforcer,
@@ -64,14 +70,7 @@ export {
 } from './api-client/index.js';
 
 // Stores
-export {
-  AuthStore,
-  TransactionStore,
-  AccountStore,
-  CategoryStore,
-  ReportStore,
-  UIStore,
-} from './stores/index.js';
+export { AuthStore, TransactionStore, AccountStore, CategoryStore, ReportStore, UIStore } from './stores/index.js';
 
 // Services
 export {

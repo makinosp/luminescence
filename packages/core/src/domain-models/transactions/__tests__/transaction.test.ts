@@ -54,17 +54,29 @@ describe('Transaction', () => {
 
   describe('netAmount', () => {
     it('should return positive for deposits', () => {
-      const tx = createTransaction({ ...baseTransaction, type: 'deposit', amount: 100 });
+      const tx = createTransaction({
+        ...baseTransaction,
+        type: 'deposit',
+        amount: 100,
+      });
       expect(netAmount(tx)).toBe(100);
     });
 
     it('should return negative for withdrawals', () => {
-      const tx = createTransaction({ ...baseTransaction, type: 'withdrawal', amount: 50 });
+      const tx = createTransaction({
+        ...baseTransaction,
+        type: 'withdrawal',
+        amount: 50,
+      });
       expect(netAmount(tx)).toBe(-50);
     });
 
     it('should return zero for transfers', () => {
-      const tx = createTransaction({ ...baseTransaction, type: 'transfer', amount: 200 });
+      const tx = createTransaction({
+        ...baseTransaction,
+        type: 'transfer',
+        amount: 200,
+      });
       expect(netAmount(tx)).toBe(0);
     });
   });

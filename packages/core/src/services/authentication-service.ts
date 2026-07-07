@@ -1,8 +1,8 @@
-import type { ISecureStorage } from '../storage/interfaces/secure-storage.js';
-import type { ILocalSettings } from '../storage/interfaces/local-settings.js';
 import type { IFireflyIIIClient } from '../api-client/firefly-client.js';
-import { ValidationService } from './validation-service.js';
-import { AuthStore } from '../stores/auth-store.js';
+import type { ILocalSettings } from '../storage/interfaces/local-settings.js';
+import type { ISecureStorage } from '../storage/interfaces/secure-storage.js';
+import type { AuthStore } from '../stores/auth-store.js';
+import type { ValidationService } from './validation-service.js';
 import { AuthError, StorageError } from '../errors/error-types.js';
 
 /**
@@ -19,7 +19,7 @@ export class AuthenticationService {
     private readonly apiClient: IFireflyIIIClient,
     private readonly validationService: ValidationService,
     private readonly authStore: AuthStore,
-  ) { }
+  ) {}
 
   /**
    * Check if the user is configured (baseURL + token exist).

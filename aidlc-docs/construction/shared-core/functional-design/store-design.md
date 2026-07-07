@@ -73,11 +73,11 @@
  * Observable properties trigger UI re-renders via MobX.
  */
 export interface AuthState {
-  readonly isConfigured: boolean;   // true when baseURL + token are set
-  readonly baseURL: string | null;  // Server base URL (non-sensitive)
-  readonly isTokenValid: boolean;   // true when token has been validated
-  readonly isLoading: boolean;       // true during configuration/validation
-  readonly error: AuthError | null;  // Last error, if any
+    readonly isConfigured: boolean; // true when baseURL + token are set
+    readonly baseURL: string | null; // Server base URL (non-sensitive)
+    readonly isTokenValid: boolean; // true when token has been validated
+    readonly isLoading: boolean; // true during configuration/validation
+    readonly error: AuthError | null; // Last error, if any
 }
 ```
 
@@ -135,11 +135,11 @@ get isAuthenticated(): boolean {
  * Transaction list state.
  */
 export interface TransactionState {
-  readonly transactions: readonly Transaction[];  // Immutable array
-  readonly isLoading: boolean;
-  readonly error: APIError | NetworkError | AuthError | null;
-  readonly currentPage: number;
-  readonly hasMore: boolean;
+    readonly transactions: readonly Transaction[]; // Immutable array
+    readonly isLoading: boolean;
+    readonly error: APIError | NetworkError | AuthError | null;
+    readonly currentPage: number;
+    readonly hasMore: boolean;
 }
 ```
 
@@ -216,10 +216,10 @@ clear(): void
  * Account list state.
  */
 export interface AccountState {
-  readonly accounts: readonly Account[];
-  readonly isLoading: boolean;
-  readonly error: APIError | NetworkError | AuthError | null;
-  readonly selectedAccountId: string | null;
+    readonly accounts: readonly Account[];
+    readonly isLoading: boolean;
+    readonly error: APIError | NetworkError | AuthError | null;
+    readonly selectedAccountId: string | null;
 }
 ```
 
@@ -257,9 +257,9 @@ clear(): void
  * Category list state.
  */
 export interface CategoryState {
-  readonly categories: readonly Category[];
-  readonly isLoading: boolean;
-  readonly error: APIError | NetworkError | AuthError | null;
+    readonly categories: readonly Category[];
+    readonly isLoading: boolean;
+    readonly error: APIError | NetworkError | AuthError | null;
 }
 ```
 
@@ -290,13 +290,13 @@ clear(): void
  * Report data state.
  */
 export interface ReportState {
-  readonly spendingOverview: SpendingOverview | null;
-  readonly incomeVsExpenses: IncomeVsExpensesReport | null;
-  readonly trendAnalysis: TrendAnalysis | null;
-  readonly selectedPeriod: ReportPeriod;
-  readonly customDateRange: DateRange | null;
-  readonly isLoading: boolean;
-  readonly error: APIError | NetworkError | AuthError | null;
+    readonly spendingOverview: SpendingOverview | null;
+    readonly incomeVsExpenses: IncomeVsExpensesReport | null;
+    readonly trendAnalysis: TrendAnalysis | null;
+    readonly selectedPeriod: ReportPeriod;
+    readonly customDateRange: DateRange | null;
+    readonly isLoading: boolean;
+    readonly error: APIError | NetworkError | AuthError | null;
 }
 ```
 
@@ -351,10 +351,10 @@ clear(): void
  * Local UI state (does not persist between sessions).
  */
 export interface UIState {
-  readonly isModalOpen: boolean;
-  readonly activeTab: string;
-  readonly formData: Record<string, unknown>;
-  readonly toastMessage: string | null;
+    readonly isModalOpen: boolean;
+    readonly activeTab: string;
+    readonly formData: Record<string, unknown>;
+    readonly toastMessage: string | null;
 }
 ```
 
@@ -441,13 +441,13 @@ clearToast(): void
  * Enable MobX strict mode.
  * All state mutations must happen inside @action methods.
  */
-import { configure } from 'mobx';
+import { configure } from "mobx";
 
 configure({
-  enforceActions: 'always',    // State changes only in @action
-  computedRequiresReaction: true,
-  reactionRequiresObservable: true,
-  observableRequiresReaction: true,
+    enforceActions: "always", // State changes only in @action
+    computedRequiresReaction: true,
+    reactionRequiresObservable: true,
+    observableRequiresReaction: true,
 });
 ```
 
@@ -459,36 +459,40 @@ configure({
  * Provided to the React tree via Context.
  */
 export class RootStore {
-  readonly authStore: AuthStore;
-  readonly transactionStore: TransactionStore;
-  readonly accountStore: AccountStore;
-  readonly categoryStore: CategoryStore;
-  readonly reportStore: ReportStore;
-  readonly uiStore: UIStore;
+    readonly authStore: AuthStore;
+    readonly transactionStore: TransactionStore;
+    readonly accountStore: AccountStore;
+    readonly categoryStore: CategoryStore;
+    readonly reportStore: ReportStore;
+    readonly uiStore: UIStore;
 
-  constructor(dependencies: {
-    secureStorage: ISecureStorage;
-    localSettings: ILocalSettings;
-    apiClient: IFireflyIIIClient;
-  }) {
-    this.authStore = new AuthStore(dependencies.secureStorage, dependencies.localSettings, dependencies.apiClient);
-    this.transactionStore = new TransactionStore(dependencies.apiClient);
-    this.accountStore = new AccountStore(dependencies.apiClient);
-    this.categoryStore = new CategoryStore(dependencies.apiClient);
-    this.reportStore = new ReportStore(dependencies.apiClient);
-    this.uiStore = new UIStore();
-  }
+    constructor(dependencies: {
+        secureStorage: ISecureStorage;
+        localSettings: ILocalSettings;
+        apiClient: IFireflyIIIClient;
+    }) {
+        this.authStore = new AuthStore(
+            dependencies.secureStorage,
+            dependencies.localSettings,
+            dependencies.apiClient,
+        );
+        this.transactionStore = new TransactionStore(dependencies.apiClient);
+        this.accountStore = new AccountStore(dependencies.apiClient);
+        this.categoryStore = new CategoryStore(dependencies.apiClient);
+        this.reportStore = new ReportStore(dependencies.apiClient);
+        this.uiStore = new UIStore();
+    }
 
-  /**
-   * Reset all stores (e.g., on logout).
-   */
-  reset(): void {
-    this.authStore.clear();
-    this.transactionStore.clear();
-    this.accountStore.clear();
-    this.categoryStore.clear();
-    this.reportStore.clear();
-    this.uiStore.reset();
-  }
+    /**
+     * Reset all stores (e.g., on logout).
+     */
+    reset(): void {
+        this.authStore.clear();
+        this.transactionStore.clear();
+        this.accountStore.clear();
+        this.categoryStore.clear();
+        this.reportStore.clear();
+        this.uiStore.reset();
+    }
 }
 ```

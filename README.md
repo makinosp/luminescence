@@ -21,24 +21,27 @@
 ### 📦 Installation
 
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/makinosp/luminescence.git
-   cd luminescence
-   ```
+
+    ```bash
+    git clone https://github.com/makinosp/luminescence.git
+    cd luminescence
+    ```
 
 2. Install dependencies:
-   ```bash
-   pnpm install
-   ```
+    ```bash
+    pnpm install
+    ```
 
 ### ▶️ Running the Application
 
 To start the development server:
+
 ```bash
 pnpm run dev
 ```
 
 To run tests:
+
 ```bash
 pnpm test
 ```

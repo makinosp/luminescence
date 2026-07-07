@@ -31,7 +31,12 @@ export const TRANSACTION_TYPE_SIGN: Record<TransactionType, 1 | -1 | 0> = {
  */
 export const TRANSACTION_ACCOUNT_REQUIREMENTS: Record<
   TransactionType,
-  { fromRequired: boolean; toRequired: boolean; fromAccountTypes: string[]; toAccountTypes: string[] }
+  {
+    fromRequired: boolean;
+    toRequired: boolean;
+    fromAccountTypes: string[];
+    toAccountTypes: string[];
+  }
 > = {
   deposit: {
     fromRequired: true,

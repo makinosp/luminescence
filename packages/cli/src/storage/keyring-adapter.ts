@@ -1,4 +1,4 @@
-import { ISecureStorage } from '@luminescence/core';
+import type { ISecureStorage } from '@luminescence/core';
 import keytar from 'keytar';
 
 export class KeyringAdapter implements ISecureStorage {
@@ -34,7 +34,7 @@ export class KeyringAdapter implements ISecureStorage {
       // Keytar doesn't have a clear method, so we need to track keys
       // For simplicity, we'll just delete the known account
       await keytar.deletePassword(this.SERVICE_NAME, this.ACCOUNT_NAME);
-    } catch (error) {
+    } catch {
       // Ignore errors if no passwords exist
     }
   }

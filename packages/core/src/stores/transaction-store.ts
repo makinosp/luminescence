@@ -1,6 +1,6 @@
-import { makeAutoObservable, computed, runInAction } from 'mobx';
 import type { Transaction } from '../domain-models/transactions/transaction.js';
 import type { APIError, NetworkError, AuthError } from '../errors/error-types.js';
+import { makeAutoObservable, computed, runInAction } from 'mobx';
 
 /**
  * Transaction list state.
@@ -40,7 +40,11 @@ export class TransactionStore {
    * Monthly summary of income and expenses.
    * Computed property — cached until transactions change.
    */
-  get monthlySummary(): { income: number; expenses: number; netCashflow: number } {
+  get monthlySummary(): {
+    income: number;
+    expenses: number;
+    netCashflow: number;
+  } {
     let income = 0;
     let expenses = 0;
 

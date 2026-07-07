@@ -1,5 +1,5 @@
-import { makeAutoObservable, computed, runInAction } from 'mobx';
 import type { AuthError, StorageError, ValidationError } from '../errors/error-types.js';
+import { makeAutoObservable, computed, runInAction } from 'mobx';
 
 /**
  * Authentication state.

@@ -1,11 +1,4 @@
-import {
-  LuminescenceError,
-  APIError,
-  NetworkError,
-  ValidationError,
-  StorageError,
-  AuthError,
-} from './error-types.js';
+import { LuminescenceError, APIError, NetworkError, ValidationError, StorageError, AuthError } from './error-types.js';
 
 /**
  * Error category for routing and handling decisions.
@@ -27,8 +20,14 @@ export interface RedactedError {
  * These patterns are applied to internal log messages before they are
  * surfaced to the user. Internal logs retain full details for debugging.
  */
-const SENSITIVE_PATTERNS: ReadonlyArray<{ pattern: RegExp; replacement: string }> = [
-  { pattern: /Bearer\s+[A-Za-z0-9\-._~+/]+=*/g, replacement: 'Bearer [REDACTED]' },
+const SENSITIVE_PATTERNS: ReadonlyArray<{
+  pattern: RegExp;
+  replacement: string;
+}> = [
+  {
+    pattern: /Bearer\s+[A-Za-z0-9\-._~+/]+=*/g,
+    replacement: 'Bearer [REDACTED]',
+  },
   { pattern: /https?:\/\/[^\s]+/g, replacement: '[REDACTED_URL]' },
   { pattern: /\/home\/[^\s]+/g, replacement: '[REDACTED_PATH]' },
   { pattern: /\/Users\/[^\s]+/g, replacement: '[REDACTED_PATH]' },

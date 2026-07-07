@@ -4,11 +4,11 @@
 
 ### 1.1 Transaction Type Definitions
 
-| Type | Description | Source Account | Destination Account | Amount Sign |
-|------|-------------|---------------|--------------------|----|
-| **Deposit** | Money coming in | Revenue account | Asset account | Positive (+) |
-| **Withdrawal** | Money going out | Asset account | Expense account | Negative (−) |
-| **Transfer** | Money between accounts | Asset account | Asset account | Neutral (0) |
+| Type           | Description            | Source Account  | Destination Account | Amount Sign  |
+| -------------- | ---------------------- | --------------- | ------------------- | ------------ |
+| **Deposit**    | Money coming in        | Revenue account | Asset account       | Positive (+) |
+| **Withdrawal** | Money going out        | Asset account   | Expense account     | Negative (−) |
+| **Transfer**   | Money between accounts | Asset account   | Asset account       | Neutral (0)  |
 
 ### 1.2 Strict Account Pairing (Clarification Q3: A)
 
@@ -43,9 +43,9 @@ TRANSFER:    fromAccount.type === 'asset'    AND toAccount.type === 'asset' AND 
 
 - All transaction amounts are stored as **positive numbers**.
 - The sign is determined by the transaction type:
-  - Deposits → money increases (positive net)
-  - Withdrawals → money decreases (negative net)
-  - Transfers → neutral (no net change in total wealth)
+    - Deposits → money increases (positive net)
+    - Withdrawals → money decreases (negative net)
+    - Transfers → neutral (no net change in total wealth)
 
 ### 2.3 Upper Bound
 
@@ -71,11 +71,11 @@ TRANSFER:    fromAccount.type === 'asset'    AND toAccount.type === 'asset' AND 
 
 ### 3.2 Transaction Type Date Constraints
 
-| Transaction Type | Future Date | Notes |
-|-----------------|-------------|-------|
-| Deposit | Allowed (with warning) | Future-dated deposits may represent scheduled income |
-| Withdrawal | Allowed (with warning) | Future-dated withdrawals may represent scheduled bills |
-| Transfer | Allowed (with warning) | Future-dated transfers may represent planned moves |
+| Transaction Type | Future Date            | Notes                                                  |
+| ---------------- | ---------------------- | ------------------------------------------------------ |
+| Deposit          | Allowed (with warning) | Future-dated deposits may represent scheduled income   |
+| Withdrawal       | Allowed (with warning) | Future-dated withdrawals may represent scheduled bills |
+| Transfer         | Allowed (with warning) | Future-dated transfers may represent planned moves     |
 
 ### 3.3 Report Date Constraints
 
@@ -89,12 +89,12 @@ TRANSFER:    fromAccount.type === 'asset'    AND toAccount.type === 'asset' AND 
 
 ### 4.1 Account Types
 
-| Type | Description | Can Be Source For | Can Be Destination For |
-|------|-------------|-------------------|----------------------|
-| **Asset** | Bank accounts, savings | Withdrawal, Transfer | Deposit, Transfer |
-| **Liability** | Credit cards, loans | — | — |
-| **Revenue** | Income sources | Deposit | — |
-| **Expense** | Expense categories | — | Withdrawal |
+| Type          | Description            | Can Be Source For    | Can Be Destination For |
+| ------------- | ---------------------- | -------------------- | ---------------------- |
+| **Asset**     | Bank accounts, savings | Withdrawal, Transfer | Deposit, Transfer      |
+| **Liability** | Credit cards, loans    | —                    | —                      |
+| **Revenue**   | Income sources         | Deposit              | —                      |
+| **Expense**   | Expense categories     | —                    | Withdrawal             |
 
 ### 4.2 Active Account Requirement
 
@@ -132,12 +132,12 @@ TRANSFER:    fromAccount.type === 'asset'    AND toAccount.type === 'asset' AND 
 
 ### 6.1 Period Presets (Clarification Q7: C — Hybrid)
 
-| Preset | Description | Date Range Calculation |
-|--------|-------------|----------------------|
-| `current_month` | Current calendar month | 1st of current month → last day of current month |
-| `last_month` | Previous calendar month | 1st of previous month → last day of previous month |
-| `last_3_months` | Last 3 calendar months | 1st of (current month - 2) → last day of current month |
-| `custom` | User-specified range | User provides `startDate` and `endDate` |
+| Preset          | Description             | Date Range Calculation                                 |
+| --------------- | ----------------------- | ------------------------------------------------------ |
+| `current_month` | Current calendar month  | 1st of current month → last day of current month       |
+| `last_month`    | Previous calendar month | 1st of previous month → last day of previous month     |
+| `last_3_months` | Last 3 calendar months  | 1st of (current month - 2) → last day of current month |
+| `custom`        | User-specified range    | User provides `startDate` and `endDate`                |
 
 ### 6.2 Aggregation Rules
 
@@ -171,11 +171,11 @@ All validation errors are returned as a `Map<field, message>`:
 ```typescript
 // Example: Invalid transaction input
 const result = validateTransactionInput({
-  type: 'withdrawal',
-  amount: -50,
-  description: '',
-  date: new Date(),
-  fromAccountId: '1',
+    type: "withdrawal",
+    amount: -50,
+    description: "",
+    date: new Date(),
+    fromAccountId: "1",
 });
 
 // result.errors:
@@ -194,31 +194,31 @@ const result = validateTransactionInput({
 
 ### 7.3 Validation Error Fields
 
-| Field | Validation | Error Message |
-|-------|-----------|---------------|
-| `type` | Must be deposit/withdrawal/transfer | `"Transaction type must be deposit, withdrawal, or transfer"` |
-| `amount` | Positive, max 2 decimals | `"Amount must be greater than zero"` / `"Amount must have at most 2 decimal places"` |
-| `description` | Required, max 1000 chars | `"Description is required"` / `"Description must be 1000 characters or fewer"` |
-| `date` | Valid date, after 1970 | `"A valid date is required"` / `"Date must be after 1970-01-01"` |
-| `fromAccountId` | Required, non-empty | `"Source account is required"` |
-| `toAccountId` | Required for transfers | `"Destination account is required for transfers"` |
-| `categoryId` | Optional, non-empty if provided | `"Category ID must be a non-empty string if provided"` |
-| `budgetId` | Optional, non-empty if provided | `"Budget ID must be a non-empty string if provided"` |
-| `tags` | Optional, array of strings | `"Tags must be an array of strings"` |
+| Field           | Validation                          | Error Message                                                                        |
+| --------------- | ----------------------------------- | ------------------------------------------------------------------------------------ |
+| `type`          | Must be deposit/withdrawal/transfer | `"Transaction type must be deposit, withdrawal, or transfer"`                        |
+| `amount`        | Positive, max 2 decimals            | `"Amount must be greater than zero"` / `"Amount must have at most 2 decimal places"` |
+| `description`   | Required, max 1000 chars            | `"Description is required"` / `"Description must be 1000 characters or fewer"`       |
+| `date`          | Valid date, after 1970              | `"A valid date is required"` / `"Date must be after 1970-01-01"`                     |
+| `fromAccountId` | Required, non-empty                 | `"Source account is required"`                                                       |
+| `toAccountId`   | Required for transfers              | `"Destination account is required for transfers"`                                    |
+| `categoryId`    | Optional, non-empty if provided     | `"Category ID must be a non-empty string if provided"`                               |
+| `budgetId`      | Optional, non-empty if provided     | `"Budget ID must be a non-empty string if provided"`                                 |
+| `tags`          | Optional, array of strings          | `"Tags must be an array of strings"`                                                 |
 
 ---
 
 ## 8. Business Invariants Summary
 
-| # | Invariant | Enforced By |
-|---|-----------|-------------|
-| INV-01 | Transaction amount is always positive | `validateAmount()` |
-| INV-02 | Transaction type determines account pairing | `validateTransactionInput()` + `TRANSACTION_ACCOUNT_REQUIREMENTS` |
-| INV-03 | Transfers require two distinct asset accounts | `validateTransactionInput()` |
-| INV-04 | Future dates produce warnings, not errors | `getDateWarning()` |
-| INV-05 | All domain models are immutable | TypeScript `readonly` + `Object.freeze()` |
-| INV-06 | Validation errors are field-level | `ValidationResult.errors` Map |
-| INV-07 | Transfers excluded from income/expense reports | `calculateSpendingOverview()` |
-| INV-08 | Only active accounts can participate in transactions | `canBeWithdrawalSource()` / `canBeDepositDestination()` |
-| INV-09 | Category assignment is optional | `validateTransactionInput()` |
-| INV-10 | Report date range ≤ 5 years | `validateDateRange()` |
+| #      | Invariant                                            | Enforced By                                                       |
+| ------ | ---------------------------------------------------- | ----------------------------------------------------------------- |
+| INV-01 | Transaction amount is always positive                | `validateAmount()`                                                |
+| INV-02 | Transaction type determines account pairing          | `validateTransactionInput()` + `TRANSACTION_ACCOUNT_REQUIREMENTS` |
+| INV-03 | Transfers require two distinct asset accounts        | `validateTransactionInput()`                                      |
+| INV-04 | Future dates produce warnings, not errors            | `getDateWarning()`                                                |
+| INV-05 | All domain models are immutable                      | TypeScript `readonly` + `Object.freeze()`                         |
+| INV-06 | Validation errors are field-level                    | `ValidationResult.errors` Map                                     |
+| INV-07 | Transfers excluded from income/expense reports       | `calculateSpendingOverview()`                                     |
+| INV-08 | Only active accounts can participate in transactions | `canBeWithdrawalSource()` / `canBeDepositDestination()`           |
+| INV-09 | Category assignment is optional                      | `validateTransactionInput()`                                      |
+| INV-10 | Report date range ≤ 5 years                          | `validateDateRange()`                                             |
