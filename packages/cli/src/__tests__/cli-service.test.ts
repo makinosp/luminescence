@@ -1,27 +1,27 @@
-import type { JSONConfigAdapter } from '../storage/json-config-adapter.js';
-import type { KeyringAdapter } from '../storage/keyring-adapter.js';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { CLIService } from '../services/cli-service.js';
+import { JSONConfigAdapter } from '../storage/json-config-adapter.js';
+import { KeyringAdapter } from '../storage/keyring-adapter.js';
+
+vi.mock('keytar', () => ({
+  default: {
+    setPassword: vi.fn().mockResolvedValue(undefined),
+    getPassword: vi.fn().mockResolvedValue(null),
+    deletePassword: vi.fn().mockResolvedValue(true),
+  },
+}));
+vi.mock('../storage/keyring-adapter.js');
+vi.mock('../storage/json-config-adapter.js');
 
 describe('CLIService', () => {
   let cliService: CLIService;
-  let mockKeyring: KeyringAdapter;
-  let mockConfig: JSONConfigAdapter;
 
   beforeEach(() => {
-    mockKeyring = {
-      setToken: vi.fn().mockResolvedValue(undefined),
-      getToken: vi.fn().mockResolvedValue('test-token'),
-      removeToken: vi.fn().mockResolvedValue(undefined),
-      clear: vi.fn().mockResolvedValue(undefined),
-    } as unknown as KeyringAdapter;
+    const mockKeyring = vi.mocked(new KeyringAdapter());
+    const mockConfig = vi.mocked(new JSONConfigAdapter());
 
-    mockConfig = {
-      set: vi.fn().mockResolvedValue(undefined),
-      get: vi.fn().mockResolvedValue('https://test.firefly.com'),
-      remove: vi.fn().mockResolvedValue(undefined),
-      clear: vi.fn().mockResolvedValue(undefined),
-    } as unknown as JSONConfigAdapter;
+    mockKeyring.getToken.mockResolvedValue('test-token');
+    mockConfig.get.mockResolvedValue('https://test.firefly.com');
 
     cliService = new CLIService(mockKeyring, mockConfig);
   });
