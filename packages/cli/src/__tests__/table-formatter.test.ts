@@ -132,3 +132,90 @@ describe('CSVFormatter', () => {
     expect(result).toBe('');
   });
 });
+
+describe('Report Formatters', () => {
+  const tableFormatter = new TableFormatter();
+  const jsonFormatter = new JSONFormatter();
+
+  describe('TableFormatter - SpendingOverview', () => {
+    it('should format spending overview summary', () => {
+      const overview = {
+        period: 'current_month' as const,
+        dateRange: { startDate: new Date('2024-01-01'), endDate: new Date('2024-01-31') },
+        totalIncome: 5000,
+        totalExpenses: 3000,
+        netCashflow: 2000,
+        categoryBreakdown: [
+          { categoryId: '1', categoryName: 'Food', totalSpent: 1000, percentage: 33.3, transactionCount: 10 },
+          { categoryId: '2', categoryName: 'Transport', totalSpent: 500, percentage: 16.7, transactionCount: 5 },
+        ],
+      };
+
+      const result = tableFormatter.formatSpendingOverview(overview);
+      expect(result).toContain('Spending Overview');
+      expect(result).toContain('5000.00');
+      expect(result).toContain('3000.00');
+      expect(result).toContain('2000.00');
+      expect(result).toContain('Food');
+      expect(result).toContain('Transport');
+    });
+  });
+
+  describe('TableFormatter - IncomeVsExpenses', () => {
+    it('should format income vs expenses report', () => {
+      const report = {
+        period: 'last_month' as const,
+        dateRange: { startDate: new Date('2023-12-01'), endDate: new Date('2023-12-31') },
+        income: 4000,
+        expenses: 2500,
+        netCashflow: 1500,
+      };
+
+      const result = tableFormatter.formatIncomeVsExpenses(report);
+      expect(result).toContain('Income vs Expenses');
+      expect(result).toContain('4000.00');
+      expect(result).toContain('2500.00');
+    });
+  });
+
+  describe('TableFormatter - TrendAnalysis', () => {
+    it('should format trend analysis with monthly data', () => {
+      const analysis = {
+        months: [
+          { month: '2024-01', income: 5000, expenses: 3000, netCashflow: 2000 },
+          { month: '2024-02', income: 4500, expenses: 2800, netCashflow: 1700 },
+        ],
+      };
+
+      const result = tableFormatter.formatTrendAnalysis(analysis);
+      expect(result).toContain('Trend Analysis');
+      expect(result).toContain('2024-01');
+      expect(result).toContain('2024-02');
+      expect(result).toContain('2000.00');
+    });
+
+    it('should return empty message for no data', () => {
+      const analysis = { months: [] };
+      const result = tableFormatter.formatTrendAnalysis(analysis);
+      expect(result).toBe('No trend data available.');
+    });
+  });
+
+  describe('JSONFormatter - Reports', () => {
+    it('should format spending overview as JSON', () => {
+      const overview = {
+        period: 'current_month' as const,
+        dateRange: { startDate: new Date('2024-01-01'), endDate: new Date('2024-01-31') },
+        totalIncome: 5000,
+        totalExpenses: 3000,
+        netCashflow: 2000,
+        categoryBreakdown: [],
+      };
+
+      const result = jsonFormatter.formatSpendingOverview(overview);
+      const parsed = JSON.parse(result);
+      expect(parsed.totalIncome).toBe(5000);
+      expect(parsed.period).toBe('current_month');
+    });
+  });
+});

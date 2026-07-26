@@ -1,4 +1,4 @@
-import type { Transaction } from '@luminescence/core';
+import type { Transaction, SpendingOverview, IncomeVsExpensesReport, TrendAnalysis } from '@luminescence/core';
 
 export class CSVFormatter {
   formatTransactions(transactions: Transaction[]): string {
@@ -61,6 +61,52 @@ export class CSVFormatter {
 
     const headers = ['id', 'name'];
     const rows = categories.map((c) => [c.id ?? '', c.name ?? '']);
+
+    return [headers, ...rows].map((row) => row.map(this.escapeCSV).join(',')).join('\n');
+  }
+
+  formatSpendingOverview(overview: SpendingOverview): string {
+    if (overview.categoryBreakdown.length === 0) {
+      return '';
+    }
+
+    const headers = ['categoryId', 'categoryName', 'totalSpent', 'percentage', 'transactionCount'];
+    const rows = overview.categoryBreakdown.map((c) => [
+      c.categoryId ?? '',
+      c.categoryName ?? '',
+      c.totalSpent.toString(),
+      c.percentage.toFixed(1),
+      String(c.transactionCount),
+    ]);
+
+    return [headers, ...rows].map((row) => row.map(this.escapeCSV).join(',')).join('\n');
+  }
+
+  formatIncomeVsExpenses(report: IncomeVsExpensesReport): string {
+    const headers = ['period', 'startDate', 'endDate', 'income', 'expenses', 'netCashflow'];
+    const values = [
+      report.period,
+      report.dateRange.startDate.toISOString().substring(0, 10),
+      report.dateRange.endDate.toISOString().substring(0, 10),
+      report.income.toFixed(2),
+      report.expenses.toFixed(2),
+      report.netCashflow.toFixed(2),
+    ];
+    return [headers, values].map((row) => row.map(this.escapeCSV).join(',')).join('\n');
+  }
+
+  formatTrendAnalysis(analysis: TrendAnalysis): string {
+    if (analysis.months.length === 0) {
+      return '';
+    }
+
+    const headers = ['month', 'income', 'expenses', 'netCashflow'];
+    const rows = analysis.months.map((m) => [
+      m.month,
+      m.income.toFixed(2),
+      m.expenses.toFixed(2),
+      m.netCashflow.toFixed(2),
+    ]);
 
     return [headers, ...rows].map((row) => row.map(this.escapeCSV).join(',')).join('\n');
   }
