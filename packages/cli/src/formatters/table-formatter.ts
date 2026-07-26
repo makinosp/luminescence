@@ -1,4 +1,4 @@
-import type { Transaction } from '@luminescence/core';
+import type { Transaction, SpendingOverview, IncomeVsExpensesReport, TrendAnalysis } from '@luminescence/core';
 
 export class TableFormatter {
   formatTransactions(transactions: Transaction[]): string {
@@ -73,5 +73,71 @@ export class TableFormatter {
     });
 
     return [header, separator, ...rows].join('\n');
+  }
+
+  formatSpendingOverview(overview: SpendingOverview): string {
+    const lines: string[] = [];
+    lines.push('=== Spending Overview ===');
+    lines.push(`Period: ${overview.period}`);
+    lines.push(
+      `Period: ${overview.dateRange.startDate.toISOString().substring(0, 10)} — ${overview.dateRange.endDate.toISOString().substring(0, 10)}`,
+    );
+    lines.push(`Total Income:    ${overview.totalIncome.toFixed(2)}`);
+    lines.push(`Total Expenses:  ${overview.totalExpenses.toFixed(2)}`);
+    lines.push(`Net Cashflow:    ${overview.netCashflow.toFixed(2)}`);
+
+    if (overview.categoryBreakdown.length > 0) {
+      lines.push('');
+      lines.push('--- Category Breakdown ---');
+      const catHeader = 'Category'.padEnd(30) + 'Spent'.padEnd(15) + 'Percentage'.padEnd(12) + 'Count';
+      const catSep = '-'.repeat(70);
+      lines.push(catHeader);
+      lines.push(catSep);
+      for (const cat of overview.categoryBreakdown) {
+        const name = (cat.categoryName ?? 'Unknown').padEnd(30);
+        const spent = cat.totalSpent.toFixed(2).padEnd(15);
+        const pct = cat.percentage.toFixed(1).padEnd(12);
+        const count = String(cat.transactionCount);
+        lines.push(name + spent + pct + count);
+      }
+    }
+
+    return lines.join('\n');
+  }
+
+  formatIncomeVsExpenses(report: IncomeVsExpensesReport): string {
+    const lines: string[] = [];
+    lines.push('=== Income vs Expenses ===');
+    lines.push(`Period: ${report.period}`);
+    lines.push(
+      `${report.dateRange.startDate.toISOString().substring(0, 10)} — ${report.dateRange.endDate.toISOString().substring(0, 10)}`,
+    );
+    lines.push('');
+    lines.push(`Income:     ${report.income.toFixed(2)}`);
+    lines.push(`Expenses:   ${report.expenses.toFixed(2)}`);
+    lines.push(`Net:        ${report.netCashflow.toFixed(2)}`);
+    return lines.join('\n');
+  }
+
+  formatTrendAnalysis(analysis: TrendAnalysis): string {
+    if (analysis.months.length === 0) {
+      return 'No trend data available.';
+    }
+
+    const lines: string[] = [];
+    lines.push('=== Trend Analysis ===');
+    lines.push('');
+    const header = 'Month'.padEnd(12) + 'Income'.padEnd(15) + 'Expenses'.padEnd(15) + 'Net Cashflow';
+    const separator = '-'.repeat(60);
+    lines.push(header);
+    lines.push(separator);
+    for (const month of analysis.months) {
+      const m = (month.month ?? '').padEnd(12);
+      const i = month.income.toFixed(2).padEnd(15);
+      const e = month.expenses.toFixed(2).padEnd(15);
+      const n = month.netCashflow.toFixed(2);
+      lines.push(m + i + e + n);
+    }
+    return lines.join('\n');
   }
 }

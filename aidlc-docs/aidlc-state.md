@@ -27,19 +27,21 @@
 
 ## Stage Progress
 
-| Stage                 | Status               |
-| --------------------- | -------------------- |
-| Workspace Detection   | ✅ Complete          |
-| Reverse Engineering   | N/A (Greenfield)     |
-| Requirements Analysis | ✅ Complete          |
-| User Stories          | ✅ Complete          |
-| Workflow Planning     | ✅ Complete          |
-| Application Design    | ✅ Complete          |
-| Units Generation      | ✅ Complete          |
-| Functional Design     | ✅ Complete (Unit 1) |
-| NFR Requirements      | ✅ Complete (Unit 1) |
-| NFR Design            | ✅ Complete (Unit 1) |
-| Code Generation       | ✅ Complete (Unit 1) |
-| Build and Test        | ✅ Complete (Unit 1) |
-| Code Generation       | ✅ Complete (Unit 2) |
-| Build and Test        | ✅ Complete (Unit 2) |
+| Stage                 | Status                                |
+| --------------------- | ------------------------------------- |
+| Workspace Detection   | ✅ Complete                           |
+| Reverse Engineering   | N/A (Greenfield)                      |
+| Requirements Analysis | ✅ Complete                           |
+| User Stories          | ✅ Complete                           |
+| Workflow Planning     | ✅ Complete                           |
+| Application Design    | ✅ Complete                           |
+| Units Generation      | ✅ Complete                           |
+| Functional Design     | ✅ Complete (Unit 1)                  |
+| NFR Requirements      | ✅ Complete (Unit 1)                  |
+| NFR Design            | ✅ Complete (Unit 1)                  |
+| Code Generation       | ✅ Complete (Unit 1)                  |
+| Build and Test        | ✅ Complete (Unit 1)                  |
+| Code Generation       | ✅ Complete (Unit 2)                  |
+| Build and Test        | ✅ Complete (Unit 2)                  |
+| US-03 CLI CRUD        | ✅ Complete (2026-07-25, incremental) |
+| US-06 CLI Reports     | ✅ Complete (2026-07-25, incremental) |

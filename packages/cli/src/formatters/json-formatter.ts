@@ -1,4 +1,4 @@
-import type { Transaction } from '@luminescence/core';
+import type { Transaction, SpendingOverview, IncomeVsExpensesReport, TrendAnalysis } from '@luminescence/core';
 
 export class JSONFormatter {
   formatTransactions(transactions: Transaction[]): string {
@@ -22,5 +22,17 @@ export class JSONFormatter {
 
   formatCategories(categories: Array<{ id: string; name: string }>): string {
     return JSON.stringify(categories, null, 2);
+  }
+
+  formatSpendingOverview(overview: SpendingOverview): string {
+    return JSON.stringify(overview, null, 2);
+  }
+
+  formatIncomeVsExpenses(report: IncomeVsExpensesReport): string {
+    return JSON.stringify(report, null, 2);
+  }
+
+  formatTrendAnalysis(analysis: TrendAnalysis): string {
+    return JSON.stringify(analysis, null, 2);
   }
 }

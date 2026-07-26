@@ -518,8 +518,89 @@
 
 ### Unit 2 CLI Structure:
 
-- `packages/cli/src/cli.ts` — Commander.js entry point (configure, logout, transactions, transaction, accounts, categories)
-- `packages/cli/src/services/cli-service.ts` — CLIService orchestration
+- `packages/cli/src/cli.ts` — Commander.js entry point (configure, logout, transactions, transaction, create, update, delete, accounts, categories)
+- `packages/cli/src/services/cli-service.ts` — CLIService orchestration (createTransaction, updateTransaction, deleteTransaction)
 - `packages/cli/src/formatters/` — TableFormatter, JSONFormatter, CSVFormatter
 - `packages/cli/src/storage/` — JSONConfigAdapter (ILocalSettings), KeyringAdapter (ISecureStorage)
 - `packages/cli/src/__tests__/` — cli-service.test.ts, table-formatter.test.ts
+
+---
+
+## US-03 Implementation — CLI Transaction CRUD
+
+**Timestamp**: 2026-07-25T00:00:00Z
+**User Input**: "取引の作成・編集・削除 (US-03)を実装してほしい"
+**AI Response**: Implemented CLI transaction CRUD commands (create, update, delete) following lightweight approach (B). No AI-DLC workflow stages re-executed since all design artifacts already existed.
+**Context**: CONSTRUCTION - Unit 2 (CLI Client) incremental update
+
+### Changes Made:
+
+| File                                             | Change                                                                                                                                                                  |
+| ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `packages/cli/src/services/cli-service.ts`       | Added `createTransaction()`, `updateTransaction()`, `deleteTransaction()` methods + `CreateOptions`, `UpdateOptions`, `DeleteOptions` types + `promptOptional()` helper |
+| `packages/cli/src/cli.ts`                        | Registered 3 new Commander.js commands: `create`, `update <id>`, `delete <id>`                                                                                          |
+| `packages/cli/src/__tests__/cli-service.test.ts` | Added 3 test cases for CRUD operations                                                                                                                                  |
+
+### Design Decisions:
+
+- **Interactive fallback**: Missing required flags trigger interactive prompts via `prompt()`
+- **Optional field skip**: Optional flags use `promptOptional()` — empty Enter skips the field
+- **Validation delegated to Core**: `ValidationService.validateTransactionInput()` reused; no duplicate validation in CLI
+- **Partial update**: `update` accepts any subset of fields via `Partial<CreateTransactionInput>`
+- **Delete confirmation**: Requires `--force` flag or interactive "yes/no" confirmation (per AC3-05)
+- **No Core changes**: All Core mutation support already existed; CLI-only additions
+
+### Verification Results:
+
+- ✅ `pnpm --filter @luminescence/core build` — TypeScript max strict passes
+- ✅ `pnpm --filter @luminescence/cli build` — TypeScript max strict passes
+- ✅ `pnpm --filter @luminescence/core test` — 88 tests pass (9 files)
+- ✅ `pnpm --filter @luminescence/cli test` — 15 tests pass (2 files, +3 new)
+- ✅ `pnpm run lint` — No warnings
+
+### Commands Added:
+
+```bash
+luminescence create -t withdrawal -a 50.00 -d "Groceries" --date 2024-01-15 --from-account 1
+luminescence create                                              # Interactive mode
+luminescence update <id> -a 75.00 -d "Updated description"
+luminescence delete <id> --force                                 # Skip confirmation
+luminescence delete <id>                                         # Interactive confirmation
+```
+
+---
+
+## US-06 Implementation — CLI Reports
+
+**Timestamp**: 2026-07-25T00:00:00Z
+**User Input**: "B (レポート表示)"
+**AI Response**: Implemented CLI report commands (spending, income-expenses, trend) following lightweight approach (B).
+**Context**: CONSTRUCTION - Unit 2 (CLI Client) incremental update
+
+### Changes Made:
+
+| File                                                 | Change                                                                                                                                                                                   |
+| ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `packages/cli/src/services/cli-service.ts`           | Added `reportSpending()`, `reportIncomeExpenses()`, `reportTrend()` methods + `ReportOptions` type + `parseCustomRange()` helper. Wired `ReportService` + `ReportStore` into constructor |
+| `packages/cli/src/cli.ts`                            | Registered `reports <type>` command with subcommands: `spending`, `income-expenses`, `trend`                                                                                             |
+| `packages/cli/src/formatters/table-formatter.ts`     | Added `formatSpendingOverview()`, `formatIncomeVsExpenses()`, `formatTrendAnalysis()`                                                                                                    |
+| `packages/cli/src/formatters/json-formatter.ts`      | Added `formatSpendingOverview()`, `formatIncomeVsExpenses()`, `formatTrendAnalysis()`                                                                                                    |
+| `packages/cli/src/formatters/csv-formatter.ts`       | Added `formatSpendingOverview()`, `formatIncomeVsExpenses()`, `formatTrendAnalysis()`                                                                                                    |
+| `packages/cli/src/__tests__/cli-service.test.ts`     | Added 3 test cases for report error handling                                                                                                                                             |
+| `packages/cli/src/__tests__/table-formatter.test.ts` | Added 5 test cases for report formatting                                                                                                                                                 |
+
+### Design Decisions:
+
+- **Single `reports <type>` command**: Three sub-report types under one Commander.js command, selected by positional argument
+- **CSV output**: Spending overview outputs category breakdown rows; income-expenses outputs a single row; trend outputs one row per month
+- **Custom date range**: `--start` and `--end` flags enable `custom` period with client-side calculation
+- **No Core changes**: `ReportService` / `ReportStore` / domain models all pre-existing
+- **Period-based**: Standard periods (`current_month`, `last_month`, `last_3_months`) use Firefly III API; `custom` does client-side calculation
+
+### Verification Results:
+
+- ✅ `pnpm --filter @luminescence/core build` — TypeScript max strict passes
+- ✅ `pnpm --filter @luminescence/cli build` — TypeScript max strict passes
+- ✅ `pnpm --filter @luminescence/core test` — 88 tests pass (9 files)
+- ✅ `pnpm --filter @luminescence/cli test` — 23 tests pass (2 files, +11 new)
+- ✅ `pnpm run lint` — No warnings
