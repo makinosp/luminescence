@@ -1,7 +1,7 @@
 import { defineConfig } from 'oxfmt';
 
 export default defineConfig({
-  ignorePatterns: ['**/.github/**', '**/coverage/**', '**/dist/**', '**/node_modules/**'],
+  ignorePatterns: ['**/.github/**', '**/coverage/**', '**/dist/**', '**/node_modules/**', '**/.vendor/**'],
   overrides: [
     {
       files: ['**/*.ts'],

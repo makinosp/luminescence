@@ -84,7 +84,13 @@ export class CLIService {
     this.transactionService = new TransactionService(this.client, validationService, transactionStore);
     this.accountService = new AccountService(this.client, accountStore);
     this.categoryService = new CategoryService(this.client, categoryStore, this.transactionService);
-    this.reportService = new ReportService(this.client, validationService, reportStore, this.transactionService, this.categoryService);
+    this.reportService = new ReportService(
+      this.client,
+      validationService,
+      reportStore,
+      this.transactionService,
+      this.categoryService,
+    );
   }
 
   async configure(options: { url?: string; token?: string }): Promise<number> {
@@ -264,7 +270,9 @@ export class CLIService {
       console.log(formatter.formatIncomeVsExpenses(report));
       return 0;
     } catch (error) {
-      console.error(`✗ Failed to generate income vs expenses report: ${error instanceof Error ? error.message : String(error)}`);
+      console.error(
+        `✗ Failed to generate income vs expenses report: ${error instanceof Error ? error.message : String(error)}`,
+      );
       return 1;
     }
   }
