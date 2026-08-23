@@ -1,7 +1,8 @@
 import { defineConfig } from 'oxlint';
+import { ignorePatterns } from './ocx.config.ts';
 
 export default defineConfig({
-  ignorePatterns: ['**/.github/**', '**/coverage/**', '**/dist/**', '**/node_modules/**'],
+  ignorePatterns,
   overrides: [
     {
       files: ['**/*.test.ts', '**/tests/**/*.test.ts', '**/tests/**/*.ts', '**/__properties__/**/*.ts'],
