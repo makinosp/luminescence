@@ -10,9 +10,12 @@
     "lint": "oxlint",
     "format": "oxfmt --write .",
     "format:check": "oxfmt --check .",
-    "clean": "pnpm --recursive clean"
+    "clean": "pnpm --recursive clean",
+    "openspec:init": "openspec init",
+    "openspec:update": "openspec update"
   },
   "devDependencies": {
+    "@fission-ai/openspec": "^1.9.0",
     "oxfmt": "^0.57.0",
     "oxlint": "^1.59.0"
   },

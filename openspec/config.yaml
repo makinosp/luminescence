@@ -1,0 +1,57 @@
+schema: spec-driven
+
+# Project context (optional)
+# This is shown to AI when creating artifacts.
+# Add your tech stack, conventions, style guides, domain knowledge, etc.
+context: |
+  Project: luminescence — Multi-platform Firefly III client (Mobile, Web, CLI)
+  Type: Monorepo (pnpm workspaces)
+  Packages:
+    - @luminescence/core: Shared core — domain models, API client, stores, services, storage interfaces
+    - @luminescence/cli: Command-line interface
+  Tech stack: TypeScript (ESM), Node.js >=20, pnpm >=9
+  Key dependencies: mobx (state management), vitest (testing), oxlint/oxfmt (linting/formatting)
+  Architecture: Clean architecture with domain-driven design
+  - Domain models: accounts, categories, transactions, reports
+  - API client: Firefly III REST API with auth gate, retry middleware, timeout controller, HTTPS enforcer
+  - Stores: MobX-based reactive stores for UI state
+  - Services: Business logic layer
+  - Storage: Config (JSON) + Keyring (secrets) adapters
+  Authentication: Firefly III Personal Access Token + user-configured server base URL
+  Security: API secrets stored in platform keyring (not plaintext)
+  Conventions: Conventional commits, RFC 2119 keywords (SHALL/MUST/SHOULD) in specs
+  Testing: Unit tests with vitest, property-based testing with fast-check (partial)
+
+# Per-artifact rules (optional)
+# Add custom rules for specific artifacts.
+rules:
+  proposal:
+    - Keep proposals under 500 words
+    - Always include a "Non-goals" section
+    - Reference relevant domain specs
+  specs:
+    - Use RFC 2119 keywords (SHALL/MUST/SHOULD/MAY)
+    - Write testable scenarios in Given/When/Then format
+    - Keep requirements behavior-focused, not implementation-focused
+  design:
+    - Document architecture decisions with rationale
+    - List file changes explicitly
+    - Keep implementation details out of specs
+  tasks:
+    - Break tasks into chunks of max 2 hours
+    - Use hierarchical numbering (1.1, 1.2, etc.)
+    - Group related tasks under headings
+
+# Per-operation guidance (optional)
+# Add advisory guidance for how apply and archive work should be conducted.
+operations:
+  apply:
+    guidance:
+      - Run tests after each task completion
+      - Update specs if implementation reveals new behavior
+      - Keep test summaries concise
+  archive:
+    guidance:
+      - Summarize the archive outcome before finishing
+      - Verify all delta specs merge cleanly
+      - Ensure no aidlc references remain in active codebase
