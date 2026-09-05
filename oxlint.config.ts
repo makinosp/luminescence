@@ -1,5 +1,5 @@
 import { defineConfig } from 'oxlint';
-import { ignorePatterns } from './ocx.config.ts';
+import { ignorePatterns } from './oxc.config.ts';
 
 export default defineConfig({
   ignorePatterns,
