@@ -130,13 +130,6 @@ Project context is in `openspec/config.yaml`:
 /opsx:explore "How does transaction creation work?"
 ```
 
-## Migration from aidlc-workflows
-
-This project previously used aidlc-workflows. Historical documents are preserved in `aidlc-docs-archive/`. The OpenSpec specs in `openspec/specs/` were created from:
-- `aidlc-docs-archive/inception/requirements/requirements.md`
-- `aidlc-docs-archive/inception/user-stories/user-stories.md`
-- `aidlc-docs-archive/inception/application-design/`
-
 ## AI Tool Commands
 
 OpenSpec installed commands for:

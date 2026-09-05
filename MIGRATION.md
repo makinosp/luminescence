@@ -6,10 +6,11 @@ Migrated the luminescence project from **aidlc-workflows** (phased, rigid, 30+ d
 
 ## What Was Done
 
-### 1. Archived Historical Documents
+### 1. Archived and Removed Historical Documents
 
 - Moved `aidlc-docs/` → `aidlc-docs-archive/` (preserved all historical context)
 - Contains: requirements, user stories, application design, construction plans, audit log, state tracking
+- **Removed `aidlc-docs-archive/` after PR #8 merge** — all behavioral specs migrated to `openspec/specs/`
 
 ### 2. Installed OpenSpec
 
@@ -59,7 +60,7 @@ Replaced aidlc-workflows instructions with OpenSpec workflow reference.
 
 | Decision                             | Rationale                                                                          |
 | ------------------------------------ | ---------------------------------------------------------------------------------- |
-| **Preserve aidlc-docs as archive**   | Valuable historical context for decisions made                                     |
+| **Archive aidlc-docs temporarily**   | Valuable historical context for decisions made; removed after migration complete   |
 | **Delta-first migration**            | Bootstrap change adds all specs as deltas (not done yet — Phase 3)                 |
 | **Package-based domains**            | Maps to existing structure: `core/` domains + `cli/`                               |
 | **Default `spec-driven` schema**     | Standard workflow: proposal → specs → design → tasks                               |
@@ -93,7 +94,7 @@ Domain specs were created directly in `openspec/specs/` (they serve as the sourc
 
 ## Verification Checklist
 
-- [x] `aidlc-docs/` archived to `aidlc-docs-archive/`
+- [x] `aidlc-docs/` archived to `aidlc-docs-archive/` then removed
 - [x] `@fission-ai/openspec` installed locally
 - [x] `openspec init` completed successfully
 - [x] `openspec/config.yaml` created with project context
@@ -103,6 +104,7 @@ Domain specs were created directly in `openspec/specs/` (they serve as the sourc
 - [x] All aidlc artifacts removed (symlink, submodule, rule details)
 - [x] `openspec validate --specs` passes (7/7)
 - [x] Build and tests pass after migration
+- [x] `aidlc-docs-archive/` removed after merge
 
 ## References
 
